@@ -11,8 +11,10 @@
 #include "nn/StochasticGradientDescent.h"
 #include "nn/Tanh.h"
 #include <iostream>
+#include <random>
+#include <chrono>
 
-#define NUM_DS 10000
+#define NUM_DS 100000
 int main() {
 
   NetworkBuilder builder;
@@ -37,10 +39,26 @@ int main() {
   Eigen::Vector2d X_S[] = {{1, 0}, {0, 1}, {1, 1}, {0, 0}};
   Eigen::Vector2d Y_S[] = {{1, 0}, {1, 0}, {0, 1}, {0, 1}};
 
+  std::random_device rd;
+  std::mt19937::result_type seed = rd() ^ (
+      (std::mt19937::result_type)
+          std::chrono::duration_cast<std::chrono::seconds>(
+              std::chrono::system_clock::now().time_since_epoch()
+          ).count() +
+      (std::mt19937::result_type)
+          std::chrono::duration_cast<std::chrono::microseconds>(
+              std::chrono::high_resolution_clock::now().time_since_epoch()
+          ).count() );
+
+  std::mt19937 gen(seed);
+  std::uniform_int_distribution<unsigned> distrib(0, 3);
+
   for (int i = 0; i < NUM_DS; i++) {
-    X.emplace_back(X_S[i % 4]);
-    Y.emplace_back(Y_S[i % 4]);
+    int rand = distrib(gen);
+    X.emplace_back(X_S[rand]);
+    Y.emplace_back(Y_S[rand]);
   }
+
 
   auto out = network.fit(X, Y, 10, 64);
 

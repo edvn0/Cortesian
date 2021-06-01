@@ -10,8 +10,16 @@ Network::Network()
 
 BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
                                 const std::vector<Eigen::VectorXd> &Y,
-                                int epochs, int batch_size) {
-  DataSplit batch_split(batch_size, X, Y);
+                                int epochs, int batch_size, double train_split) {
+
+  size_t training_size = (size_t)(X.size()*train_split);
+
+  std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
+  std::vector<Eigen::VectorXd> train_y(&Y[0], &Y[training_size]);
+  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size()-1]);
+  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size()-1]);
+
+  DataSplit batch_split(batch_size, train_x, train_y);
 
   BackPropStatistics backPropStatistics(m_eval.size());
 
@@ -26,12 +34,12 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
     t.stop();
     auto timeEpoch = t.elapsedSeconds();
 
-    const std::vector<Eigen::VectorXd> evaluated = evaluate(X);
+    const std::vector<Eigen::VectorXd> evaluated = evaluate(validate_x);
     auto loss = m_loss->apply_loss(evaluated, Y);
     std::vector<double> metrics;
     metrics.reserve(m_eval.size());
     for (auto *eval : m_eval) {
-      metrics.emplace_back(eval->apply_evaluation(evaluated, Y));
+      metrics.emplace_back(eval->apply_evaluation(evaluated, validate_y));
     }
 
     std::cout << "Loss: " << loss << ", Evaluation Scores: [";

@@ -43,7 +43,7 @@ public:
 
   BackPropStatistics fit(const std::vector<Eigen::VectorXd> &X,
                          const std::vector<Eigen::VectorXd> &Y, int epochs,
-                         int batch_size);
+                         int batch_size, double train_split = 0.8);
 
   Eigen::MatrixXd evaluate(const DataSplit::DataPoint &point);
 
