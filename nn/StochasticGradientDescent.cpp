@@ -21,10 +21,10 @@ void StochasticGradientDescent::initialize_optimizer(int layers,
 
 void StochasticGradientDescent::sgd(Eigen::MatrixXd &param,
                                     const Eigen::MatrixXd &delta_param) const {
-  param -= l_r *delta_param;
+  param -= l_r * delta_param;
 }
 
 void StochasticGradientDescent::sgd(Eigen::VectorXd &param,
                                     const Eigen::VectorXd &delta_param) const {
-  param -= l_r *delta_param;
+  param -= l_r * delta_param;
 }

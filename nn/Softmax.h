@@ -7,9 +7,10 @@
 
 #include "Activation.h"
 
-class Softmax: public Activation {
+class Softmax : public Activation {
 private:
-  Eigen::VectorXd soft_max(const Eigen::VectorXd& in);
+  Eigen::VectorXd soft_max(const Eigen::VectorXd &in);
+
 public:
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;

@@ -14,13 +14,9 @@ double SigmoidFunction::approx(double t) {
 }
 
 Eigen::VectorXd SigmoidFunction::function(Eigen::VectorXd in) {
-  return in.unaryExpr([&](double t) {
-    return approx(t);
-  });
+  return in.unaryExpr([&](double t) { return approx(t); });
 }
 
 Eigen::VectorXd SigmoidFunction::derivative(Eigen::VectorXd in) {
   return in.array() * (1 - in.array());
 }
-
-

@@ -21,7 +21,7 @@ private:
   Optimizer *m_optimizer;
   ParameterInitializer *m_initializer;
   LossFunction *m_loss_function;
-  std::vector<EvaluationFunction *> m_evaluation_function {};
+  std::vector<EvaluationFunction *> m_evaluation_function{};
 
 public:
   NetworkBuilder() = default;
@@ -46,7 +46,8 @@ public:
     return *this;
   }
 
-  NetworkBuilder& evaluation_function(std::initializer_list<EvaluationFunction*> functions) {
+  NetworkBuilder &
+  evaluation_function(std::initializer_list<EvaluationFunction *> functions) {
     m_evaluation_function = functions;
     return *this;
   }
@@ -84,7 +85,7 @@ public:
 
   [[nodiscard]] size_t get_total() const { return m_total; }
   LossFunction *get_loss() { return m_loss_function; }
-  std::vector<EvaluationFunction *>get_eval() { return m_evaluation_function; }
+  std::vector<EvaluationFunction *> get_eval() { return m_evaluation_function; }
   Optimizer *get_optimizer() { return m_optimizer; }
   ParameterInitializer *get_initializer() { return m_initializer; }
   [[nodiscard]] bool should_clip() const { return m_gradient_clipping > 0; };

@@ -8,7 +8,7 @@
 #include "EvaluationFunction.h"
 #include "LossFunction.h"
 
-class MeanAbsolute: public LossFunction, public EvaluationFunction {
+class MeanAbsolute : public LossFunction, public EvaluationFunction {
 public:
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;

@@ -7,7 +7,7 @@
 
 #include "Activation.h"
 
-class LinearFunction:public Activation {
+class LinearFunction : public Activation {
 public:
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;

@@ -17,7 +17,7 @@ DataSplit::DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
     size_t toIndex = std::min(ds_size, (i + 1) * batch_size);
 
     for (; fromIndex < toIndex; fromIndex++) {
-      s.rows.push_back(DataPoint { Xs[fromIndex], Ys[fromIndex] });
+      s.rows.push_back(DataPoint{Xs[fromIndex], Ys[fromIndex]});
     }
 
     batches.emplace_back(s);

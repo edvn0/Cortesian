@@ -9,9 +9,7 @@
 
 class BlockTimer {
 public:
-  BlockTimer() {
-    start();
-  }
+  BlockTimer() { start(); }
 
   void start() {
     m_StartTime = std::chrono::system_clock::now();

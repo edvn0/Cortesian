@@ -16,7 +16,8 @@ public:
    * @param Y real values
    * @return the loss
    */
-  virtual double apply_loss(const std::vector<Eigen::VectorXd>& Y_hat, const std::vector<Eigen::VectorXd>& Y) = 0;
+  virtual double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
+                            const std::vector<Eigen::VectorXd> &Y) = 0;
 
   /**
    * Applies the loss function to an already predicted data set.
@@ -25,7 +26,8 @@ public:
    * @param y real
    * @return loss
    */
-  virtual double apply_loss_single(const Eigen::VectorXd& Y_hat, const Eigen::VectorXd& y) = 0;
+  virtual double apply_loss_single(const Eigen::VectorXd &Y_hat,
+                                   const Eigen::VectorXd &y) = 0;
 
   /**
    * Calculates the gradient vector from the predicted/real pair.
@@ -33,7 +35,8 @@ public:
    * @param y real(X)
    * @return gradient vector.
    */
-  virtual Eigen::MatrixXd apply_loss_gradient(const Eigen::MatrixXd& y_hat, const Eigen::MatrixXd& y) = 0;
+  virtual Eigen::MatrixXd apply_loss_gradient(const Eigen::MatrixXd &y_hat,
+                                              const Eigen::MatrixXd &y) = 0;
 };
 
 #endif // CORTESIAN_LOSSFUNCTION_H

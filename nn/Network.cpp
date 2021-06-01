@@ -10,14 +10,15 @@ Network::Network()
 
 BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
                                 const std::vector<Eigen::VectorXd> &Y,
-                                int epochs, int batch_size, double train_split) {
+                                int epochs, int batch_size,
+                                double train_split) {
 
-  size_t training_size = (size_t)(X.size()*train_split);
+  size_t training_size = (size_t)(X.size() * train_split);
 
   std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
   std::vector<Eigen::VectorXd> train_y(&Y[0], &Y[training_size]);
-  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size()-1]);
-  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size()-1]);
+  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size() - 1]);
+  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size() - 1]);
 
   DataSplit batch_split(batch_size, train_x, train_y);
 
@@ -175,7 +176,7 @@ Eigen::VectorXd Network::predict(const Eigen::VectorXd &vector) {
 
   return eval;
 }
-Eigen::VectorXd Network::classify(const Eigen::VectorXd& vector) {
+Eigen::VectorXd Network::classify(const Eigen::VectorXd &vector) {
   auto out = predict(vector);
   Eigen::VectorXd vec(1);
   vec << arg_max(out);

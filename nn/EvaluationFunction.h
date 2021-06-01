@@ -5,8 +5,8 @@
 #ifndef CORTESIAN_EVALUATIONFUNCTION_H
 #define CORTESIAN_EVALUATIONFUNCTION_H
 
-#include <vector>
 #include "../libs/Eigen/Core"
+#include <vector>
 
 class EvaluationFunction {
 public:

@@ -18,11 +18,11 @@ private:
 public:
   explicit StochasticGradientDescent(double l_r = 0.0001) : l_r(l_r){};
 
-  void change_weight(int layer_index, Eigen::MatrixXd& w,
-                                const Eigen::MatrixXd& d_w) override;
+  void change_weight(int layer_index, Eigen::MatrixXd &w,
+                     const Eigen::MatrixXd &d_w) override;
 
-  void change_bias(int layer_index, Eigen::VectorXd& b,
-                              const Eigen::VectorXd& d_b) override;
+  void change_bias(int layer_index, Eigen::VectorXd &b,
+                   const Eigen::VectorXd &d_b) override;
 
   void initialize_optimizer(int layers, Eigen::MatrixXd w_seed,
                             Eigen::VectorXd b_seed) override;

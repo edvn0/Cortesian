@@ -17,6 +17,7 @@ protected:
   [[nodiscard]] bool pre_check_get_params() const {
     return m_is_initialized && !m_structure.empty();
   }
+
 public:
   virtual ~ParameterInitializer() = default;
 

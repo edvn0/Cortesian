@@ -23,7 +23,8 @@ public:
     }
   }
 
-  void update(double time_epoch, double loss, const std::vector<double>& accuracy) {
+  void update(double time_epoch, double loss,
+              const std::vector<double> &accuracy) {
     for (int i = 0; i < mean_for_eval_functions.size(); i++) {
       mean_for_eval_functions[i] += accuracy[i];
     }
@@ -35,7 +36,7 @@ public:
   void finalize() {
     mean_time_epochs /= (double)iterations;
     mean_loss_epochs /= (double)iterations;
-    for (double & i : mean_for_eval_functions) {
+    for (double &i : mean_for_eval_functions) {
       i /= (double)iterations;
     }
   }
@@ -44,8 +45,9 @@ public:
                                   const BackPropStatistics &statistics) {
     os << "Mean Time/epoch: " << statistics.mean_time_epochs
        << "\nMean_Loss/epoch: " << statistics.mean_loss_epochs
-       << "\nIterations: " << statistics.iterations << "\nMean for Evaluation Function(s): [";
-    for (const double& i : statistics.mean_for_eval_functions) {
+       << "\nIterations: " << statistics.iterations
+       << "\nMean for Evaluation Function(s): [";
+    for (const double &i : statistics.mean_for_eval_functions) {
       os << i << ", ";
     }
     os << "]\n";

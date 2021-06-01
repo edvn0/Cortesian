@@ -11,9 +11,9 @@
 #include "EvaluationFunction.h"
 #include "Layer.h"
 #include "LossFunction.h"
+#include "MathUtils.h"
 #include "NetworkBuilder.h"
 #include "ParameterInitializer.h"
-#include "MathUtils.h"
 #include <iostream>
 #include <ostream>
 #include <vector>
@@ -53,7 +53,7 @@ public:
 
   friend std::ostream &operator<<(std::ostream &os, const Network &network);
 
-  Eigen::VectorXd classify(const Eigen::VectorXd& vector);
+  Eigen::VectorXd classify(const Eigen::VectorXd &vector);
 };
 
 #endif // CORTESIAN_NETWORK_H

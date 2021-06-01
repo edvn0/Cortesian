@@ -7,7 +7,7 @@
 
 #include "../libs/Eigen/Core"
 #include "EvaluationFunction.h"
-class ArgMaxEval:public EvaluationFunction {
+class ArgMaxEval : public EvaluationFunction {
 public:
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;

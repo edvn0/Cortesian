@@ -7,9 +7,10 @@
 
 #include "Activation.h"
 
-class SigmoidFunction: public Activation {
+class SigmoidFunction : public Activation {
 private:
   static double approx(double t);
+
 public:
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;

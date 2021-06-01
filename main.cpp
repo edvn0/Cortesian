@@ -1,5 +1,6 @@
 #include "libs/Eigen/Core"
 #include "nn/ArgMaxEval.h"
+#include "nn/EarlyStopping.h"
 #include "nn/EigenInitializer.h"
 #include "nn/Layer.h"
 #include "nn/LeakyRelu.h"
@@ -10,11 +11,11 @@
 #include "nn/SigmoidFunction.h"
 #include "nn/StochasticGradientDescent.h"
 #include "nn/Tanh.h"
+#include <chrono>
 #include <iostream>
 #include <random>
-#include <chrono>
 
-#define NUM_DS 100000
+#define NUM_DS 100
 int main() {
 
   NetworkBuilder builder;
@@ -53,12 +54,14 @@ int main() {
   std::mt19937 gen(seed);
   std::uniform_int_distribution<unsigned> distrib(0, 3);
 
+  BlockTimer t;
   for (int i = 0; i < NUM_DS; i++) {
     int rand = distrib(gen);
     X.emplace_back(X_S[rand]);
     Y.emplace_back(Y_S[rand]);
   }
-
+  t.stop();
+  std::cout << "Time taken: " << t.elapsedSeconds() << "\n";
 
   auto out = network.fit(X, Y, 10, 64);
 

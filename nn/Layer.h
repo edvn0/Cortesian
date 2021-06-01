@@ -81,7 +81,7 @@ public:
 
   void set_previous(Layer *prev) { m_previous = prev; }
 
-  Layer* get_previous();
+  Layer *get_previous();
 
   void set_params(Eigen::MatrixXd weight, Eigen::VectorXd bias);
 
@@ -89,7 +89,6 @@ public:
 
   Eigen::MatrixXd error_derivative(const Eigen::VectorXd &previous,
                                    const Eigen::MatrixXd &current);
-
 
   void set_index(size_t i);
 
