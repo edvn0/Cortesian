@@ -9,6 +9,7 @@
 #include "nn/Network.h"
 #include "nn/SigmoidFunction.h"
 #include "nn/StochasticGradientDescent.h"
+#include "nn/Tanh.h"
 #include <iostream>
 
 #define NUM_DS 10000
@@ -24,7 +25,7 @@ int main() {
       .layer(Layer(new LeakyRelu(), 2, 0.9))
       .layer(Layer(new LeakyRelu(), 30, 0.9))
       .layer(Layer(new LeakyRelu(), 30, 0.9))
-      .layer(Layer(new SigmoidFunction(), 2));
+      .layer(Layer(new Tanh(), 2));
 
   Network network(builder);
 
@@ -41,12 +42,9 @@ int main() {
     Y.emplace_back(Y_S[i % 4]);
   }
 
-  auto out = network.fit(X, Y, 40, 64);
+  auto out = network.fit(X, Y, 10, 64);
 
   std::cout << out;
-
-  std::cout << network << "\n";
-
-  std::cout << "Hello, World!" << std::endl;
+  std::cout << network.classify(X_S[0]) << "\n" << network.classify(X_S[3]) << "\n";
   return 0;
 }

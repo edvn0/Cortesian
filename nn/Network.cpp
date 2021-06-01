@@ -3,9 +3,6 @@
 //
 
 #include "Network.h"
-#include "BackPropStatistics.h"
-#include "BlockTimer.h"
-#include "DataSplit.h"
 
 Network::Network()
     : m_loss(nullptr), m_eval({nullptr}), m_optimizer(nullptr),
@@ -169,4 +166,10 @@ Eigen::VectorXd Network::predict(const Eigen::VectorXd &vector) {
   }
 
   return eval;
+}
+Eigen::VectorXd Network::classify(const Eigen::VectorXd& vector) {
+  auto out = predict(vector);
+  Eigen::VectorXd vec(1);
+  vec << arg_max(out);
+  return vec;
 }

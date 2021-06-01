@@ -6,14 +6,16 @@
 #define CORTESIAN_NETWORK_H
 
 #include "BackPropStatistics.h"
+#include "BlockTimer.h"
 #include "DataSplit.h"
 #include "EvaluationFunction.h"
 #include "Layer.h"
 #include "LossFunction.h"
 #include "NetworkBuilder.h"
 #include "ParameterInitializer.h"
-#include <ostream>
+#include "MathUtils.h"
 #include <iostream>
+#include <ostream>
 #include <vector>
 
 class Network {
@@ -22,16 +24,17 @@ private:
     bool clipping{false};
     double clip_factor{0.0};
   };
+
 private:
   std::vector<Layer> m_layers;
-  LossFunction* m_loss;
-  std::vector<EvaluationFunction*> m_eval;
-  Optimizer* m_optimizer;
+  LossFunction *m_loss;
+  std::vector<EvaluationFunction *> m_eval;
+  Optimizer *m_optimizer;
   Clipping m_clipping;
-  ParameterInitializer* m_initializer;
+  ParameterInitializer *m_initializer;
 
   void optimize();
-  void back_propagate(const Eigen::VectorXd& matrix);
+  void back_propagate(const Eigen::VectorXd &matrix);
 
 public:
   Network();
@@ -42,13 +45,15 @@ public:
                          const std::vector<Eigen::VectorXd> &Y, int epochs,
                          int batch_size);
 
-  Eigen::MatrixXd evaluate(const DataSplit::DataPoint& point);
+  Eigen::MatrixXd evaluate(const DataSplit::DataPoint &point);
 
-  std::vector<Eigen::VectorXd> evaluate(const std::vector<Eigen::VectorXd>& Xs);
+  Eigen::VectorXd predict(const Eigen::VectorXd &vector);
+
+  std::vector<Eigen::VectorXd> evaluate(const std::vector<Eigen::VectorXd> &Xs);
 
   friend std::ostream &operator<<(std::ostream &os, const Network &network);
 
-  Eigen::VectorXd predict(const Eigen::VectorXd &matrix);
+  Eigen::VectorXd classify(const Eigen::VectorXd& vector);
 };
 
 #endif // CORTESIAN_NETWORK_H

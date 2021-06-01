@@ -7,7 +7,7 @@
 
 double ArgMaxEval::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                            const Eigen::VectorXd &Y) {
-  return argMax(Y_hat) == argMax(Y) ? 1.0 : 0.0;
+  return arg_max(Y_hat) == arg_max(Y) ? 1.0 : 0.0;
 }
 
 double ArgMaxEval::apply_evaluation(const std::vector<Eigen::VectorXd> &Y_hat,

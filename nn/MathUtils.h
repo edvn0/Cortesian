@@ -12,7 +12,7 @@
  * @param in vector
  * @return index of max
  */
-static int argMax(const Eigen::VectorXd &in) {
+static int arg_max(const Eigen::VectorXd &in) {
   size_t rows = in.rows();
   int max = 0;
   double val = in(0);
