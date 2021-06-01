@@ -31,19 +31,19 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
 
     const std::vector<Eigen::VectorXd> evaluated = evaluate(X);
     auto loss = m_loss->apply_loss(evaluated, Y);
-    std::vector<double> evals;
-    evals.reserve(m_eval.size());
+    std::vector<double> metrics;
+    metrics.reserve(m_eval.size());
     for (auto *eval : m_eval) {
-      evals.emplace_back(eval->apply_evaluation(evaluated, Y));
+      metrics.emplace_back(eval->apply_evaluation(evaluated, Y));
     }
 
     std::cout << "Loss: " << loss << ", Evaluation Scores: [";
-    for (auto &val : evals) {
+    for (auto &val : metrics) {
       std::cout << val << ", ";
     }
     std::cout << "]\n";
 
-    backPropStatistics.update(timeEpoch, loss, evals);
+    backPropStatistics.update(timeEpoch, loss, metrics);
   }
   backPropStatistics.finalize();
   return backPropStatistics;
@@ -107,10 +107,11 @@ Network::Network(NetworkBuilder builder) {
 
 std::ostream &operator<<(std::ostream &os, const Network &network) {
   os << "\nOptimizer:" << network.m_optimizer << "\nLoss: " << network.m_loss
-     << "\nInitializer: " << network.m_initializer << "\nEvaluators: ";
+     << "\nInitializer: " << network.m_initializer << "\nEvaluators: [";
   for (auto *eval : network.m_eval) {
-    os << eval;
+    os << eval << ", ";
   }
+  os << "]\n";
   return os;
 }
 

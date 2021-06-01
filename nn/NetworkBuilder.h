@@ -46,6 +46,11 @@ public:
     return *this;
   }
 
+  NetworkBuilder& evaluation_function(std::initializer_list<EvaluationFunction*> functions) {
+    m_evaluation_function = functions;
+    return *this;
+  }
+
   NetworkBuilder &initializer(ParameterInitializer *initializer) {
     m_initializer = initializer;
     return *this;

@@ -7,6 +7,7 @@
 #include "nn/MeanAbsolute.h"
 #include "nn/MeanSquared.h"
 #include "nn/Network.h"
+#include "nn/SigmoidFunction.h"
 #include "nn/StochasticGradientDescent.h"
 #include <iostream>
 
@@ -16,15 +17,14 @@ int main() {
   NetworkBuilder builder;
   builder.clipping(0.5)
       .loss_function(new MeanSquared())
-      .evaluation_function(new ArgMaxEval())
-      .evaluation_function(new MeanAbsolute())
-      .evaluation_function(new MeanSquared())
+      .evaluation_function(
+          {new ArgMaxEval(), new MeanAbsolute(), new MeanSquared()})
       .initializer(new EigenInitializer())
       .optimizer(new StochasticGradientDescent(0.1))
       .layer(Layer(new LeakyRelu(), 2, 0.9))
       .layer(Layer(new LeakyRelu(), 30, 0.9))
-      .layer(Layer(new LeakyRelu(), 40, 0.9))
-      .layer(Layer(new LinearFunction(), 2));
+      .layer(Layer(new LeakyRelu(), 30, 0.9))
+      .layer(Layer(new SigmoidFunction(), 2));
 
   Network network(builder);
 
@@ -41,7 +41,7 @@ int main() {
     Y.emplace_back(Y_S[i % 4]);
   }
 
-  auto out = network.fit(X, Y, 10, 64);
+  auto out = network.fit(X, Y, 40, 64);
 
   std::cout << out;
 
