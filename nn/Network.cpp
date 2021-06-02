@@ -62,7 +62,7 @@ Network::Network(NetworkBuilder builder) {
 BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
                                 const std::vector<Eigen::VectorXd> &Y,
                                 int epochs, int batch_size,
-                                double train_split) {
+                                double train_split, bool should_shuffle_validation) {
   auto training_size = (size_t)((int)X.size() * train_split);
 
   std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
@@ -76,7 +76,7 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
 
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
-    auto splits = batch_split.get_splits(true);
+    auto splits = batch_split.get_splits(should_shuffle_validation);
     for (auto &dps : splits) {
       for (const auto &point : dps.rows) {
         evaluate(point);
