@@ -7,5 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(effolkronium_random REQUIRED)
 
-add_executable(cortesian main.cpp nn/Activation.h nn/LeakyRelu.cpp nn/LeakyRelu.h nn/Layer.cpp nn/Layer.h nn/Optimizer.h nn/StochasticGradientDescent.cpp nn/StochasticGradientDescent.h nn/Network.cpp nn/Network.h nn/LossFunction.h nn/EvaluationFunction.h nn/ParameterInitializer.h nn/NetworkBuilder.h nn/BackPropStatistics.cpp nn/BackPropStatistics.h nn/BlockTimer.cpp nn/BlockTimer.h nn/EigenInitializer.cpp nn/EigenInitializer.h nn/ArgMaxEval.cpp nn/ArgMaxEval.h nn/MeanSquared.cpp nn/MeanSquared.h nn/MathUtils.h nn/DataSplit.cpp nn/DataSplit.h nn/LinearFunction.cpp nn/LinearFunction.h nn/MeanAbsolute.cpp nn/MeanAbsolute.h nn/SigmoidFunction.cpp nn/SigmoidFunction.h nn/Tanh.cpp nn/Tanh.h nn/Softmax.cpp nn/Softmax.h nn/common.h)
-target_link_libraries(cortesian effolkronium_random Eigen3::Eigen)
+add_subdirectory(libs/csv-parser)
+
+add_executable(cortesian main.cpp nn/Activation.h nn/LeakyRelu.cpp nn/LeakyRelu.h nn/Layer.cpp nn/Layer.h nn/Optimizer.h nn/StochasticGradientDescent.cpp nn/StochasticGradientDescent.h nn/Network.cpp nn/Network.h nn/LossFunction.h nn/EvaluationFunction.h nn/ParameterInitializer.h nn/NetworkBuilder.h nn/BackPropStatistics.cpp nn/BackPropStatistics.h nn/BlockTimer.cpp nn/BlockTimer.h nn/EigenInitializer.cpp nn/EigenInitializer.h nn/ArgMaxEval.cpp nn/ArgMaxEval.h nn/MeanSquared.cpp nn/MeanSquared.h nn/MathUtils.h nn/DataSplit.cpp nn/DataSplit.h nn/LinearFunction.cpp nn/LinearFunction.h nn/MeanAbsolute.cpp nn/MeanAbsolute.h nn/SigmoidFunction.cpp nn/SigmoidFunction.h nn/Tanh.cpp nn/Tanh.h nn/Softmax.cpp nn/Softmax.h nn/common.h nn/DataReader.h)
+target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv)

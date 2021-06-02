@@ -17,10 +17,7 @@ class BackPropStatistics {
 
  public:
   explicit BackPropStatistics(size_t eval_functions) {
-    mean_for_eval_functions.reserve(eval_functions);
-    for (size_t i = 0; i < eval_functions; i++) {
-      mean_for_eval_functions.emplace_back(0.0);
-    }
+    mean_for_eval_functions = std::vector<double>(eval_functions);
   }
 
   void update(double time_epoch, double loss,
@@ -36,8 +33,8 @@ class BackPropStatistics {
   void finalize() {
     mean_time_epochs /= (double)iterations;
     mean_loss_epochs /= (double)iterations;
-    for (double &i : mean_for_eval_functions) {
-      i /= (double)iterations;
+    for (double &means : mean_for_eval_functions) {
+      means /= (double)iterations;
     }
   }
 

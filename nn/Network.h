@@ -14,7 +14,7 @@ private:
     double clip_factor{0.0};
   };
 
-private:
+protected:
   std::vector<Layer> m_layers;
   LossFunction *m_loss;
   std::vector<EvaluationFunction *> m_eval;
@@ -25,6 +25,8 @@ private:
   // These are private helper methods, but also the core of this class.
   void optimize();
   void back_propagate(const Eigen::VectorXd &matrix);
+  void evaluate_for_back_prop(const DataSplit::DataPoint &point);
+  void evaluate_for_back_prop(const DataSplit::DataSet &ds);
 
 public:
   Network();
@@ -32,19 +34,29 @@ public:
   explicit Network(NetworkBuilder &&builder) : Network(builder){};
   ~Network() = default;
 
-  BackPropStatistics fit(const std::vector<Eigen::VectorXd> &X,
-                         const std::vector<Eigen::VectorXd> &Y, int epochs,
-                         int batch_size, double train_split = 0.8, bool should_shuffle_validation = true);
+  virtual BackPropStatistics fit(const std::vector<Eigen::VectorXd> &X,
+                                 const std::vector<Eigen::VectorXd> &Y,
+                                 int epochs, int batch_size, double train_split,
+                                 bool should_shuffle_training);
 
-  Eigen::MatrixXd evaluate(const DataSplit::DataPoint &point);
+  BackPropStatistics fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
+                                int epochs, int batch_size,
+                                Eigen::MatrixXd &X_validate,
+                                Eigen::MatrixXd &Y_validate);
 
   Eigen::VectorXd predict(const Eigen::VectorXd &vector);
 
   std::vector<Eigen::VectorXd> evaluate(const std::vector<Eigen::VectorXd> &Xs);
 
+  std::vector<Eigen::VectorXd> evaluate(const Eigen::MatrixXd &Xs);
+
   friend std::ostream &operator<<(std::ostream &os, const Network &network);
 
   Eigen::VectorXd classify(const Eigen::VectorXd &vector);
+
+  static std::vector<DataSplit::DataSet>
+  generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
+                  size_t from_index, size_t to_index, int i);
 };
 
 #endif // CORTESIAN_NETWORK_H

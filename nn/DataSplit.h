@@ -16,11 +16,11 @@ class DataSplit {
     Eigen::VectorXd Y;
   };
 
- private:
   struct DataSet {
     std::vector<DataPoint> rows;
   };
 
+private:
   std::vector<DataSet> split;
 
  public:

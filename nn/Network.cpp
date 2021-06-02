@@ -5,9 +5,7 @@
 #include "Network.h"
 
 Network::Network()
-    : m_loss(nullptr),
-      m_eval({nullptr}),
-      m_optimizer(nullptr),
+    : m_loss(nullptr), m_eval({nullptr}), m_optimizer(nullptr),
       m_initializer(nullptr) {}
 
 Network::Network(NetworkBuilder builder) {
@@ -59,55 +57,8 @@ Network::Network(NetworkBuilder builder) {
   }
 }
 
-BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
-                                const std::vector<Eigen::VectorXd> &Y,
-                                int epochs, int batch_size,
-                                double train_split, bool should_shuffle_validation) {
-  auto training_size = (size_t)((int)X.size() * train_split);
-
-  std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
-  std::vector<Eigen::VectorXd> train_y(&Y[0], &Y[training_size]);
-  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size() - 1]);
-  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size() - 1]);
-
-  DataSplit batch_split(batch_size, train_x, train_y);
-
-  BackPropStatistics backPropStatistics(m_eval.size());
-
-  for (int i = 0; i < epochs; i++) {
-    BlockTimer t;
-    auto splits = batch_split.get_splits(should_shuffle_validation);
-    for (auto &dps : splits) {
-      for (const auto &point : dps.rows) {
-        evaluate(point);
-      }
-      optimize();
-    }
-    t.stop();
-    auto timeEpoch = t.elapsedSeconds();
-
-    const std::vector<Eigen::VectorXd> evaluated = evaluate(validate_x);
-    auto loss = m_loss->apply_loss(evaluated, validate_y);
-    std::vector<double> metrics;
-    metrics.reserve(m_eval.size());
-    for (auto *eval : m_eval) {
-      metrics.emplace_back(eval->apply_evaluation(evaluated, validate_y));
-    }
-
-    std::cout << "Loss: " << loss << ", Evaluation Scores: [";
-    for (auto &val : metrics) {
-      std::cout << val << ", ";
-    }
-    std::cout << "]\n";
-
-    backPropStatistics.update(timeEpoch, loss, metrics);
-  }
-  backPropStatistics.finalize();
-  return backPropStatistics;
-}
-
-std::vector<Eigen::VectorXd> Network::evaluate(
-    const std::vector<Eigen::VectorXd> &Xs) {
+std::vector<Eigen::VectorXd>
+Network::evaluate(const std::vector<Eigen::VectorXd> &Xs) {
   std::vector<Eigen::VectorXd> predicted;
   predicted.reserve(Xs.size());
 
@@ -134,7 +85,7 @@ void Network::optimize() {
   }
 }
 
-Eigen::MatrixXd Network::evaluate(const DataSplit::DataPoint &point) {
+void Network::evaluate_for_back_prop(const DataSplit::DataPoint &point) {
   auto Xs = point.X;
   auto Ys = point.Y;
 
@@ -143,8 +94,28 @@ Eigen::MatrixXd Network::evaluate(const DataSplit::DataPoint &point) {
   }
 
   back_propagate(Ys);
+}
 
-  return Xs;
+void Network::evaluate_for_back_prop(const DataSplit::DataSet &ds) {
+  for (const auto& d : ds.rows) {
+    evaluate_for_back_prop(d);
+  }
+}
+
+std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
+  size_t rows = Xs.rows();
+  std::vector<Eigen::VectorXd> evaluated;
+  evaluated.reserve(rows);
+  for (long i = 0; i < rows; i++) {
+    Eigen::VectorXd xs = Xs.row(i);
+
+    for (auto &layer : m_layers) {
+      xs = layer.calculate(xs);
+    }
+
+    evaluated.emplace_back(xs);
+  }
+  return evaluated;
 }
 
 void Network::back_propagate(const Eigen::VectorXd &real) {
@@ -189,4 +160,114 @@ Eigen::VectorXd Network::classify(const Eigen::VectorXd &vector) {
   Eigen::VectorXd vec(1);
   vec << arg_max(out);
   return vec;
+}
+
+BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
+                                       int epochs, int batch_size,
+                                       Eigen::MatrixXd &X_validate,
+                                       Eigen::MatrixXd &Y_validate) {
+
+  BackPropStatistics backPropStatistics(m_eval.size());
+
+  size_t end_size = X.rows();
+  size_t start_size = 0;
+
+  auto splits = generate_splits(X, Y, start_size, end_size, batch_size);
+
+  for (int i = 0; i < epochs; i++) {
+    BlockTimer t;
+    for (auto &dps : splits) {
+      evaluate_for_back_prop(dps);
+      optimize();
+    }
+    t.stop();
+
+    auto timeEpoch = t.elapsedSeconds();
+    const std::vector<Eigen::VectorXd> evaluated = evaluate(X_validate);
+    auto loss = m_loss->apply_loss(evaluated, Y_validate);
+    std::vector<double> metrics;
+    metrics.reserve(m_eval.size());
+    for (auto *eval : m_eval) {
+      metrics.emplace_back(eval->apply_evaluation(evaluated, Y_validate));
+    }
+
+    std::cout << "Loss: " << loss << ", Evaluation Scores: [";
+    for (auto &val : metrics) {
+      std::cout << val << ", ";
+    }
+    std::cout << "]\n";
+
+    backPropStatistics.update(timeEpoch, loss, metrics);
+  }
+  backPropStatistics.finalize();
+  return backPropStatistics;
+}
+
+BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
+                                const std::vector<Eigen::VectorXd> &Y,
+                                int epochs, int batch_size, double train_split,
+                                bool should_shuffle_training) {
+  auto training_size = (size_t)((int)X.size() * train_split);
+
+  std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
+  std::vector<Eigen::VectorXd> train_y(&Y[0], &Y[training_size]);
+  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size() - 1]);
+  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size() - 1]);
+
+  DataSplit batch_split(batch_size, train_x, train_y);
+
+  BackPropStatistics backPropStatistics(m_eval.size());
+
+  for (int i = 0; i < epochs; i++) {
+    BlockTimer t;
+    auto splits = batch_split.get_splits(should_shuffle_training);
+    for (auto &dps : splits) {
+      evaluate_for_back_prop(dps);
+      optimize();
+    }
+    t.stop();
+    auto timeEpoch = t.elapsedSeconds();
+
+    const std::vector<Eigen::VectorXd> evaluated = evaluate(validate_x);
+    auto loss = m_loss->apply_loss(evaluated, validate_y);
+    std::vector<double> metrics;
+    metrics.reserve(m_eval.size());
+    for (auto *eval : m_eval) {
+      metrics.emplace_back(eval->apply_evaluation(evaluated, validate_y));
+    }
+
+    std::cout << "Loss: " << loss << ", Evaluation Scores: [";
+    for (auto &val : metrics) {
+      std::cout << val << ", ";
+    }
+    std::cout << "]\n";
+
+    backPropStatistics.update(timeEpoch, loss, metrics);
+  }
+  backPropStatistics.finalize();
+  return backPropStatistics;
+}
+
+std::vector<DataSplit::DataSet>
+Network::generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
+                         size_t from_index, size_t to_index, int batch_size) {
+  std::vector<DataSplit::DataSet> data_sets;
+  data_sets.reserve((int)(X_tensor.size() / batch_size));
+  for (size_t i = from_index; i < to_index; i += batch_size) {
+    if (i >= to_index)
+      break;
+
+    std::vector<DataSplit::DataPoint> dps;
+    dps.reserve(batch_size);
+    size_t max_loop = std::min((i + batch_size), to_index);
+    for (size_t j = i; j < max_loop; j++) {
+      Eigen::VectorXd col_x = X_tensor.row((long)j);
+      Eigen::VectorXd col_y = Y_tensor.row((long)j);
+      dps.emplace_back(DataSplit::DataPoint{col_x, col_y});
+    }
+    DataSplit::DataSet ds;
+    ds.rows = dps;
+    data_sets.emplace_back(ds);
+  }
+  return data_sets;
 }
