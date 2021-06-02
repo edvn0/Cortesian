@@ -6,8 +6,57 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(effolkronium_random REQUIRED)
+find_package(Catch2 REQUIRED)
 
 add_subdirectory(libs/csv-parser)
 
-add_executable(cortesian main.cpp nn/Activation.h nn/LeakyRelu.cpp nn/LeakyRelu.h nn/Layer.cpp nn/Layer.h nn/Optimizer.h nn/StochasticGradientDescent.cpp nn/StochasticGradientDescent.h nn/Network.cpp nn/Network.h nn/LossFunction.h nn/EvaluationFunction.h nn/ParameterInitializer.h nn/NetworkBuilder.h nn/BackPropStatistics.cpp nn/BackPropStatistics.h nn/BlockTimer.cpp nn/BlockTimer.h nn/EigenInitializer.cpp nn/EigenInitializer.h nn/ArgMaxEval.cpp nn/ArgMaxEval.h nn/MeanSquared.cpp nn/MeanSquared.h nn/MathUtils.h nn/DataSplit.cpp nn/DataSplit.h nn/LinearFunction.cpp nn/LinearFunction.h nn/MeanAbsolute.cpp nn/MeanAbsolute.h nn/SigmoidFunction.cpp nn/SigmoidFunction.h nn/Tanh.cpp nn/Tanh.h nn/Softmax.cpp nn/Softmax.h nn/common.h nn/DataReader.h)
+add_executable(
+  cortesian
+  main.cpp
+  include/Activation.h
+  src/LeakyRelu.cpp
+  include/LeakyRelu.h
+  src/Layer.cpp
+  include/Layer.h
+  include/Optimizer.h
+  src/StochasticGradientDescent.cpp
+  include/StochasticGradientDescent.h
+  src/Network.cpp
+  include/Network.h
+  include/LossFunction.h
+  include/EvaluationFunction.h
+  include/ParameterInitializer.h
+  include/NetworkBuilder.h
+  src/BackPropStatistics.cpp
+  include/BackPropStatistics.h
+  src/BlockTimer.cpp
+  include/BlockTimer.h
+  src/EigenInitializer.cpp
+  include/EigenInitializer.h
+  src/ArgMaxEval.cpp
+  include/ArgMaxEval.h
+  src/MeanSquared.cpp
+  include/MeanSquared.h
+  include/MathUtils.h
+  src/DataSplit.cpp
+  include/DataSplit.h
+  src/LinearFunction.cpp
+  include/LinearFunction.h
+  src/MeanAbsolute.cpp
+  include/MeanAbsolute.h
+  src/SigmoidFunction.cpp
+  include/SigmoidFunction.h
+  src/Tanh.cpp
+  include/Tanh.h
+  src/Softmax.cpp
+  include/Softmax.h
+  include/common.h
+  include/DataReader.h
+  src/CategoricalCrossEntropy.cpp
+  include/CategoricalCrossEntropy.h
+  src/Adam.cpp
+  include/Adam.h)
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv)
+
+add_executable(cortesian_tests tests/test.cpp)
+target_link_libraries(cortesian_tests PRIVATE Catch2::Catch2)

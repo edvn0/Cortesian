@@ -3,27 +3,29 @@
 #include <effolkronium/random.hpp>
 #include <iostream>
 
+#include "include/Adam.h"
+#include "include/ArgMaxEval.h"
+#include "include/CategoricalCrossEntropy.h"
+#include "include/DataReader.h"
+#include "include/EigenInitializer.h"
+#include "include/Layer.h"
+#include "include/LeakyRelu.h"
+#include "include/MeanAbsolute.h"
+#include "include/MeanSquared.h"
+#include "include/Network.h"
+#include "include/Softmax.h"
+#include "include/StochasticGradientDescent.h"
 #include "libs/csv-parser/single_include/csv.hpp"
-#include "nn/ArgMaxEval.h"
-#include "nn/DataReader.h"
-#include "nn/EigenInitializer.h"
-#include "nn/Layer.h"
-#include "nn/LeakyRelu.h"
-#include "nn/MeanAbsolute.h"
-#include "nn/MeanSquared.h"
-#include "nn/Network.h"
-#include "nn/Softmax.h"
-#include "nn/StochasticGradientDescent.h"
 
 int main() {
   auto [X_tensor, Y_tensor] = csv_to_tensor(
       "/Users/edwincarlsson/Documents/Code.nosync/CPP/DeepLearning/cortesian/"
-      "resources/mnist_train.csv",
-      60000, 784, 10,
+      "resources/mnist_case_x.csv",
+      768, 784, 10,
       [](Eigen::MatrixXd &matrix, csv::CSVField &field, size_t row,
          size_t col) {
         if (col != 0) {
-          matrix((long)row, (long)col - 1) = field.get<double>();
+          matrix((long)row, (long)col - 1) = field.get<double>() / 255.0;
         }
       },
       [](Eigen::MatrixXd &matrix, csv::CSVField &field, size_t row,
@@ -35,8 +37,8 @@ int main() {
 
   auto [X_validate_tensor, Y_validate_tensor] = csv_to_tensor(
       "/Users/edwincarlsson/Documents/Code.nosync/CPP/DeepLearning/cortesian/"
-      "resources/mnist_test.csv",
-      10000, 784, 10,
+      "resources/mnist_case_y.csv",
+      298, 784, 10,
       [](Eigen::MatrixXd &matrix, csv::CSVField &field, size_t row,
          size_t col) {
         if (col != 0) {
@@ -52,11 +54,11 @@ int main() {
 
   NetworkBuilder builder;
   builder.clipping(0.5)
-      .loss_function(new MeanSquared())
+      .loss_function(new CategoricalCrossEntropy())
       .evaluation_function(
           {new ArgMaxEval(), new MeanAbsolute(), new MeanSquared()})
       .initializer(new EigenInitializer())
-      .optimizer(new StochasticGradientDescent(0.001))
+      .optimizer(new Adam(0.0001))
       .layer(Layer(new LeakyRelu(), 784, 0.1))
       .layer(Layer(new LeakyRelu(), 30, 0.1))
       .layer(Layer(new LeakyRelu(), 30, 0.1))
