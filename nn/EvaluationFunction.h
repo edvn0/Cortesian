@@ -5,11 +5,11 @@
 #ifndef CORTESIAN_EVALUATIONFUNCTION_H
 #define CORTESIAN_EVALUATIONFUNCTION_H
 
-#include "../libs/Eigen/Core"
+#include <Eigen/Core>
 #include <vector>
 
 class EvaluationFunction {
-public:
+ public:
   virtual ~EvaluationFunction() = default;
   virtual double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                          const Eigen::VectorXd &Y) = 0;
@@ -17,4 +17,4 @@ public:
                                   const std::vector<Eigen::VectorXd> &Y) = 0;
 };
 
-#endif // CORTESIAN_EVALUATIONFUNCTION_H
+#endif  // CORTESIAN_EVALUATIONFUNCTION_H

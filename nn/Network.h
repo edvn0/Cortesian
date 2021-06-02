@@ -5,28 +5,16 @@
 #ifndef CORTESIAN_NETWORK_H
 #define CORTESIAN_NETWORK_H
 
-#include "BackPropStatistics.h"
-#include "BlockTimer.h"
-#include "DataSplit.h"
-#include "EvaluationFunction.h"
-#include "Layer.h"
-#include "LossFunction.h"
-#include "MathUtils.h"
-#include "NetworkBuilder.h"
-#include "ParameterInitializer.h"
-#include <iostream>
-#include <string>
-#include <ostream>
-#include <vector>
+#include "common.h"
 
 class Network {
-private:
+ private:
   struct Clipping {
     bool clipping{false};
     double clip_factor{0.0};
   };
 
-private:
+ private:
   std::vector<Layer> m_layers;
   LossFunction *m_loss;
   std::vector<EvaluationFunction *> m_eval;
@@ -37,7 +25,7 @@ private:
   void optimize();
   void back_propagate(const Eigen::VectorXd &matrix);
 
-public:
+ public:
   Network();
   explicit Network(NetworkBuilder builder);
   ~Network() = default;
@@ -57,4 +45,4 @@ public:
   Eigen::VectorXd classify(const Eigen::VectorXd &vector);
 };
 
-#endif // CORTESIAN_NETWORK_H
+#endif  // CORTESIAN_NETWORK_H

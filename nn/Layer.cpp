@@ -12,11 +12,9 @@ Eigen::VectorXd Layer::activate(Eigen::VectorXd in, Eigen::VectorXd out) {
 }
 
 void Layer::fit(Optimizer *optimizer) {
-  if (!has_previous())
-    return;
+  if (!has_previous()) return;
 
   if (deltas_added > 0) {
-
     if (l2 > 0) {
       // regularization
       Eigen::MatrixXd reg_weights =
@@ -57,7 +55,10 @@ Eigen::VectorXd Layer::calculate(const Eigen::VectorXd &in) {
 
 Layer::Layer(int neurons, double l2, Activation *activation, Eigen::MatrixXd ws,
              Eigen::VectorXd bs)
-    : neurons(neurons), l2(l2), f_l(activation), m_delta_weight(std::move(ws)),
+    : neurons(neurons),
+      l2(l2),
+      f_l(activation),
+      m_delta_weight(std::move(ws)),
       m_delta_bias(std::move(bs)) {}
 
 Layer::Layer(Activation *activation, int neurons)

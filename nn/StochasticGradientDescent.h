@@ -5,17 +5,18 @@
 #ifndef CORTESIAN_STOCHASTICGRADIENTDESCENT_H
 #define CORTESIAN_STOCHASTICGRADIENTDESCENT_H
 
-#include "../libs/Eigen/Core"
+#include <Eigen/Core>
+
 #include "Optimizer.h"
 
 class StochasticGradientDescent : public Optimizer {
-private:
+ private:
   double l_r;
 
   void sgd(Eigen::MatrixXd &param, const Eigen::MatrixXd &delta_param) const;
   void sgd(Eigen::VectorXd &param, const Eigen::VectorXd &delta_param) const;
 
-public:
+ public:
   explicit StochasticGradientDescent(double l_r = 0.0001) : l_r(l_r){};
 
   void change_weight(int layer_index, Eigen::MatrixXd &w,
@@ -28,4 +29,4 @@ public:
                             Eigen::VectorXd b_seed) override;
 };
 
-#endif // CORTESIAN_STOCHASTICGRADIENTDESCENT_H
+#endif  // CORTESIAN_STOCHASTICGRADIENTDESCENT_H

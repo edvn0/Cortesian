@@ -3,6 +3,7 @@
 //
 
 #include "ArgMaxEval.h"
+
 #include "MathUtils.h"
 
 double ArgMaxEval::apply_evaluation_single(const Eigen::VectorXd &Y_hat,

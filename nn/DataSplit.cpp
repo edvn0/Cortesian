@@ -5,7 +5,6 @@
 #include "DataSplit.h"
 DataSplit::DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
                      const std::vector<Eigen::VectorXd> &Ys) {
-
   assert(Xs.size() == Ys.size());
   std::vector<DataSet> batches;
   size_t ds_size = Xs.size();

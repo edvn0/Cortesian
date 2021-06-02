@@ -5,27 +5,27 @@
 #ifndef CORTESIAN_DATASPLIT_H
 #define CORTESIAN_DATASPLIT_H
 
-#include "../libs/Eigen/Core"
+#include <Eigen/Core>
 #include <vector>
 
 class DataSplit {
-public:
+ public:
   struct DataPoint {
     Eigen::VectorXd X;
     Eigen::VectorXd Y;
   };
 
-private:
+ private:
   struct DataSet {
     std::vector<DataPoint> rows;
   };
 
   std::vector<DataSet> split;
 
-public:
+ public:
   DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
             const std::vector<Eigen::VectorXd> &Ys);
   std::vector<DataSet> get_splits() { return split; };
 };
 
-#endif // CORTESIAN_DATASPLIT_H
+#endif  // CORTESIAN_DATASPLIT_H

@@ -1,4 +1,4 @@
-#include "libs/Eigen/Core"
+#include <Eigen/Core>
 #include "nn/ArgMaxEval.h"
 #include "nn/EigenInitializer.h"
 #include "nn/Layer.h"
@@ -10,7 +10,9 @@
 #include "nn/Tanh.h"
 #include <chrono>
 #include <iostream>
-#include <random>
+#include <effolkronium/random.hpp>
+
+using Random = effolkronium::random_static;
 
 #define NUM_DS 100
 int main() {
@@ -37,23 +39,9 @@ int main() {
   Eigen::Vector2d X_S[] = {{1, 0}, {0, 1}, {1, 1}, {0, 0}};
   Eigen::Vector2d Y_S[] = {{1, 0}, {1, 0}, {0, 1}, {0, 1}};
 
-  std::random_device rd;
-  std::mt19937::result_type seed = rd() ^ (
-      (std::mt19937::result_type)
-          std::chrono::duration_cast<std::chrono::seconds>(
-              std::chrono::system_clock::now().time_since_epoch()
-          ).count() +
-      (std::mt19937::result_type)
-          std::chrono::duration_cast<std::chrono::microseconds>(
-              std::chrono::high_resolution_clock::now().time_since_epoch()
-          ).count() );
-
-  std::mt19937 gen(seed);
-  std::uniform_int_distribution<unsigned> distrib(0, 3);
-
   BlockTimer t;
   for (int i = 0; i < NUM_DS; i++) {
-    int rand = distrib(gen);
+    size_t rand = Random::get(0,3);
     X.emplace_back(X_S[rand]);
     Y.emplace_back(Y_S[rand]);
   }

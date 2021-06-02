@@ -8,14 +8,14 @@
 #include "Activation.h"
 
 class Softmax : public Activation {
-private:
+ private:
   Eigen::VectorXd soft_max(const Eigen::VectorXd &in);
 
-public:
+ public:
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;
   Eigen::MatrixXd derivativeOnInput(Eigen::VectorXd in,
                                     Eigen::VectorXd out) override;
 };
 
-#endif // CORTESIAN_SOFTMAX_H
+#endif  // CORTESIAN_SOFTMAX_H

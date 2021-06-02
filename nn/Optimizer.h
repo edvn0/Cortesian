@@ -5,13 +5,13 @@
 #ifndef CORTESIAN_OPTIMIZER_H
 #define CORTESIAN_OPTIMIZER_H
 
-#include "../libs/Eigen/Core"
+#include <Eigen/Core>
 
 class Optimizer {
-public:
+ public:
   virtual ~Optimizer() = default;
 
-public:
+ public:
   virtual void change_weight(int layer_index, Eigen::MatrixXd &w,
                              const Eigen::MatrixXd &d_w) = 0;
 
@@ -22,4 +22,4 @@ public:
                                     Eigen::VectorXd b_seed) = 0;
 };
 
-#endif // CORTESIAN_OPTIMIZER_H
+#endif  // CORTESIAN_OPTIMIZER_H

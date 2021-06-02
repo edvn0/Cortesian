@@ -5,70 +5,12 @@
 #include "Network.h"
 
 Network::Network()
-    : m_loss(nullptr), m_eval({nullptr}), m_optimizer(nullptr),
+    : m_loss(nullptr),
+      m_eval({nullptr}),
+      m_optimizer(nullptr),
       m_initializer(nullptr) {}
 
-BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
-                                const std::vector<Eigen::VectorXd> &Y,
-                                int epochs, int batch_size,
-                                double train_split) {
-
-  size_t training_size = (size_t)(X.size() * train_split);
-
-  std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
-  std::vector<Eigen::VectorXd> train_y(&Y[0], &Y[training_size]);
-  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size() - 1]);
-  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size() - 1]);
-
-  DataSplit batch_split(batch_size, train_x, train_y);
-
-  BackPropStatistics backPropStatistics(m_eval.size());
-
-  for (int i = 0; i < epochs; i++) {
-    BlockTimer t;
-    for (auto &dps : batch_split.get_splits()) {
-      for (const auto &point : dps.rows) {
-        evaluate(point);
-      }
-      optimize();
-    }
-    t.stop();
-    auto timeEpoch = t.elapsedSeconds();
-
-    const std::vector<Eigen::VectorXd> evaluated = evaluate(validate_x);
-    auto loss = m_loss->apply_loss(evaluated, Y);
-    std::vector<double> metrics;
-    metrics.reserve(m_eval.size());
-    for (auto *eval : m_eval) {
-      metrics.emplace_back(eval->apply_evaluation(evaluated, validate_y));
-    }
-
-    std::cout << "Loss: " << loss << ", Evaluation Scores: [";
-    for (auto &val : metrics) {
-      std::cout << val << ", ";
-    }
-    std::cout << "]\n";
-
-    backPropStatistics.update(timeEpoch, loss, metrics);
-  }
-  backPropStatistics.finalize();
-  return backPropStatistics;
-}
-
-std::vector<Eigen::VectorXd>
-Network::evaluate(const std::vector<Eigen::VectorXd> &Xs) {
-  std::vector<Eigen::VectorXd> predicted;
-  predicted.reserve(Xs.size());
-
-  for (const auto &x : Xs) {
-    predicted.emplace_back(predict(x));
-  }
-
-  return predicted;
-}
-
 Network::Network(NetworkBuilder builder) {
-
   if (builder.is_valid() != NetworkBuilder::Validity::VALID) {
     throw std::runtime_error(
         NetworkBuilder::validity_to_string(builder.is_valid()));
@@ -115,6 +57,66 @@ Network::Network(NetworkBuilder builder) {
 
     m_layers[i] = new_layer;
   }
+}
+
+BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
+                                const std::vector<Eigen::VectorXd> &Y,
+                                int epochs, int batch_size,
+                                double train_split) {
+  auto training_size = (size_t)((int)X.size() * train_split);
+
+  std::vector<Eigen::VectorXd> train_x(&X[0], &X[training_size]);
+  std::vector<Eigen::VectorXd> train_y(&Y[0], &Y[training_size]);
+  std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size() - 1]);
+  std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size() - 1]);
+
+  DataSplit batch_split(batch_size, train_x, train_y);
+
+  BackPropStatistics backPropStatistics(m_eval.size());
+
+  for (int i = 0; i < epochs; i++) {
+    BlockTimer t;
+    auto splits = batch_split.get_splits();
+
+    for (auto &dps : splits) {
+      for (const auto &point : dps.rows) {
+        evaluate(point);
+      }
+      optimize();
+    }
+    t.stop();
+    auto timeEpoch = t.elapsedSeconds();
+
+    const std::vector<Eigen::VectorXd> evaluated = evaluate(validate_x);
+    auto loss = m_loss->apply_loss(evaluated, Y);
+    std::vector<double> metrics;
+    metrics.reserve(m_eval.size());
+    for (auto *eval : m_eval) {
+      metrics.emplace_back(eval->apply_evaluation(evaluated, validate_y));
+    }
+
+    std::cout << "Loss: " << loss << ", Evaluation Scores: [";
+    for (auto &val : metrics) {
+      std::cout << val << ", ";
+    }
+    std::cout << "]\n";
+
+    backPropStatistics.update(timeEpoch, loss, metrics);
+  }
+  backPropStatistics.finalize();
+  return backPropStatistics;
+}
+
+std::vector<Eigen::VectorXd> Network::evaluate(
+    const std::vector<Eigen::VectorXd> &Xs) {
+  std::vector<Eigen::VectorXd> predicted;
+  predicted.reserve(Xs.size());
+
+  for (const auto &x : Xs) {
+    predicted.emplace_back(predict(x));
+  }
+
+  return predicted;
 }
 
 std::ostream &operator<<(std::ostream &os, const Network &network) {
@@ -182,6 +184,7 @@ Eigen::VectorXd Network::predict(const Eigen::VectorXd &vector) {
 
   return eval;
 }
+
 Eigen::VectorXd Network::classify(const Eigen::VectorXd &vector) {
   auto out = predict(vector);
   Eigen::VectorXd vec(1);

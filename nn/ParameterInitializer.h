@@ -5,11 +5,11 @@
 #ifndef CORTESIAN_PARAMETERINITIALIZER_H
 #define CORTESIAN_PARAMETERINITIALIZER_H
 
-#include "../libs/Eigen/Core"
+#include <Eigen/Core>
 #include <vector>
 
 class ParameterInitializer {
-protected:
+ protected:
   bool m_is_initialized{false};
   std::vector<int> m_structure;
   size_t m_offset_length;
@@ -18,7 +18,7 @@ protected:
     return m_is_initialized && !m_structure.empty();
   }
 
-public:
+ public:
   virtual ~ParameterInitializer() = default;
 
   virtual std::vector<Eigen::MatrixXd> get_weight_params() = 0;
@@ -28,4 +28,4 @@ public:
   virtual void init(std::vector<int> structure) = 0;
 };
 
-#endif // CORTESIAN_PARAMETERINITIALIZER_H
+#endif  // CORTESIAN_PARAMETERINITIALIZER_H

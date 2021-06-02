@@ -5,13 +5,14 @@
 #ifndef CORTESIAN_LAYER_H
 #define CORTESIAN_LAYER_H
 
-#include "../libs/Eigen/Core"
-#include "Activation.h"
-#include "Optimizer.h"
+#include <Eigen/Core>
 #include <ostream>
 
+#include "Activation.h"
+#include "Optimizer.h"
+
 class Layer {
-private:
+ private:
   Eigen::MatrixXd m_weight;
   Eigen::VectorXd m_bias;
   Eigen::MatrixXd m_delta_weight;
@@ -33,7 +34,7 @@ private:
     bool are_created{false};
   };
 
-public:
+ public:
   Layer(Activation *activation, int neurons, double l2);
 
   Layer(Activation *activation, int neurons);
@@ -57,7 +58,7 @@ public:
 
   double l2{0.0};
 
-public:
+ public:
   /**
    * Returns true if the previous layer is not nullptr.
    * @return Returns true if the previous layer is not nullptr.
@@ -95,4 +96,4 @@ public:
   friend std::ostream &operator<<(std::ostream &os, const Layer &layer);
 };
 
-#endif // CORTESIAN_LAYER_H
+#endif  // CORTESIAN_LAYER_H

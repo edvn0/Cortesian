@@ -5,8 +5,7 @@
 #ifndef CORTESIAN_MATHUTILS_H
 #define CORTESIAN_MATHUTILS_H
 
-#include "../libs/Eigen/Core"
-
+#include <Eigen/Core>
 /**
  * Returns the argument of the maximum of the vector.
  * @param in vector
@@ -47,4 +46,4 @@ static double max(const Eigen::VectorXd &in) {
   return val;
 }
 
-#endif // CORTESIAN_MATHUTILS_H
+#endif  // CORTESIAN_MATHUTILS_H

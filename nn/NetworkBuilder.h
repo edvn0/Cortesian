@@ -5,16 +5,16 @@
 #ifndef CORTESIAN_NETWORKBUILDER_H
 #define CORTESIAN_NETWORKBUILDER_H
 
+#include <vector>
+
 #include "EvaluationFunction.h"
 #include "Layer.h"
 #include "LossFunction.h"
 #include "Optimizer.h"
 #include "ParameterInitializer.h"
-#include <unordered_map>
-#include <vector>
 
 class NetworkBuilder {
-private:
+ private:
   double m_gradient_clipping;
   int m_total;
   std::vector<Layer> m_layers;
@@ -24,7 +24,7 @@ private:
   LossFunction *m_loss_function;
   std::vector<EvaluationFunction *> m_evaluation_function{};
 
-public:
+ public:
   NetworkBuilder() = default;
 
   NetworkBuilder(const NetworkBuilder &other) {
@@ -47,8 +47,8 @@ public:
     return *this;
   }
 
-  NetworkBuilder &
-  evaluation_function(std::initializer_list<EvaluationFunction *> functions) {
+  NetworkBuilder &evaluation_function(
+      std::initializer_list<EvaluationFunction *> functions) {
     m_evaluation_function = functions;
     return *this;
   }
@@ -94,23 +94,23 @@ public:
     VALID = 0
   };
 
-public:
-  static std::string validity_to_string(const Validity& validity) {
+ public:
+  static std::string validity_to_string(const Validity &validity) {
     switch (validity) {
-    case OPTIMIZER:
-      return "Optimizer";
-    case EVAL:
-      return "Evaluation";
-    case LOSS:
-      return "Loss";
-    case LAYERS:
-      return "Layers";
-    case INITIALIZER:
-      return "Initializer";
-    case EVAL_SINGLE:
-      return "Evaluation Single Function";
-    case VALID:
-      return "Is valid.";
+      case OPTIMIZER:
+        return "Optimizer";
+      case EVAL:
+        return "Evaluation";
+      case LOSS:
+        return "Loss";
+      case LAYERS:
+        return "Layers";
+      case INITIALIZER:
+        return "Initializer";
+      case EVAL_SINGLE:
+        return "Evaluation Single Function";
+      case VALID:
+        return "Is valid.";
     }
   }
 
@@ -148,4 +148,4 @@ public:
   std::vector<Layer> get_layers() { return m_layers; }
 };
 
-#endif // CORTESIAN_NETWORKBUILDER_H
+#endif  // CORTESIAN_NETWORKBUILDER_H

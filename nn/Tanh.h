@@ -8,9 +8,9 @@
 #include "Activation.h"
 
 class Tanh : public Activation {
-public:
+ public:
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;
 };
 
-#endif // CORTESIAN_TANH_H
+#endif  // CORTESIAN_TANH_H

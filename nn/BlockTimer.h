@@ -8,7 +8,7 @@
 #include <chrono>
 
 class BlockTimer {
-public:
+ public:
   BlockTimer() { start(); }
 
   void start() {
@@ -37,10 +37,10 @@ public:
 
   double elapsedSeconds() { return elapsedMilliseconds() / 1000.0; }
 
-private:
+ private:
   std::chrono::time_point<std::chrono::system_clock> m_StartTime;
   std::chrono::time_point<std::chrono::system_clock> m_EndTime;
   bool m_bRunning = false;
 };
 
-#endif // CORTESIAN_BLOCKTIMER_H
+#endif  // CORTESIAN_BLOCKTIMER_H

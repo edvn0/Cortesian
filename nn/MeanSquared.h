@@ -5,12 +5,11 @@
 #ifndef CORTESIAN_MEANSQUARED_H
 #define CORTESIAN_MEANSQUARED_H
 
-#include "../libs/Eigen/Core"
 #include "EvaluationFunction.h"
 #include "LossFunction.h"
-#include <vector>
+
 class MeanSquared : public LossFunction, public EvaluationFunction {
-public:
+ public:
   double apply_loss(const std::vector<Eigen::VectorXd> &X,
                     const std::vector<Eigen::VectorXd> &Y) override;
   double apply_loss_single(const Eigen::VectorXd &x,
@@ -23,4 +22,4 @@ public:
                           const std::vector<Eigen::VectorXd> &Y) override;
 };
 
-#endif // CORTESIAN_MEANSQUARED_H
+#endif  // CORTESIAN_MEANSQUARED_H

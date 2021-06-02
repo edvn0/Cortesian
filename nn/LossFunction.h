@@ -5,8 +5,10 @@
 #ifndef CORTESIAN_LOSSFUNCTION_H
 #define CORTESIAN_LOSSFUNCTION_H
 
+#include <Eigen/Core>
+
 class LossFunction {
-public:
+ public:
   virtual ~LossFunction() = default;
 
   /**
@@ -39,4 +41,4 @@ public:
                                               const Eigen::MatrixXd &y) = 0;
 };
 
-#endif // CORTESIAN_LOSSFUNCTION_H
+#endif  // CORTESIAN_LOSSFUNCTION_H

@@ -9,7 +9,7 @@
 #include "LossFunction.h"
 
 class MeanAbsolute : public LossFunction, public EvaluationFunction {
-public:
+ public:
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;
   double apply_evaluation(const std::vector<Eigen::VectorXd> &Y_hat,
@@ -22,4 +22,4 @@ public:
                                       const Eigen::MatrixXd &y) override;
 };
 
-#endif // CORTESIAN_MEANABSOLUTE_H
+#endif  // CORTESIAN_MEANABSOLUTE_H

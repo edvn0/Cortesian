@@ -5,10 +5,10 @@
 #ifndef CORTESIAN_ACTIVATION_H
 #define CORTESIAN_ACTIVATION_H
 
-#include "../libs/Eigen/Core"
+#include <Eigen/Core>
 
 class Activation {
-public:
+ public:
   virtual ~Activation() = default;
   virtual Eigen::VectorXd function(Eigen::VectorXd in) = 0;
   virtual Eigen::VectorXd derivative(Eigen::VectorXd in) = 0;
@@ -23,4 +23,4 @@ public:
   };
 };
 
-#endif // CORTESIAN_ACTIVATION_H
+#endif  // CORTESIAN_ACTIVATION_H
