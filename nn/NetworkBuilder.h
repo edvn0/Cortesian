@@ -10,6 +10,7 @@
 #include "LossFunction.h"
 #include "Optimizer.h"
 #include "ParameterInitializer.h"
+#include <unordered_map>
 #include <vector>
 
 class NetworkBuilder {
@@ -81,6 +82,60 @@ public:
       sizes.push_back(m_layers[i].get_neurons());
     }
     return sizes;
+  }
+
+  enum Validity {
+    OPTIMIZER = 1,
+    EVAL = 2,
+    LOSS = 3,
+    LAYERS = 4,
+    INITIALIZER = 5,
+    EVAL_SINGLE = 6,
+    VALID = 0
+  };
+
+public:
+  static std::string validity_to_string(const Validity& validity) {
+    switch (validity) {
+    case OPTIMIZER:
+      return "Optimizer";
+    case EVAL:
+      return "Evaluation";
+    case LOSS:
+      return "Loss";
+    case LAYERS:
+      return "Layers";
+    case INITIALIZER:
+      return "Initializer";
+    case EVAL_SINGLE:
+      return "Evaluation Single Function";
+    case VALID:
+      return "Is valid.";
+    }
+  }
+
+  Validity is_valid() {
+    if (!m_optimizer) {
+      return OPTIMIZER;
+    }
+    if (!m_loss_function) {
+      return LOSS;
+    }
+    if (!m_initializer) {
+      return INITIALIZER;
+    };
+    if (m_evaluation_function.empty()) {
+      return EVAL;
+    }
+    for (auto &eval : m_evaluation_function) {
+      if (!eval) {
+        return EVAL_SINGLE;
+      };
+    }
+    if (m_layers.empty()) {
+      return LAYERS;
+    }
+    return VALID;
   }
 
   [[nodiscard]] size_t get_total() const { return m_total; }

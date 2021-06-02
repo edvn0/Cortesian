@@ -15,6 +15,7 @@
 #include "NetworkBuilder.h"
 #include "ParameterInitializer.h"
 #include <iostream>
+#include <string>
 #include <ostream>
 #include <vector>
 

@@ -68,6 +68,12 @@ Network::evaluate(const std::vector<Eigen::VectorXd> &Xs) {
 }
 
 Network::Network(NetworkBuilder builder) {
+
+  if (builder.is_valid() != NetworkBuilder::Validity::VALID) {
+    throw std::runtime_error(
+        NetworkBuilder::validity_to_string(builder.is_valid()));
+  }
+
   m_loss = builder.get_loss();
   m_eval = builder.get_eval();
   m_optimizer = builder.get_optimizer();
