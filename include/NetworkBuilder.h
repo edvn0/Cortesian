@@ -7,8 +7,8 @@
 
 #include <vector>
 
-#include "Layer.h"
 #include "initializers/ParameterInitializer.h"
+#include "layers/Dense.h"
 #include "loss_evals/EvaluationFunction.h"
 #include "loss_evals/LossFunction.h"
 #include "optimizers/Optimizer.h"
@@ -17,7 +17,7 @@ class NetworkBuilder {
  private:
   double m_gradient_clipping;
   int m_total;
-  std::vector<Layer> m_layers;
+  std::vector<Layer*> m_layers;
 
   Optimizer *m_optimizer;
   ParameterInitializer *m_initializer;
@@ -68,7 +68,7 @@ class NetworkBuilder {
     return *this;
   }
 
-  NetworkBuilder &layer(Layer &&layer) {
+  NetworkBuilder &layer(Layer* layer) {
     m_layers.emplace_back(layer);
     return *this;
   }
@@ -79,7 +79,7 @@ class NetworkBuilder {
     std::vector<int> sizes;
     sizes.reserve(m_total);
     for (int i = 0; i < m_total; ++i) {
-      sizes.push_back(m_layers[i].get_neurons());
+      sizes.push_back(m_layers[i]->get_neurons());
     }
     return sizes;
   }
@@ -145,7 +145,7 @@ class NetworkBuilder {
   ParameterInitializer *get_initializer() { return m_initializer; }
   [[nodiscard]] bool should_clip() const { return m_gradient_clipping > 0; };
   [[nodiscard]] double clip_factor() const { return m_gradient_clipping; }
-  std::vector<Layer> get_layers() { return m_layers; }
+  std::vector<Layer*> get_layers() { return m_layers; }
 };
 
 #endif  // CORTESIAN_NETWORKBUILDER_H

@@ -11,10 +11,10 @@
 #include <eigen3/Eigen/Core>
 #include <effolkronium/random.hpp>
 
-#include "../Layer.h"
 #include "../NetworkBuilder.h"
 #include "../activations/Activation.h"
 #include "../initializers/ParameterInitializer.h"
+#include "../layers/Dense.h"
 #include "../loss_evals/EvaluationFunction.h"
 #include "../loss_evals/LossFunction.h"
 #include "BackPropStatistics.h"

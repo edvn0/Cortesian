@@ -22,9 +22,10 @@ Network::Network(NetworkBuilder builder) {
 
   m_layers = builder.get_layers();
   //  m_layers[0].set_activation_function(DoNothingFunction());
-  m_layers[0].set_index(0);
+  m_layers[0]->set_index(0);
 
-  m_initializer->init(builder.compile());
+  auto structure = builder.compile();
+  m_initializer->init(structure);
   auto ws = m_initializer->get_weight_params();
   auto bs = m_initializer->get_bias_params();
   auto dws = m_initializer->get_delta_weight_params();
@@ -33,25 +34,26 @@ Network::Network(NetworkBuilder builder) {
   m_optimizer->initialize_optimizer((int)m_layers.size(), {}, {});
 
   for (size_t i = 1; i < builder.get_total(); i++) {
-    auto new_layer = Layer(m_layers[i]);
+    Layer* new_layer = m_layers[i];
     auto layer_weight = ws[i - 1];
     auto layer_bias = bs[i - 1];
     auto layer_delta_weight = dws[i - 1];
     auto layer_delta_bias = dbs[i - 1];
 
-    new_layer.set_params(layer_weight, layer_bias);
-    new_layer.set_delta_params(layer_delta_weight, layer_delta_bias);
-    new_layer.set_index(i);
+    new_layer->set_params(layer_weight, layer_bias);
+    new_layer->set_delta_params(layer_delta_weight, layer_delta_bias);
+    new_layer->set_index(i);
 
-    if (!new_layer.regularization.are_created) {
-      new_layer.regularization.m_l2Matrix = Eigen::MatrixXd::Constant(
-          layer_weight.rows(), layer_weight.cols(), new_layer.l2);
-      new_layer.regularization.m_l2Vector =
-          Eigen::VectorXd::Constant(layer_weight.rows(), new_layer.l2);
-      new_layer.regularization.are_created = true;
+    auto &reg = new_layer->get_regularization();
+    if (!reg.are_created) {
+      reg.m_l2Matrix = Eigen::MatrixXd::Constant(
+          layer_weight.rows(), layer_weight.cols(), new_layer->get_l2());
+      reg.m_l2Vector =
+          Eigen::VectorXd::Constant(layer_weight.rows(), new_layer->get_l2());
+      reg.are_created = true;
     }
 
-    new_layer.set_previous(&m_layers[i - 1]);
+    new_layer->set_previous(m_layers[i - 1]);
 
     m_layers[i] = new_layer;
   }
@@ -81,7 +83,7 @@ std::ostream &operator<<(std::ostream &os, const Network &network) {
 
 void Network::optimize() {
   for (auto &layer : m_layers) {
-    layer.fit(m_optimizer);
+    layer->fit(m_optimizer);
   }
 }
 
@@ -90,7 +92,7 @@ void Network::evaluate_for_back_prop(const DataSplit::DataPoint &point) {
   auto Ys = point.Y;
 
   for (auto &layer : m_layers) {
-    Xs = layer.calculate(Xs);
+    Xs = layer->calculate(Xs);
   }
 
   back_propagate(Ys);
@@ -110,7 +112,7 @@ std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
     Eigen::VectorXd xs = Xs.row(i);
 
     for (auto &layer : m_layers) {
-      xs = layer.calculate(xs);
+      xs = layer->calculate(xs);
     }
 
     evaluated.emplace_back(xs);
@@ -119,7 +121,7 @@ std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
 }
 
 void Network::back_propagate(const Eigen::VectorXd &real) {
-  Layer *last_layer = &m_layers[m_layers.size() - 1];
+  Layer *last_layer = m_layers[m_layers.size() - 1];
   Eigen::VectorXd z = last_layer->get_activated();
 
   Eigen::MatrixXd gradient = m_loss->apply_loss_gradient(z, real);
@@ -149,7 +151,7 @@ void Network::back_propagate(const Eigen::VectorXd &real) {
 Eigen::VectorXd Network::predict(const Eigen::VectorXd &vector) {
   Eigen::VectorXd eval = vector;
   for (auto &layer : m_layers) {
-    eval = layer.calculate(eval);
+    eval = layer->calculate(eval);
   }
 
   return eval;

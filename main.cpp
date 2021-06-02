@@ -2,11 +2,11 @@
 #include <chrono>
 #include <iostream>
 
-#include "include/Layer.h"
 #include "include/Network.h"
 #include "include/activations/LeakyRelu.h"
 #include "include/activations/Softmax.h"
 #include "include/initializers/EigenInitializer.h"
+#include "include/layers/Dense.h"
 #include "include/loss_evals/CategoricalCrossEntropy.h"
 #include "include/loss_evals/MeanAbsolute.h"
 #include "include/loss_evals/MeanSquared.h"
@@ -57,10 +57,10 @@ int main() {
           {new ArgMax(), new MeanAbsolute(), new MeanSquared()})
       .initializer(new EigenInitializer())
       .optimizer(new Adam(0.0001))
-      .layer(Layer(new LeakyRelu(), 784, 0.1))
-      .layer(Layer(new LeakyRelu(), 30, 0.1))
-      .layer(Layer(new LeakyRelu(), 30, 0.1))
-      .layer(Layer(new Softmax(), 10));
+      .layer(new Dense(new LeakyRelu(), 784, 0.1))
+      .layer(new Dense(new LeakyRelu(), 30, 0.1))
+      .layer(new Dense(new LeakyRelu(), 30, 0.1))
+      .layer(new Dense(new Softmax(), 10));
 
   Network network(builder);
 

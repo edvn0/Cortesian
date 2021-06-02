@@ -15,7 +15,7 @@ private:
   };
 
 protected:
-  std::vector<Layer> m_layers;
+  std::vector<Layer*> m_layers;
   LossFunction *m_loss;
   std::vector<EvaluationFunction *> m_eval;
   Optimizer *m_optimizer;

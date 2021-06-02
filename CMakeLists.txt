@@ -16,8 +16,8 @@ add_executable(
         include/activations/Activation.h
         src/activations/LeakyRelu.cpp
         include/activations/LeakyRelu.h
-  src/Layer.cpp
-  include/Layer.h
+        src/layers/Dense.cpp
+        include/layers/Dense.h
         include/optimizers/Optimizer.h
         src/optimizer/StochasticGradientDescent.cpp
         include/optimizers/StochasticGradientDescent.h
@@ -55,7 +55,7 @@ add_executable(
         src/loss_eval/CategoricalCrossEntropy.cpp
         include/loss_evals/CategoricalCrossEntropy.h
         src/optimizer/Adam.cpp
-        include/optimizers/Adam.h)
+        include/optimizers/Adam.h include/layers/Layer.h)
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv)
 
 add_executable(cortesian_tests tests/test.cpp)
