@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/Softmax.h"
+#include "../../include/activations/Softmax.h"
 
 Eigen::VectorXd Softmax::function(Eigen::VectorXd in) { return soft_max(in); }
 

@@ -2,16 +2,16 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/ArgMaxEval.h"
+#include "../../include/utils/ArgMax.h"
 
-#include "../include/MathUtils.h"
+#include "../../include/utils/MathUtils.h"
 
-double ArgMaxEval::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
+double ArgMax::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                            const Eigen::VectorXd &Y) {
   return arg_max(Y_hat) == arg_max(Y) ? 1.0 : 0.0;
 }
 
-double ArgMaxEval::apply_evaluation(const std::vector<Eigen::VectorXd> &Y_hat,
+double ArgMax::apply_evaluation(const std::vector<Eigen::VectorXd> &Y_hat,
                                     const std::vector<Eigen::VectorXd> &Y) {
   size_t correct = 0;
   size_t len = Y_hat.size();

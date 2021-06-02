@@ -7,11 +7,11 @@
 
 #include <vector>
 
-#include "EvaluationFunction.h"
 #include "Layer.h"
-#include "LossFunction.h"
-#include "Optimizer.h"
-#include "ParameterInitializer.h"
+#include "initializers/ParameterInitializer.h"
+#include "loss_evals/EvaluationFunction.h"
+#include "loss_evals/LossFunction.h"
+#include "optimizers/Optimizer.h"
 
 class NetworkBuilder {
  private:

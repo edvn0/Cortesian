@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-02.
 //
 
-#include "../include/CategoricalCrossEntropy.h"
+#include "../../include/loss_evals/CategoricalCrossEntropy.h"
 
 #include <iostream>
 

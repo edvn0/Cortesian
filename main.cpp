@@ -1,20 +1,18 @@
 #include <Eigen/Core>
 #include <chrono>
-#include <effolkronium/random.hpp>
 #include <iostream>
 
-#include "include/Adam.h"
-#include "include/ArgMaxEval.h"
-#include "include/CategoricalCrossEntropy.h"
-#include "include/DataReader.h"
-#include "include/EigenInitializer.h"
 #include "include/Layer.h"
-#include "include/LeakyRelu.h"
-#include "include/MeanAbsolute.h"
-#include "include/MeanSquared.h"
 #include "include/Network.h"
-#include "include/Softmax.h"
-#include "include/StochasticGradientDescent.h"
+#include "include/activations/LeakyRelu.h"
+#include "include/activations/Softmax.h"
+#include "include/initializers/EigenInitializer.h"
+#include "include/loss_evals/CategoricalCrossEntropy.h"
+#include "include/loss_evals/MeanAbsolute.h"
+#include "include/loss_evals/MeanSquared.h"
+#include "include/optimizers/Adam.h"
+#include "include/utils/ArgMax.h"
+#include "include/utils/DataReader.h"
 #include "libs/csv-parser/single_include/csv.hpp"
 
 int main() {
@@ -56,7 +54,7 @@ int main() {
   builder.clipping(0.5)
       .loss_function(new CategoricalCrossEntropy())
       .evaluation_function(
-          {new ArgMaxEval(), new MeanAbsolute(), new MeanSquared()})
+          {new ArgMax(), new MeanAbsolute(), new MeanSquared()})
       .initializer(new EigenInitializer())
       .optimizer(new Adam(0.0001))
       .layer(Layer(new LeakyRelu(), 784, 0.1))

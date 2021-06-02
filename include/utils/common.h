@@ -11,16 +11,16 @@
 #include <eigen3/Eigen/Core>
 #include <effolkronium/random.hpp>
 
+#include "../Layer.h"
+#include "../NetworkBuilder.h"
+#include "../activations/Activation.h"
+#include "../initializers/ParameterInitializer.h"
+#include "../loss_evals/EvaluationFunction.h"
+#include "../loss_evals/LossFunction.h"
 #include "BackPropStatistics.h"
 #include "BlockTimer.h"
 #include "DataSplit.h"
-#include "EvaluationFunction.h"
-#include "Activation.h"
-#include "Layer.h"
-#include "LossFunction.h"
 #include "MathUtils.h"
-#include "NetworkBuilder.h"
-#include "ParameterInitializer.h"
 
 #define CORTESIAN_COMMON_H
 

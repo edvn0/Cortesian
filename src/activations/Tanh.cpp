@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/Tanh.h"
+#include "../../include/activations/Tanh.h"
 
 Eigen::VectorXd Tanh::function(Eigen::VectorXd in) {
   return in.unaryExpr([](double t) {

@@ -2,7 +2,8 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/SigmoidFunction.h"
+#include "../../include/activations/SigmoidFunction.h"
+
 double SigmoidFunction::approx(double t) {
   if (t < -2.0) {
     return -1.0;

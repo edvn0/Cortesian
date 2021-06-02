@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-05-31.
 //
 
-#include "../include/StochasticGradientDescent.h"
+#include "../../include/optimizers/StochasticGradientDescent.h"
 
 void StochasticGradientDescent::change_weight(int layer_index,
                                               Eigen::MatrixXd &w,

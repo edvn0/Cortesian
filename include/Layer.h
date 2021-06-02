@@ -8,8 +8,8 @@
 #include <eigen3/Eigen/Core>
 #include <ostream>
 
-#include "Activation.h"
-#include "Optimizer.h"
+#include "activations/Activation.h"
+#include "optimizers/Optimizer.h"
 
 class Layer {
  private:

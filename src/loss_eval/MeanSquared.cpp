@@ -2,7 +2,8 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/MeanSquared.h"
+#include "../../include/loss_evals/MeanSquared.h"
+
 double MeanSquared::apply_loss(const std::vector<Eigen::VectorXd> &X,
                                const std::vector<Eigen::VectorXd> &Y) {
   double loss = 0.0;

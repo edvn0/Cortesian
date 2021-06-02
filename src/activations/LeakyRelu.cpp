@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-05-31.
 //
 
-#include "../include/LeakyRelu.h"
+#include "../../include/activations/LeakyRelu.h"
 
 Eigen::VectorXd LeakyRelu::function(Eigen::VectorXd in) {
   double &val = cap;

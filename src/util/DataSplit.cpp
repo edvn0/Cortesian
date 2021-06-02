@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/DataSplit.h"
+#include "../../include/utils/DataSplit.h"
 
 DataSplit::DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
                      const std::vector<Eigen::VectorXd> &Ys) {

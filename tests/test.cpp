@@ -4,7 +4,7 @@
 
 #include <catch2/catch_all.hpp>
 
-#include "../src/CategoricalCrossEntropy.cpp"
+#include "../src/loss_eval/CategoricalCrossEntropy.cpp"
 
 TEST_CASE("CategoricalCrossEntropy") {
   SECTION("Should return ~0.708 when tested on particular values") {

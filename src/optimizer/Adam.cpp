@@ -2,7 +2,8 @@
 // Created by Edwin Carlsson on 2021-06-02.
 //
 
-#include "../include/Adam.h"
+#include "../../include/optimizers/Adam.h"
+
 void Adam::change_weight(int layer_index, Eigen::MatrixXd &w,
                          const Eigen::MatrixXd &d_w) {
   int exponent = layer_index + 1;

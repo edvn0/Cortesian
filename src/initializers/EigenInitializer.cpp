@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../include/EigenInitializer.h"
+#include "../../include/initializers/EigenInitializer.h"
 
 std::vector<Eigen::MatrixXd> EigenInitializer::get_weight_params() {
   std::vector<Eigen::MatrixXd> weights;

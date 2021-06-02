@@ -5,7 +5,7 @@
 #ifndef CORTESIAN_NETWORK_H
 #define CORTESIAN_NETWORK_H
 
-#include "common.h"
+#include "utils/common.h"
 
 class Network {
 private:
