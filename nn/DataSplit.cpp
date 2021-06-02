@@ -3,6 +3,7 @@
 //
 
 #include "DataSplit.h"
+
 DataSplit::DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
                      const std::vector<Eigen::VectorXd> &Ys) {
   assert(Xs.size() == Ys.size());
@@ -23,4 +24,14 @@ DataSplit::DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
   }
 
   split = batches;
+}
+
+std::vector<DataSplit::DataSet> DataSplit::get_splits(bool shuffle) {
+  if (shuffle) {
+    std::vector<DataSplit::DataSet> to_shuffle = split;
+    effolkronium::random_static::shuffle(to_shuffle);
+    return to_shuffle;
+  } else {
+    return split;
+  }
 }

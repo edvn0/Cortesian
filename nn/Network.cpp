@@ -76,8 +76,7 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
 
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
-    auto splits = batch_split.get_splits();
-
+    auto splits = batch_split.get_splits(true);
     for (auto &dps : splits) {
       for (const auto &point : dps.rows) {
         evaluate(point);
@@ -88,7 +87,7 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
     auto timeEpoch = t.elapsedSeconds();
 
     const std::vector<Eigen::VectorXd> evaluated = evaluate(validate_x);
-    auto loss = m_loss->apply_loss(evaluated, Y);
+    auto loss = m_loss->apply_loss(evaluated, validate_y);
     std::vector<double> metrics;
     metrics.reserve(m_eval.size());
     for (auto *eval : m_eval) {

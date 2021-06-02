@@ -8,13 +8,13 @@
 #include "common.h"
 
 class Network {
- private:
+private:
   struct Clipping {
     bool clipping{false};
     double clip_factor{0.0};
   };
 
- private:
+private:
   std::vector<Layer> m_layers;
   LossFunction *m_loss;
   std::vector<EvaluationFunction *> m_eval;
@@ -22,12 +22,14 @@ class Network {
   Clipping m_clipping;
   ParameterInitializer *m_initializer;
 
+  // These are private helper methods, but also the core of this class.
   void optimize();
   void back_propagate(const Eigen::VectorXd &matrix);
 
- public:
+public:
   Network();
   explicit Network(NetworkBuilder builder);
+  explicit Network(NetworkBuilder &&builder) : Network(builder){};
   ~Network() = default;
 
   BackPropStatistics fit(const std::vector<Eigen::VectorXd> &X,
@@ -45,4 +47,4 @@ class Network {
   Eigen::VectorXd classify(const Eigen::VectorXd &vector);
 };
 
-#endif  // CORTESIAN_NETWORK_H
+#endif // CORTESIAN_NETWORK_H

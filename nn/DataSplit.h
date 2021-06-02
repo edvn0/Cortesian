@@ -6,6 +6,7 @@
 #define CORTESIAN_DATASPLIT_H
 
 #include <Eigen/Core>
+#include <effolkronium/random.hpp>
 #include <vector>
 
 class DataSplit {
@@ -25,7 +26,8 @@ class DataSplit {
  public:
   DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
             const std::vector<Eigen::VectorXd> &Ys);
-  std::vector<DataSet> get_splits() { return split; };
+
+  std::vector<DataSet> get_splits(bool shuffle=false);
 };
 
 #endif  // CORTESIAN_DATASPLIT_H

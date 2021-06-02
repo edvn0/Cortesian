@@ -14,7 +14,8 @@
 
 using Random = effolkronium::random_static;
 
-#define NUM_DS 100
+#define NUM_DS 10000
+
 int main() {
 
   NetworkBuilder builder;
