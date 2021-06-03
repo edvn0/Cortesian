@@ -6,7 +6,6 @@
 #define CORTESIAN_NETWORK_H
 
 #include "utils/common.h"
-#include <thread>
 
 class Network {
 private:
