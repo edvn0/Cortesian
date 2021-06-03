@@ -4,8 +4,6 @@
 
 #include "../../include/activations/Softmax.h"
 
-#include <iostream>
-
 Eigen::VectorXd Softmax::function(Eigen::VectorXd in) { return soft_max(in); }
 
 Eigen::VectorXd Softmax::derivative(Eigen::VectorXd in) { assert(false); }
