@@ -18,7 +18,7 @@ add_subdirectory(libs/csv-parser)
 
 add_executable(
   cortesian
-        demo/main.cpp
+        demo/mnist_demo.cpp
   include/activations/Activation.h
   src/activations/LeakyRelu.cpp
   include/activations/LeakyRelu.h
