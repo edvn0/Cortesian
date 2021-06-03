@@ -8,7 +8,7 @@
 #include <utility>
 
 Eigen::VectorXd Dense::activate(Eigen::VectorXd in, Eigen::VectorXd out) {
-  return m_activation->derivativeOnInput(std::move(in), std::move(out));
+  return m_activation->derivative_on_input(std::move(in), std::move(out));
 }
 
 void Dense::fit(Optimizer *optimizer) {
@@ -75,7 +75,7 @@ void Dense::set_params(Eigen::MatrixXd weight, Eigen::VectorXd bias) {
 
 Eigen::MatrixXd Dense::error_derivative(const Eigen::VectorXd &prev_activation,
                                         const Eigen::MatrixXd &current) {
-  return m_activation->derivativeOnInput(prev_activation, current);
+  return m_activation->derivative_on_input(prev_activation, current);
 }
 
 Dense::Dense(const Dense &other) : Layer(other) {

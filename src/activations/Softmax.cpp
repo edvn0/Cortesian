@@ -8,7 +8,7 @@ Eigen::VectorXd Softmax::function(Eigen::VectorXd in) { return soft_max(in); }
 
 Eigen::VectorXd Softmax::derivative(Eigen::VectorXd in) { assert(false); }
 
-Eigen::MatrixXd Softmax::derivativeOnInput(Eigen::VectorXd in,
+Eigen::MatrixXd Softmax::derivative_on_input(Eigen::VectorXd in,
                                            Eigen::VectorXd out) {
   auto sum = (in.array() * out.array()).sum();
   auto diff = out.array() - sum;

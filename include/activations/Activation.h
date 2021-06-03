@@ -13,7 +13,7 @@ public:
   virtual Eigen::VectorXd function(Eigen::VectorXd in) = 0;
   virtual Eigen::VectorXd derivative(Eigen::VectorXd in) = 0;
 
-  virtual Eigen::MatrixXd derivativeOnInput(Eigen::VectorXd in,
+  virtual Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in,
                                             Eigen::VectorXd out) {
     auto arrPred = out.array();
     auto arrRaw = in.array();
