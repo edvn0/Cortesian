@@ -53,9 +53,7 @@ Dense::Dense(Activation *activation, int neurons)
     : Layer(activation, neurons, 0.0) {}
 
 Dense::Dense(Activation *activation, int neurons, double l2)
-    : Layer(activation, neurons, l2) {
-  m_previous = nullptr;
-}
+    : Layer(activation, neurons, l2) {}
 
 std::ostream &operator<<(std::ostream &os, const Dense &layer) {
   os << "m_weight: " << layer.m_weight.rows() << " X " << layer.m_weight.cols()
@@ -79,9 +77,6 @@ Eigen::MatrixXd Dense::error_derivative(const Eigen::VectorXd &prev_activation,
                                         const Eigen::MatrixXd &current) {
   return m_activation->derivativeOnInput(prev_activation, current);
 }
-Eigen::MatrixXd Dense::previous_activation() {
-  return m_previous->get_activated().transpose();
-}
 
 Dense::Dense(const Dense &other) : Layer(other) {
   m_layer_index = other.m_layer_index;
@@ -91,7 +86,6 @@ Dense::Dense(const Dense &other) : Layer(other) {
   m_bias = other.m_bias;
   activated = other.activated;
   m_neurons = other.m_neurons;
-  m_previous = other.m_previous;
   m_l2 = other.m_l2;
   m_activation = other.m_activation;
 }

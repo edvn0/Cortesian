@@ -31,8 +31,6 @@ public:
 
   Eigen::VectorXd calculate(Eigen::VectorXd &in) override;
 
-  Eigen::MatrixXd previous_activation() override;
-
   Eigen::MatrixXd get_weight() override;
 
   Eigen::MatrixXd get_activated() override;

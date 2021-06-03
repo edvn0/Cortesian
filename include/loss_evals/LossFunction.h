@@ -9,8 +9,30 @@
 #include <vector>
 
 class LossFunction {
- public:
+public:
   virtual ~LossFunction() = default;
+
+  virtual double calculate(const std::vector<Eigen::VectorXd> &Y_hat,
+                           const std::vector<Eigen::VectorXd> &Y) {
+    double loss = 0.0;
+    size_t rows = Y_hat.size();
+#pragma omp parallel for
+    for (size_t i = 0; i < rows; i++) {
+      loss += apply_loss_single(Y_hat[i], Y[i]);
+    }
+    return loss / (double)rows;
+  }
+
+  virtual double calculate(const std::vector<Eigen::VectorXd> &Y_hat,
+                           const Eigen::MatrixXd &Y_tensor) {
+    double loss = 0.0;
+    size_t rows = Y_hat.size();
+#pragma omp parallel for
+    for (size_t i = 0; i < rows; i++) {
+      loss += apply_loss_single(Y_hat[i], Y_tensor.row((long)i));
+    }
+    return loss / (double)rows;
+  }
 
   /**
    * Applies the loss function to an already predicted data set.
@@ -20,17 +42,19 @@ class LossFunction {
    * @return the loss
    */
   virtual double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
-                            const std::vector<Eigen::VectorXd> &Y) = 0;
+                            const std::vector<Eigen::VectorXd> &Y) {
+    return calculate(Y_hat, Y);
+  };
 
-    /**
+  /**
    * Applies the loss function to an already tensor
    * Caller must have predicted the data to call this function.
    * @param Y_hat predicted data set
    * @param Y real values
    * @return the loss
    */
-    virtual double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
-                              const Eigen::MatrixXd & Y) {
+  virtual double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
+                            const Eigen::MatrixXd &Y) {
     double loss = 0.0;
     size_t size = Y_hat.size();
     for (long i = 0; i < size; i++) {
@@ -38,7 +62,7 @@ class LossFunction {
       Eigen::VectorXd col_y = Y.row(i);
       loss += apply_loss_single(col_x, col_y);
     }
-    return loss / (double) size;
+    return loss / (double)size;
   }
 
   /**
@@ -61,4 +85,4 @@ class LossFunction {
                                               const Eigen::MatrixXd &y) = 0;
 };
 
-#endif  // CORTESIAN_LOSSFUNCTION_H
+#endif // CORTESIAN_LOSSFUNCTION_H

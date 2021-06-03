@@ -8,10 +8,10 @@
 #include <eigen3/Eigen/Core>
 
 class Optimizer {
- public:
+public:
   virtual ~Optimizer() = default;
 
- public:
+public:
   virtual void change_weight(int layer_index, Eigen::MatrixXd &w,
                              const Eigen::MatrixXd &d_w) = 0;
 
@@ -22,4 +22,4 @@ class Optimizer {
                                     Eigen::VectorXd b_seed) = 0;
 };
 
-#endif  // CORTESIAN_OPTIMIZER_H
+#endif // CORTESIAN_OPTIMIZER_H

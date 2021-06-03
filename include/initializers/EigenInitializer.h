@@ -11,12 +11,12 @@
 #include "ParameterInitializer.h"
 
 class EigenInitializer : public ParameterInitializer {
- private:
+private:
   static double glorot_limit(size_t neurons_in, size_t neurons_out) {
     return sqrt(6.0 / ((double)neurons_in + (double)neurons_out));
   }
 
- public:
+public:
   std::vector<Eigen::MatrixXd> get_weight_params() override;
   std::vector<Eigen::VectorXd> get_bias_params() override;
   std::vector<Eigen::MatrixXd> get_delta_weight_params() override;
@@ -24,4 +24,4 @@ class EigenInitializer : public ParameterInitializer {
   void init(std::vector<int> structure) override;
 };
 
-#endif  // CORTESIAN_EIGENINITIALIZER_H
+#endif // CORTESIAN_EIGENINITIALIZER_H

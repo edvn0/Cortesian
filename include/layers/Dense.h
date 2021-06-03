@@ -47,20 +47,7 @@ public:
   Eigen::VectorXd calculate(Eigen::VectorXd &in) override;
 
 public:
-  /**
-   * Returns true if the previous layer is not nullptr.
-   * @return Returns true if the previous layer is not nullptr.
-   */
-  bool has_previous() { return m_previous != nullptr; };
-
   Eigen::VectorXd get_bias() { return m_bias; };
-
-  /**
-   * Returns the transpose of the previous layer's activation.
-   * Utility for back propagation.
-   * @return transpose of prev layer activation.
-   */
-  Eigen::MatrixXd previous_activation() override;
 
   Eigen::MatrixXd get_weight() override { return m_weight; };
 
@@ -72,8 +59,6 @@ public:
                         Eigen::VectorXd d_bias) override;
 
   L2Tensors &get_regularization() override;
-
-  double get_l2() const;
 
   friend std::ostream &operator<<(std::ostream &os, const Dense &layer);
   Eigen::VectorXd calculate(const Eigen::VectorXd &in) override;

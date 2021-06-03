@@ -8,6 +8,9 @@
 #include "LossFunction.h"
 
 class CategoricalCrossEntropy : public LossFunction {
+private:
+  static constexpr double gce_epsilon = 1e-9;
+
 public:
   double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
                     const std::vector<Eigen::VectorXd> &Y) override;
@@ -17,6 +20,7 @@ public:
 
   Eigen::MatrixXd apply_loss_gradient(const Eigen::MatrixXd &y_hat,
                                       const Eigen::MatrixXd &y) override;
+
   double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
                     const Eigen::MatrixXd &Y) override;
 };

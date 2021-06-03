@@ -9,7 +9,7 @@
 #include <vector>
 
 class ParameterInitializer {
- protected:
+protected:
   bool m_is_initialized{false};
   std::vector<int> m_structure;
   size_t m_offset_length;
@@ -18,7 +18,7 @@ class ParameterInitializer {
     return m_is_initialized && !m_structure.empty();
   }
 
- public:
+public:
   virtual ~ParameterInitializer() = default;
 
   virtual std::vector<Eigen::MatrixXd> get_weight_params() = 0;
@@ -28,4 +28,4 @@ class ParameterInitializer {
   virtual void init(std::vector<int> structure) = 0;
 };
 
-#endif  // CORTESIAN_PARAMETERINITIALIZER_H
+#endif // CORTESIAN_PARAMETERINITIALIZER_H

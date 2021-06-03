@@ -5,12 +5,12 @@
 #ifndef CORTESIAN_DATASPLIT_H
 #define CORTESIAN_DATASPLIT_H
 
-#include <eigen3/Eigen/Core>
 #include <effolkronium/random.hpp>
+#include <eigen3/Eigen/Core>
 #include <vector>
 
 class DataSplit {
- public:
+public:
   struct DataPoint {
     Eigen::VectorXd X;
     Eigen::VectorXd Y;
@@ -23,11 +23,11 @@ class DataSplit {
 private:
   std::vector<DataSet> split;
 
- public:
+public:
   DataSplit(size_t batch_size, const std::vector<Eigen::VectorXd> &Xs,
             const std::vector<Eigen::VectorXd> &Ys);
 
-  std::vector<DataSet> get_splits(bool shuffle=false);
+  std::vector<DataSet> get_splits(bool shuffle = false);
 };
 
-#endif  // CORTESIAN_DATASPLIT_H
+#endif // CORTESIAN_DATASPLIT_H
