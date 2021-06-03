@@ -15,7 +15,7 @@ private:
   };
 
 protected:
-  std::vector<Layer*> m_layers;
+  std::vector<Layer *> m_layers;
   LossFunction *m_loss;
   std::vector<EvaluationFunction *> m_eval;
   Optimizer *m_optimizer;
@@ -32,7 +32,7 @@ public:
   Network();
   explicit Network(NetworkBuilder builder);
   explicit Network(NetworkBuilder &&builder) : Network(builder){};
-  ~Network() = default;
+  ~Network();
 
   virtual BackPropStatistics fit(const std::vector<Eigen::VectorXd> &X,
                                  const std::vector<Eigen::VectorXd> &Y,

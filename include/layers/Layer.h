@@ -53,7 +53,7 @@ public:
 
   virtual Eigen::MatrixXd get_activated() = 0;
 
-  virtual L2Tensors &get_regularization() = 0;
+  virtual L2Tensors &get_regularization() { return regularization; };
 
   virtual void set_previous(Layer *prev) { m_previous = prev; };
 

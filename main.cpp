@@ -60,9 +60,13 @@ int main() {
       .layer(new Dense(new LeakyRelu(), 784, 0.1))
       .layer(new Dense(new LeakyRelu(), 30, 0.1))
       .layer(new Dense(new LeakyRelu(), 30, 0.1))
+      .layer(new Dense(new LeakyRelu(), 30, 0.1))
+      .layer(new Dense(new LeakyRelu(), 30, 0.1))
       .layer(new Dense(new Softmax(), 10));
 
   Network network(builder);
+
+  std::cout << network;
 
   auto out = network.fit_tensor(X_tensor, Y_tensor, 10, 64, X_validate_tensor,
                                 Y_validate_tensor);

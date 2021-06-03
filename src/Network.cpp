@@ -34,7 +34,7 @@ Network::Network(NetworkBuilder builder) {
   m_optimizer->initialize_optimizer((int)m_layers.size(), {}, {});
 
   for (size_t i = 1; i < builder.get_total(); i++) {
-    Layer* new_layer = m_layers[i];
+    Layer *new_layer = m_layers[i];
     auto layer_weight = ws[i - 1];
     auto layer_bias = bs[i - 1];
     auto layer_delta_weight = dws[i - 1];
@@ -121,7 +121,7 @@ std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
 }
 
 void Network::back_propagate(const Eigen::VectorXd &real) {
-  Layer *last_layer = m_layers[m_layers.size() - 1];
+  Layer *last_layer = m_layers.back();
   Eigen::VectorXd z = last_layer->get_activated();
 
   Eigen::MatrixXd gradient = m_loss->apply_loss_gradient(z, real);
@@ -272,4 +272,21 @@ Network::generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
     data_sets.emplace_back(ds);
   }
   return data_sets;
+}
+Network::~Network() {
+  std::cout << "deleting network.";
+  delete m_optimizer;
+  delete m_initializer;
+  delete m_loss;
+
+  for (auto eval : m_eval) {
+    delete eval;
+  }
+
+  for (auto layer : m_layers) {
+    delete layer;
+  }
+
+  m_eval.clear();
+  m_layers.clear();
 }
