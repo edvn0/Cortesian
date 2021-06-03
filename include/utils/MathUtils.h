@@ -46,4 +46,4 @@ static double max(const Eigen::VectorXd &in) {
   return val;
 }
 
-#endif  // CORTESIAN_MATHUTILS_H
+#endif // CORTESIAN_MATHUTILS_H

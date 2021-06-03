@@ -11,7 +11,6 @@ class Conv2D : public Layer {
 private:
   Eigen::MatrixXd kernel;
 
-
 public:
   Eigen::VectorXd calculate(const Eigen::VectorXd &in) override;
   void add_deltas(const Eigen::MatrixXd &d_w,
@@ -21,7 +20,6 @@ public:
   Eigen::MatrixXd error_derivative(const Eigen::VectorXd &previous,
                                    const Eigen::MatrixXd &current) override;
   Eigen::VectorXd calculate(Eigen::VectorXd &in) override;
-  Eigen::MatrixXd previous_activation() override;
   Eigen::MatrixXd get_weight() override;
   Eigen::MatrixXd get_activated() override;
   void set_params(Eigen::MatrixXd weight, Eigen::VectorXd bias) override;

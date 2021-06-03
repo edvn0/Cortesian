@@ -26,8 +26,6 @@ Eigen::VectorXd Conv2D::calculate(Eigen::VectorXd &in) {
   return Eigen::VectorXd();
 }
 
-Eigen::MatrixXd Conv2D::previous_activation() { return Eigen::MatrixXd(); }
-
 Eigen::MatrixXd Conv2D::get_weight() { return Eigen::MatrixXd(); }
 
 Eigen::MatrixXd Conv2D::get_activated() { return Eigen::MatrixXd(); }

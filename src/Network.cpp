@@ -53,8 +53,6 @@ Network::Network(NetworkBuilder builder) {
       reg.are_created = true;
     }
 
-    new_layer->set_previous(m_layers[i - 1]);
-
     m_layers[i] = new_layer;
   }
 }
@@ -99,15 +97,21 @@ void Network::evaluate_for_back_prop(const DataSplit::DataPoint &point) {
 }
 
 void Network::evaluate_for_back_prop(const DataSplit::DataSet &ds) {
-  for (const auto &d : ds.rows) {
-    evaluate_for_back_prop(d);
+  size_t size = ds.rows.size();
+#pragma omp parallel for default(none) shared(size, ds)
+  for (int i = 0; i < size; i++) {
+    evaluate_for_back_prop(ds.rows[i]);
   }
 }
 
 std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
   size_t rows = Xs.rows();
+#pragma omp declare reduction (merge : std::vector<Eigen::VectorXd> : omp_out.insert(omp_out.end(), omp_in.begin(), omp_in.end()))
+
   std::vector<Eigen::VectorXd> evaluated;
   evaluated.reserve(rows);
+#pragma omp parallel for reduction(merge                                       \
+                                   : evaluated) default(none) shared(rows, Xs)
   for (long i = 0; i < rows; i++) {
     Eigen::VectorXd xs = Xs.row(i);
 
@@ -117,6 +121,7 @@ std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
 
     evaluated.emplace_back(xs);
   }
+
   return evaluated;
 }
 
@@ -132,9 +137,12 @@ void Network::back_propagate(const Eigen::VectorXd &real) {
     }
   }
 
+  int layer = last_layer->get_layer_index();
   do {
+    auto previous_layer = m_layers[layer - 1];
     auto dc_di = last_layer->error_derivative(z, gradient);
-    auto previous_activation = last_layer->previous_activation();
+
+    auto previous_activation = previous_layer->get_activated().transpose();
 
     Eigen::MatrixXd d_w = dc_di * previous_activation;
 
@@ -142,10 +150,10 @@ void Network::back_propagate(const Eigen::VectorXd &real) {
 
     gradient = last_layer->get_weight().transpose() * dc_di;
 
-    last_layer = last_layer->get_previous();
+    last_layer = previous_layer;
     z = last_layer->get_activated();
-
-  } while (last_layer->has_previous());
+    layer--;
+  } while (layer > 0);
 }
 
 Eigen::VectorXd Network::predict(const Eigen::VectorXd &vector) {
@@ -185,6 +193,7 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
     t.stop();
 
     auto timeEpoch = t.elapsedSeconds();
+
     const std::vector<Eigen::VectorXd> evaluated = evaluate(X_validate);
     auto loss = m_loss->apply_loss(evaluated, Y_validate);
     std::vector<double> metrics;
@@ -193,16 +202,28 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
       metrics.emplace_back(eval->apply_evaluation(evaluated, Y_validate));
     }
 
-    std::cout << "Loss: " << loss << ", Evaluation Scores: [";
-    for (auto &val : metrics) {
-      std::cout << val << ", ";
-    }
-    std::cout << "]\n";
-
+    print_epoch_information(loss, metrics);
     backPropStatistics.update(timeEpoch, loss, metrics);
   }
   backPropStatistics.finalize();
   return backPropStatistics;
+}
+
+void Network::print_epoch_information(double loss,
+                                      const std::vector<double> &metrics) {
+  std::string epoch_output;
+  epoch_output.reserve(70);
+  epoch_output.append("Loss: ");
+  epoch_output.append(std::to_string(loss));
+  epoch_output.append(", Evaluation Scores: [");
+  size_t metrics_size = metrics.size();
+  for (auto &val : metrics) {
+    epoch_output.append(std::to_string(val));
+    if (metrics_size-- > 1)
+      epoch_output.append(", ");
+  }
+  epoch_output.append("]\n");
+  std::cout << epoch_output;
 }
 
 BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,

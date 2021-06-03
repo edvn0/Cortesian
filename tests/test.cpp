@@ -1,10 +1,39 @@
+
 //
 // Created by Edwin Carlsson on 2021-06-02.
 //
 
 #include <catch2/catch_all.hpp>
 
+#include "../src/activations/Softmax.cpp"
 #include "../src/loss_eval/CategoricalCrossEntropy.cpp"
+
+#define CORTESIAN_TEST
+
+static constexpr double certainty = 1e-6;
+
+TEST_CASE("Softmax") {
+  SECTION("Should correctly handle case 0.6,0.2,0.2") {
+    Activation *f = new Softmax();
+    Eigen::VectorXd vec(10);
+    vec << 0.0, 0.00, 0.0, 0.0, 0.2, 0.2, 0.0, 0.0, 0.0, 0.6;
+    Eigen::VectorXd expected(10);
+    expected << 0.08877112, 0.08877112, 0.08877112, 0.08877112, 0.1084253,
+        0.1084253, 0.08877112, 0.08877112, 0.08877112, 0.16175154;
+    auto calc = f->function(vec);
+    REQUIRE((calc - expected).norm() < certainty);
+  }
+
+  SECTION("Should correctly handle case HUGE certainty") {
+    Activation *f = new Softmax();
+    Eigen::VectorXd vec(10);
+    vec << 0.0, 0.00, 0.0, 0.0, 0.2, 0.2, 0.0, 0.0, 0.0, 100;
+    Eigen::VectorXd expected(10);
+    expected << 0.0, 0.00, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1;
+    auto calc = f->function(vec);
+    REQUIRE((calc - expected).norm() < certainty);
+  }
+}
 
 TEST_CASE("CategoricalCrossEntropy") {
   SECTION("Should return ~0.708 when tested on particular values") {
@@ -21,7 +50,7 @@ TEST_CASE("CategoricalCrossEntropy") {
     actual.row(1) << 0.0, 0.0, 0.0, 1.0;
 
     double calculated = f->apply_loss(preds, actual);
-    REQUIRE(calculated == 0.7083767843022996);
+    REQUIRE(abs(calculated - 0.7083767843022996) < certainty);
     delete f;
   }
 }

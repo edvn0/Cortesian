@@ -57,6 +57,9 @@ public:
   static std::vector<DataSplit::DataSet>
   generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
                   size_t from_index, size_t to_index, int i);
+
+  static void print_epoch_information(double loss,
+                                      const std::vector<double> &metrics);
 };
 
 #endif // CORTESIAN_NETWORK_H

@@ -56,19 +56,19 @@ int main() {
       .evaluation_function(
           {new ArgMax(), new MeanAbsolute(), new MeanSquared()})
       .initializer(new EigenInitializer())
-      .optimizer(new Adam(0.0001))
+      .optimizer(new Adam(1))
       .layer(new Dense(new LeakyRelu(), 784, 0.1))
-      .layer(new Dense(new LeakyRelu(), 30, 0.1))
-      .layer(new Dense(new LeakyRelu(), 30, 0.1))
-      .layer(new Dense(new LeakyRelu(), 30, 0.1))
-      .layer(new Dense(new LeakyRelu(), 30, 0.1))
-      .layer(new Dense(new Softmax(), 10));
+      .layer(new Dense(new LeakyRelu(), 30, 0.5))
+      .layer(new Dense(new LeakyRelu(), 30, 0.5))
+      .layer(new Dense(new LeakyRelu(), 30, 0.5))
+      .layer(new Dense(new LeakyRelu(), 30, 0.5))
+      .layer(new Dense(new Softmax(), 10, 0.5));
 
   Network network(builder);
 
   std::cout << network;
 
-  auto out = network.fit_tensor(X_tensor, Y_tensor, 10, 64, X_validate_tensor,
+  auto out = network.fit_tensor(X_tensor, Y_tensor, 100, 64, X_validate_tensor,
                                 Y_validate_tensor);
 
   std::cout << out;

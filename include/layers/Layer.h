@@ -25,7 +25,6 @@ protected:
   Activation *m_activation;
   L2Tensors regularization;
   double m_l2{0.0};
-  Layer *m_previous;
 
 public:
   int m_neurons;
@@ -47,17 +46,11 @@ public:
 
   virtual Eigen::VectorXd calculate(Eigen::VectorXd &in) = 0;
 
-  virtual Eigen::MatrixXd previous_activation() = 0;
-
   virtual Eigen::MatrixXd get_weight() = 0;
 
   virtual Eigen::MatrixXd get_activated() = 0;
 
   virtual L2Tensors &get_regularization() { return regularization; };
-
-  virtual void set_previous(Layer *prev) { m_previous = prev; };
-
-  virtual Layer *get_previous() { return m_previous; };
 
   virtual void set_params(Eigen::MatrixXd weight, Eigen::VectorXd bias) = 0;
 
@@ -70,7 +63,9 @@ public:
 
   virtual const double &get_l2() { return m_l2; }
 
-  bool has_previous() { return m_previous != nullptr; }
+  bool has_previous() { return m_layer_index != 0; };
+
+  int get_layer_index() { return m_layer_index; }
 };
 
 #endif // CORTESIAN_LAYER_H

@@ -9,13 +9,13 @@
 #include <vector>
 
 class BackPropStatistics {
- private:
+private:
   double mean_time_epochs{0.0};
   double mean_loss_epochs{0.0};
   std::vector<double> mean_for_eval_functions;
   size_t iterations{0};
 
- public:
+public:
   explicit BackPropStatistics(size_t eval_functions) {
     mean_for_eval_functions = std::vector<double>(eval_functions);
   }
@@ -52,4 +52,4 @@ class BackPropStatistics {
   }
 };
 
-#endif  // CORTESIAN_BACKPROPSTATISTICS_H
+#endif // CORTESIAN_BACKPROPSTATISTICS_H

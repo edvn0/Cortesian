@@ -4,12 +4,12 @@
 
 #ifndef CORTESIAN_COMMON_H
 
+#include <effolkronium/random.hpp>
+#include <eigen3/Eigen/Core>
 #include <iostream>
 #include <ostream>
 #include <string>
 #include <vector>
-#include <eigen3/Eigen/Core>
-#include <effolkronium/random.hpp>
 
 #include "../NetworkBuilder.h"
 #include "../activations/Activation.h"

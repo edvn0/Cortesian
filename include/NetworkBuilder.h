@@ -14,17 +14,17 @@
 #include "optimizers/Optimizer.h"
 
 class NetworkBuilder {
- private:
+private:
   double m_gradient_clipping;
   int m_total;
-  std::vector<Layer*> m_layers;
+  std::vector<Layer *> m_layers;
 
   Optimizer *m_optimizer;
   ParameterInitializer *m_initializer;
   LossFunction *m_loss_function;
   std::vector<EvaluationFunction *> m_evaluation_function{};
 
- public:
+public:
   NetworkBuilder() = default;
 
   NetworkBuilder(const NetworkBuilder &other) {
@@ -47,8 +47,8 @@ class NetworkBuilder {
     return *this;
   }
 
-  NetworkBuilder &evaluation_function(
-      std::initializer_list<EvaluationFunction *> functions) {
+  NetworkBuilder &
+  evaluation_function(std::initializer_list<EvaluationFunction *> functions) {
     m_evaluation_function = functions;
     return *this;
   }
@@ -68,7 +68,7 @@ class NetworkBuilder {
     return *this;
   }
 
-  NetworkBuilder &layer(Layer* layer) {
+  NetworkBuilder &layer(Layer *layer) {
     m_layers.emplace_back(layer);
     return *this;
   }
@@ -94,23 +94,23 @@ class NetworkBuilder {
     VALID = 0
   };
 
- public:
+public:
   static std::string validity_to_string(const Validity &validity) {
     switch (validity) {
-      case OPTIMIZER:
-        return "Optimizer";
-      case EVAL:
-        return "Evaluation";
-      case LOSS:
-        return "Loss";
-      case LAYERS:
-        return "Layers";
-      case INITIALIZER:
-        return "Initializer";
-      case EVAL_SINGLE:
-        return "Evaluation Single Function";
-      case VALID:
-        return "Is valid.";
+    case OPTIMIZER:
+      return "Optimizer";
+    case EVAL:
+      return "Evaluation";
+    case LOSS:
+      return "Loss";
+    case LAYERS:
+      return "Layers";
+    case INITIALIZER:
+      return "Initializer";
+    case EVAL_SINGLE:
+      return "Evaluation Single Function";
+    case VALID:
+      return "Is valid.";
     }
   }
 
@@ -145,7 +145,7 @@ class NetworkBuilder {
   ParameterInitializer *get_initializer() { return m_initializer; }
   [[nodiscard]] bool should_clip() const { return m_gradient_clipping > 0; };
   [[nodiscard]] double clip_factor() const { return m_gradient_clipping; }
-  std::vector<Layer*> get_layers() { return m_layers; }
+  std::vector<Layer *> get_layers() { return m_layers; }
 };
 
-#endif  // CORTESIAN_NETWORKBUILDER_H
+#endif // CORTESIAN_NETWORKBUILDER_H

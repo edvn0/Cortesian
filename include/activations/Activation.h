@@ -8,7 +8,7 @@
 #include <eigen3/Eigen/Core>
 
 class Activation {
- public:
+public:
   virtual ~Activation() = default;
   virtual Eigen::VectorXd function(Eigen::VectorXd in) = 0;
   virtual Eigen::VectorXd derivative(Eigen::VectorXd in) = 0;
@@ -23,4 +23,4 @@ class Activation {
   };
 };
 
-#endif  // CORTESIAN_ACTIVATION_H
+#endif // CORTESIAN_ACTIVATION_H

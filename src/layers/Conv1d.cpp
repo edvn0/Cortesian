@@ -24,7 +24,6 @@ Eigen::MatrixXd Conv1D::error_derivative(const Eigen::VectorXd &previous,
 Eigen::VectorXd Conv1D::calculate(Eigen::VectorXd &in) {
   return Eigen::VectorXd();
 }
-Eigen::MatrixXd Conv1D::previous_activation() { return Eigen::MatrixXd(); }
 Eigen::MatrixXd Conv1D::get_weight() { return Eigen::MatrixXd(); }
 Eigen::MatrixXd Conv1D::get_activated() { return Eigen::MatrixXd(); }
 void Conv1D::set_params(Eigen::MatrixXd weight, Eigen::VectorXd bias) {}
