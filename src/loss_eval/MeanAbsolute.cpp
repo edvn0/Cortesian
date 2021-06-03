@@ -7,10 +7,6 @@ double MeanAbsolute::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                              const Eigen::VectorXd &Y) {
   return apply_loss_single(Y_hat, Y);
 }
-double MeanAbsolute::apply_evaluation(const std::vector<Eigen::VectorXd> &Y_hat,
-                                      const std::vector<Eigen::VectorXd> &Y) {
-  return apply_loss(Y_hat, Y);
-}
 
 double MeanAbsolute::apply_loss_single(const Eigen::VectorXd &Y_hat,
                                        const Eigen::VectorXd &y) {
@@ -22,7 +18,7 @@ Eigen::MatrixXd MeanAbsolute::apply_loss_gradient(const Eigen::MatrixXd &y_hat,
                                                   const Eigen::MatrixXd &y) {
   auto diff = (y_hat.array() - y.array()).abs();
   Eigen::MatrixXd absed = diff.unaryExpr([&](double t) {
-    if (t < 0.000000001) {
+    if (t < ma_epsilon) {
       return 0.0;
     } else if (t > 1) {
       return 1.0;

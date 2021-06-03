@@ -25,6 +25,7 @@ public:
                                   const std::vector<Eigen::VectorXd> &Y) {
     double eval = 0.0;
     size_t size = Y_hat.size();
+#pragma omp parallel for
     for (long i = 0; i < size; i++) {
       eval += apply_evaluation_single(Y_hat[i], Y[i]);
     }
@@ -41,6 +42,7 @@ public:
                                   const Eigen::MatrixXd &Y_tensor) {
     double eval = 0.0;
     size_t size = Y_hat.size();
+#pragma omp parallel for
     for (long i = 0; i < size; i++) {
       eval += apply_evaluation_single(Y_hat[i], Y_tensor.row(i));
     }

@@ -19,8 +19,3 @@ double MeanSquared::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                             const Eigen::VectorXd &Y) {
   return apply_loss_single(Y_hat, Y);
 }
-
-double MeanSquared::apply_evaluation(const std::vector<Eigen::VectorXd> &Y_hat,
-                                     const std::vector<Eigen::VectorXd> &Y) {
-  return apply_loss(Y_hat, Y);
-}

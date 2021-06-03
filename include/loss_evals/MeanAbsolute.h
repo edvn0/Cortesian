@@ -9,6 +9,9 @@
 #include "LossFunction.h"
 
 class MeanAbsolute : public LossFunction, public EvaluationFunction {
+private:
+  static constexpr double ma_epsilon = 1e-8;
+
 public:
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;

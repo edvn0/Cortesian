@@ -55,14 +55,7 @@ public:
    */
   virtual double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
                             const Eigen::MatrixXd &Y) {
-    double loss = 0.0;
-    size_t size = Y_hat.size();
-    for (long i = 0; i < size; i++) {
-      Eigen::VectorXd col_x = Y_hat[i];
-      Eigen::VectorXd col_y = Y.row(i);
-      loss += apply_loss_single(col_x, col_y);
-    }
-    return loss / (double)size;
+    return calculate(Y_hat, Y);
   }
 
   /**

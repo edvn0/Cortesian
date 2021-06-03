@@ -66,4 +66,4 @@ add_executable(
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv OpenMP::OpenMP_CXX)
 
 add_executable(cortesian_tests tests/test.cpp)
-target_link_libraries(cortesian_tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(cortesian_tests PRIVATE Catch2::Catch2WithMain OpenMP::OpenMP_CXX)
