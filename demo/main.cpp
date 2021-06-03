@@ -2,18 +2,18 @@
 #include <chrono>
 #include <iostream>
 
-#include "include/Network.h"
-#include "include/activations/LeakyRelu.h"
-#include "include/activations/Softmax.h"
-#include "include/initializers/EigenInitializer.h"
-#include "include/layers/Dense.h"
-#include "include/loss_evals/CategoricalCrossEntropy.h"
-#include "include/loss_evals/MeanAbsolute.h"
-#include "include/loss_evals/MeanSquared.h"
-#include "include/optimizers/Adam.h"
-#include "include/utils/ArgMax.h"
-#include "include/utils/DataReader.h"
-#include "libs/csv-parser/single_include/csv.hpp"
+#include "../include/Network.h"
+#include "../include/activations/LeakyRelu.h"
+#include "../include/activations/Softmax.h"
+#include "../include/initializers/EigenInitializer.h"
+#include "../include/layers/Dense.h"
+#include "../include/loss_evals/CategoricalCrossEntropy.h"
+#include "../include/loss_evals/MeanAbsolute.h"
+#include "../include/loss_evals/MeanSquared.h"
+#include "../include/optimizers/Adam.h"
+#include "../include/utils/ArgMax.h"
+#include "../include/utils/DataReader.h"
+#include "../libs/csv-parser/single_include/csv.hpp"
 
 int main() {
   auto [X_tensor, Y_tensor] = csv_to_tensor(
