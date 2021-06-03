@@ -40,7 +40,7 @@ add_executable(
   src/initializers/EigenInitializer.cpp
   include/initializers/EigenInitializer.h
   src/loss_eval/ArgMax.cpp
-  include/utils/ArgMax.h
+        include/loss_evals/ArgMax.h
   src/loss_eval/MeanSquared.cpp
   include/loss_evals/MeanSquared.h
   include/utils/MathUtils.h
@@ -62,7 +62,7 @@ add_executable(
   include/loss_evals/CategoricalCrossEntropy.h
   src/optimizer/Adam.cpp
   include/optimizers/Adam.h
-  include/layers/Layer.h include/layers/Conv2d.h src/layers/Conv2d.cpp src/layers/Conv1d.cpp include/layers/Conv1d.h)
+  include/layers/Layer.h include/layers/Conv2d.h src/layers/Conv2d.cpp src/layers/Conv1d.cpp include/layers/Conv1d.h include/DefaultNetworkFactory.h include/utils/MetaBase.h)
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv OpenMP::OpenMP_CXX)
 
 add_executable(cortesian_tests tests/test.cpp)

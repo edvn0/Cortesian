@@ -5,10 +5,11 @@
 #ifndef CORTESIAN_LOSSFUNCTION_H
 #define CORTESIAN_LOSSFUNCTION_H
 
+#include "../utils/MetaBase.h"
 #include <eigen3/Eigen/Core>
 #include <vector>
 
-class LossFunction {
+class LossFunction : public MetaBase {
 public:
   virtual ~LossFunction() = default;
 

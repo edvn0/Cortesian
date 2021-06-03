@@ -5,13 +5,23 @@
 #ifndef CORTESIAN_NETWORK_H
 #define CORTESIAN_NETWORK_H
 
+#include "utils/MetaBase.h"
 #include "utils/common.h"
+#include <effolkronium/random.hpp>
 
-class Network {
+using Random = effolkronium::random_static;
+
+class Network : MetaBase {
 private:
-  struct Clipping {
+  struct Clipping : public MetaBase {
     bool clipping{false};
     double clip_factor{0.0};
+
+  public:
+    Clipping(bool should_clip, double clipping)
+        : clip_factor(clipping), clipping(should_clip){};
+
+    Clipping() : clipping(false), clip_factor(0.0){};
   };
 
 protected:

@@ -9,10 +9,14 @@
 #include "../optimizers/Optimizer.h"
 #include <eigen3/Eigen/Core>
 
-class Layer {
+class Layer : public MetaBase {
 protected:
   Layer(Activation *activation, int neurons, double l2)
-      : m_activation(activation), m_neurons(neurons), m_l2(l2){};
+      : m_activation(activation), m_neurons(neurons), m_l2(l2) {
+    this->operator()("activation", activation->operator[]("activation"));
+    this->operator()("neurons", std::to_string(neurons));
+    this->operator()("l2", std::to_string(l2));
+  };
 
   int m_layer_index;
 

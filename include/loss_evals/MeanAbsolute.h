@@ -13,6 +13,10 @@ private:
   static constexpr double ma_epsilon = 1e-8;
 
 public:
+  MeanAbsolute() {
+    this->LossFunction::operator()("loss", "MeanAbsolute");
+    this->EvaluationFunction::operator()("evaluation", "MeanAbsolute");
+  }
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;
 

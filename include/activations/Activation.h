@@ -5,9 +5,10 @@
 #ifndef CORTESIAN_ACTIVATION_H
 #define CORTESIAN_ACTIVATION_H
 
+#include "../utils/MetaBase.h"
 #include <eigen3/Eigen/Core>
 
-class Activation {
+class Activation : public MetaBase {
 public:
   virtual ~Activation() = default;
   virtual Eigen::VectorXd function(Eigen::VectorXd in) = 0;

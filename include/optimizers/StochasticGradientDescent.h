@@ -15,7 +15,10 @@ private:
   void sgd(Eigen::VectorXd &param, const Eigen::VectorXd &delta_param) const;
 
 public:
-  explicit StochasticGradientDescent(double l_r = 0.0001) : l_r(l_r){};
+  explicit StochasticGradientDescent(double l_r = 0.0001) : l_r(l_r) {
+    this->operator()("optimizer", "StochasticGradientDescent");
+    this->operator()("learning", std::to_string(l_r));
+  };
 
   void change_weight(int layer_index, Eigen::MatrixXd &w,
                      const Eigen::MatrixXd &d_w) override;

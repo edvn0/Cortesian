@@ -12,6 +12,10 @@ private:
   static constexpr double gce_epsilon = 1e-9;
 
 public:
+  CategoricalCrossEntropy() {
+    this->operator()("loss", "CategoricalCrossEntropy");
+  };
+
   double apply_loss(const std::vector<Eigen::VectorXd> &Y_hat,
                     const std::vector<Eigen::VectorXd> &Y) override;
 

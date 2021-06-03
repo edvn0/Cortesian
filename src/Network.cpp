@@ -186,6 +186,7 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
 
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
+    Random::shuffle(splits);
     for (auto &dps : splits) {
       evaluate_for_back_prop(dps);
       optimize();
@@ -294,6 +295,7 @@ Network::generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
   }
   return data_sets;
 }
+
 Network::~Network() {
   std::cout << "deleting network.";
   delete m_optimizer;
