@@ -1,0 +1,75 @@
+\hypertarget{class_mean_absolute}{}\doxysection{Mean\+Absolute Class Reference}
+\label{class_mean_absolute}\index{MeanAbsolute@{MeanAbsolute}}
+Inheritance diagram for Mean\+Absolute\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mean_absolute}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mean_absolute_a9f7faf89d28552403d582771bb8e25ea}\label{class_mean_absolute_a9f7faf89d28552403d582771bb8e25ea}} 
+double {\bfseries apply\+\_\+evaluation\+\_\+single} (const Eigen\+::\+Vector\+Xd \&Y\+\_\+hat, const Eigen\+::\+Vector\+Xd \&Y) override
+\item 
+double \mbox{\hyperlink{class_mean_absolute_affaf3bfb8bc680c01c4c2c54efa7f985}{apply\+\_\+loss\+\_\+single}} (const Eigen\+::\+Vector\+Xd \&Y\+\_\+hat, const Eigen\+::\+Vector\+Xd \&y) override
+\begin{DoxyCompactList}\small\item\em Applies the loss function to an already predicted data set. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix\+Xd \mbox{\hyperlink{class_mean_absolute_a2092fe033fba6edb33fc1ba61b71aa23}{apply\+\_\+loss\+\_\+gradient}} (const Eigen\+::\+Matrix\+Xd \&y\+\_\+hat, const Eigen\+::\+Matrix\+Xd \&y) override
+\begin{DoxyCompactList}\small\item\em Calculates the gradient vector from the predicted/real pair. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mean_absolute_a2092fe033fba6edb33fc1ba61b71aa23}\label{class_mean_absolute_a2092fe033fba6edb33fc1ba61b71aa23}} 
+\index{MeanAbsolute@{MeanAbsolute}!apply\_loss\_gradient@{apply\_loss\_gradient}}
+\index{apply\_loss\_gradient@{apply\_loss\_gradient}!MeanAbsolute@{MeanAbsolute}}
+\doxysubsubsection{\texorpdfstring{apply\_loss\_gradient()}{apply\_loss\_gradient()}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Mean\+Absolute\+::apply\+\_\+loss\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Matrix\+Xd \&}]{y\+\_\+hat,  }\item[{const Eigen\+::\+Matrix\+Xd \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the gradient vector from the predicted/real pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y\+\_\+hat} & predicted X \\
+\hline
+{\em y} & real(\+X) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gradient vector. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_loss_function_a2fceb76d6a7069658bac8cb7b1651d97}{Loss\+Function}}.
+
+\mbox{\Hypertarget{class_mean_absolute_affaf3bfb8bc680c01c4c2c54efa7f985}\label{class_mean_absolute_affaf3bfb8bc680c01c4c2c54efa7f985}} 
+\index{MeanAbsolute@{MeanAbsolute}!apply\_loss\_single@{apply\_loss\_single}}
+\index{apply\_loss\_single@{apply\_loss\_single}!MeanAbsolute@{MeanAbsolute}}
+\doxysubsubsection{\texorpdfstring{apply\_loss\_single()}{apply\_loss\_single()}}
+{\footnotesize\ttfamily double Mean\+Absolute\+::apply\+\_\+loss\+\_\+single (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{Y\+\_\+hat,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Applies the loss function to an already predicted data set. 
+
+Caller must have predicted the data to call this function. 
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted \\
+\hline
+{\em y} & real \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+loss 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_loss_function_a5638e049383b04acf30edcb49adc46a7}{Loss\+Function}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/loss\+\_\+evals/Mean\+Absolute.\+h\item 
+src/loss\+\_\+eval/Mean\+Absolute.\+cpp\end{DoxyCompactItemize}

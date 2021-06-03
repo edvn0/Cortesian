@@ -1,0 +1,51 @@
+\hypertarget{class_conv1_d}{}\doxysection{Conv1D Class Reference}
+\label{class_conv1_d}\index{Conv1D@{Conv1D}}
+Inheritance diagram for Conv1D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_conv1_d}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_conv1_d_adf9de840279a69468b64b03438420c45}\label{class_conv1_d_adf9de840279a69468b64b03438420c45}} 
+{\bfseries Conv1D} (\mbox{\hyperlink{class_activation}{Activation}} $\ast$activation, int neurons, double reg=0.\+0, int filter\+\_\+size=3)
+\item 
+\mbox{\Hypertarget{class_conv1_d_a53aa2f32681b820bc1fafdeccc801da0}\label{class_conv1_d_a53aa2f32681b820bc1fafdeccc801da0}} 
+Eigen\+::\+Vector\+Xd {\bfseries calculate} (const Eigen\+::\+Vector\+Xd \&in) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a462d00c88a0f55316111f6e81cbd7095}\label{class_conv1_d_a462d00c88a0f55316111f6e81cbd7095}} 
+void {\bfseries add\+\_\+deltas} (const Eigen\+::\+Matrix\+Xd \&d\+\_\+w, const Eigen\+::\+Vector\+Xd \&d\+\_\+b) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a82a70d4735a92ebef734c3cfa270efd5}\label{class_conv1_d_a82a70d4735a92ebef734c3cfa270efd5}} 
+void {\bfseries fit} (\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$optimizer) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a5e7c25d9774e2f52ab8bfd9c3ea1848c}\label{class_conv1_d_a5e7c25d9774e2f52ab8bfd9c3ea1848c}} 
+Eigen\+::\+Vector\+Xd {\bfseries activate} (Eigen\+::\+Vector\+Xd in, Eigen\+::\+Vector\+Xd out) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_ae96f5e3336a9afc205ca1ca458e20416}\label{class_conv1_d_ae96f5e3336a9afc205ca1ca458e20416}} 
+Eigen\+::\+Matrix\+Xd {\bfseries error\+\_\+derivative} (const Eigen\+::\+Vector\+Xd \&previous, const Eigen\+::\+Matrix\+Xd \&current) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a9d3dd69c93e8039f8e031c5ef78986aa}\label{class_conv1_d_a9d3dd69c93e8039f8e031c5ef78986aa}} 
+Eigen\+::\+Vector\+Xd {\bfseries calculate} (Eigen\+::\+Vector\+Xd \&in) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a4066fd032afa3b520a0a843e6cb6c22e}\label{class_conv1_d_a4066fd032afa3b520a0a843e6cb6c22e}} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+weight} () override
+\item 
+\mbox{\Hypertarget{class_conv1_d_aa93f1f5d0b5f249cf4e80315cbf10c50}\label{class_conv1_d_aa93f1f5d0b5f249cf4e80315cbf10c50}} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+activated} () override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a3d1fefc70d2642a340520863581991bd}\label{class_conv1_d_a3d1fefc70d2642a340520863581991bd}} 
+void {\bfseries set\+\_\+params} (Eigen\+::\+Matrix\+Xd weight, Eigen\+::\+Vector\+Xd bias) override
+\item 
+\mbox{\Hypertarget{class_conv1_d_a51342deeacd5da028a341beb5db071df}\label{class_conv1_d_a51342deeacd5da028a341beb5db071df}} 
+void {\bfseries set\+\_\+delta\+\_\+params} (Eigen\+::\+Matrix\+Xd d\+\_\+weight, Eigen\+::\+Vector\+Xd d\+\_\+bias) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/Conv1d.\+h\item 
+src/layers/Conv1d.\+cpp\end{DoxyCompactItemize}

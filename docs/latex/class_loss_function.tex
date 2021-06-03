@@ -1,0 +1,129 @@
+\hypertarget{class_loss_function}{}\doxysection{Loss\+Function Class Reference}
+\label{class_loss_function}\index{LossFunction@{LossFunction}}
+Inheritance diagram for Loss\+Function\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_loss_function}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_loss_function_a61a19e6b904f6ca68ed29303af54450e}\label{class_loss_function_a61a19e6b904f6ca68ed29303af54450e}} 
+virtual double {\bfseries calculate} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y\+\_\+hat, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y)
+\item 
+\mbox{\Hypertarget{class_loss_function_a1638b0bfa6a347a793dca6ac129b843e}\label{class_loss_function_a1638b0bfa6a347a793dca6ac129b843e}} 
+virtual double {\bfseries calculate} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y\+\_\+hat, const Eigen\+::\+Matrix\+Xd \&Y\+\_\+tensor)
+\item 
+virtual double \mbox{\hyperlink{class_loss_function_aa2c908773185ddf766dba04562c47e43}{apply\+\_\+loss}} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y\+\_\+hat, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y)
+\begin{DoxyCompactList}\small\item\em Applies the loss function to an already predicted data set. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{class_loss_function_a1cf906b56d879369bf5c19b52fe7fa92}{apply\+\_\+loss}} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y\+\_\+hat, const Eigen\+::\+Matrix\+Xd \&Y)
+\begin{DoxyCompactList}\small\item\em Applies the loss function to an already tensor Caller must have predicted the data to call this function. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{class_loss_function_a5638e049383b04acf30edcb49adc46a7}{apply\+\_\+loss\+\_\+single}} (const Eigen\+::\+Vector\+Xd \&Y\+\_\+hat, const Eigen\+::\+Vector\+Xd \&y)=0
+\begin{DoxyCompactList}\small\item\em Applies the loss function to an already predicted data set. \end{DoxyCompactList}\item 
+virtual Eigen\+::\+Matrix\+Xd \mbox{\hyperlink{class_loss_function_a2fceb76d6a7069658bac8cb7b1651d97}{apply\+\_\+loss\+\_\+gradient}} (const Eigen\+::\+Matrix\+Xd \&y\+\_\+hat, const Eigen\+::\+Matrix\+Xd \&y)=0
+\begin{DoxyCompactList}\small\item\em Calculates the gradient vector from the predicted/real pair. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_loss_function_a1cf906b56d879369bf5c19b52fe7fa92}\label{class_loss_function_a1cf906b56d879369bf5c19b52fe7fa92}} 
+\index{LossFunction@{LossFunction}!apply\_loss@{apply\_loss}}
+\index{apply\_loss@{apply\_loss}!LossFunction@{LossFunction}}
+\doxysubsubsection{\texorpdfstring{apply\_loss()}{apply\_loss()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual double Loss\+Function\+::apply\+\_\+loss (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{Y\+\_\+hat,  }\item[{const Eigen\+::\+Matrix\+Xd \&}]{Y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Applies the loss function to an already tensor Caller must have predicted the data to call this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted data set \\
+\hline
+{\em Y} & real values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the loss 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_categorical_cross_entropy_aa8bc8596a6d7de72bb6dc149ee79cdba}{Categorical\+Cross\+Entropy}}.
+
+\mbox{\Hypertarget{class_loss_function_aa2c908773185ddf766dba04562c47e43}\label{class_loss_function_aa2c908773185ddf766dba04562c47e43}} 
+\index{LossFunction@{LossFunction}!apply\_loss@{apply\_loss}}
+\index{apply\_loss@{apply\_loss}!LossFunction@{LossFunction}}
+\doxysubsubsection{\texorpdfstring{apply\_loss()}{apply\_loss()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual double Loss\+Function\+::apply\+\_\+loss (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{Y\+\_\+hat,  }\item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{Y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Applies the loss function to an already predicted data set. 
+
+Caller must have predicted the data to call this function. 
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted data set \\
+\hline
+{\em Y} & real values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the loss 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_categorical_cross_entropy_a5089523e23b586a762daedcea204616e}{Categorical\+Cross\+Entropy}}.
+
+\mbox{\Hypertarget{class_loss_function_a2fceb76d6a7069658bac8cb7b1651d97}\label{class_loss_function_a2fceb76d6a7069658bac8cb7b1651d97}} 
+\index{LossFunction@{LossFunction}!apply\_loss\_gradient@{apply\_loss\_gradient}}
+\index{apply\_loss\_gradient@{apply\_loss\_gradient}!LossFunction@{LossFunction}}
+\doxysubsubsection{\texorpdfstring{apply\_loss\_gradient()}{apply\_loss\_gradient()}}
+{\footnotesize\ttfamily virtual Eigen\+::\+Matrix\+Xd Loss\+Function\+::apply\+\_\+loss\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Matrix\+Xd \&}]{y\+\_\+hat,  }\item[{const Eigen\+::\+Matrix\+Xd \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Calculates the gradient vector from the predicted/real pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y\+\_\+hat} & predicted X \\
+\hline
+{\em y} & real(\+X) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gradient vector. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_mean_squared_a45a5eadd36ef87a54d193c401fa8e00a}{Mean\+Squared}}, \mbox{\hyperlink{class_mean_absolute_a2092fe033fba6edb33fc1ba61b71aa23}{Mean\+Absolute}}, and \mbox{\hyperlink{class_categorical_cross_entropy_a800285c12ae2528b9cee09fee4eaa358}{Categorical\+Cross\+Entropy}}.
+
+\mbox{\Hypertarget{class_loss_function_a5638e049383b04acf30edcb49adc46a7}\label{class_loss_function_a5638e049383b04acf30edcb49adc46a7}} 
+\index{LossFunction@{LossFunction}!apply\_loss\_single@{apply\_loss\_single}}
+\index{apply\_loss\_single@{apply\_loss\_single}!LossFunction@{LossFunction}}
+\doxysubsubsection{\texorpdfstring{apply\_loss\_single()}{apply\_loss\_single()}}
+{\footnotesize\ttfamily virtual double Loss\+Function\+::apply\+\_\+loss\+\_\+single (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{Y\+\_\+hat,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Applies the loss function to an already predicted data set. 
+
+Caller must have predicted the data to call this function. 
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted \\
+\hline
+{\em y} & real \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+loss 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_mean_absolute_affaf3bfb8bc680c01c4c2c54efa7f985}{Mean\+Absolute}}, \mbox{\hyperlink{class_categorical_cross_entropy_af538cc83ddd5ac5d13df4b15993b8610}{Categorical\+Cross\+Entropy}}, and \mbox{\hyperlink{class_mean_squared_aeff047d09b96bc291415e038b8afabb4}{Mean\+Squared}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/loss\+\_\+evals/Loss\+Function.\+h\end{DoxyCompactItemize}

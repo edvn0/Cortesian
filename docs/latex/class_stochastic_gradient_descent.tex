@@ -1,0 +1,29 @@
+\hypertarget{class_stochastic_gradient_descent}{}\doxysection{Stochastic\+Gradient\+Descent Class Reference}
+\label{class_stochastic_gradient_descent}\index{StochasticGradientDescent@{StochasticGradientDescent}}
+Inheritance diagram for Stochastic\+Gradient\+Descent\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_stochastic_gradient_descent}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_stochastic_gradient_descent_a6d782be878567337528591cbd185627c}\label{class_stochastic_gradient_descent_a6d782be878567337528591cbd185627c}} 
+{\bfseries Stochastic\+Gradient\+Descent} (double l\+\_\+r=0.\+0001)
+\item 
+\mbox{\Hypertarget{class_stochastic_gradient_descent_a8c4ab654d8ac62de5832eeb5df2653de}\label{class_stochastic_gradient_descent_a8c4ab654d8ac62de5832eeb5df2653de}} 
+void {\bfseries change\+\_\+weight} (int layer\+\_\+index, Eigen\+::\+Matrix\+Xd \&w, const Eigen\+::\+Matrix\+Xd \&d\+\_\+w) override
+\item 
+\mbox{\Hypertarget{class_stochastic_gradient_descent_ad87da62985901b8fea232d0948f838ea}\label{class_stochastic_gradient_descent_ad87da62985901b8fea232d0948f838ea}} 
+void {\bfseries change\+\_\+bias} (int layer\+\_\+index, Eigen\+::\+Vector\+Xd \&b, const Eigen\+::\+Vector\+Xd \&d\+\_\+b) override
+\item 
+\mbox{\Hypertarget{class_stochastic_gradient_descent_a7a65a1f3895b1967d1142c491682b645}\label{class_stochastic_gradient_descent_a7a65a1f3895b1967d1142c491682b645}} 
+void {\bfseries initialize\+\_\+optimizer} (int layers, Eigen\+::\+Matrix\+Xd w\+\_\+seed, Eigen\+::\+Vector\+Xd b\+\_\+seed) override
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/optimizers/Stochastic\+Gradient\+Descent.\+h\item 
+src/optimizer/Stochastic\+Gradient\+Descent.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\hypertarget{class_network_builder}{}\doxysection{Network\+Builder Class Reference}
+\label{class_network_builder}\index{NetworkBuilder@{NetworkBuilder}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_builder_a296af96513b9b5d67aeb3dd4022c54cc}\label{class_network_builder_a296af96513b9b5d67aeb3dd4022c54cc}} 
+enum {\bfseries Validity} \{ \newline
+{\bfseries OPTIMIZER} = 1
+, {\bfseries EVAL} = 2
+, {\bfseries LOSS} = 3
+, {\bfseries LAYERS} = 4
+, \newline
+{\bfseries INITIALIZER} = 5
+, {\bfseries EVAL\+\_\+\+SINGLE} = 6
+, {\bfseries VALID} = 0
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_builder_acc230451f0b24be82a4f57b8100d512c}\label{class_network_builder_acc230451f0b24be82a4f57b8100d512c}} 
+{\bfseries Network\+Builder} (const \mbox{\hyperlink{class_network_builder}{Network\+Builder}} \&other)
+\item 
+\mbox{\Hypertarget{class_network_builder_a7d5eb4c1078e41332a5e77452708fa21}\label{class_network_builder_a7d5eb4c1078e41332a5e77452708fa21}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries clipping} (double clip\+\_\+gradients)
+\item 
+\mbox{\Hypertarget{class_network_builder_aa3a2e7ef0c1ba53c442dc000a8b8f738}\label{class_network_builder_aa3a2e7ef0c1ba53c442dc000a8b8f738}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries evaluation\+\_\+function} (\mbox{\hyperlink{class_evaluation_function}{Evaluation\+Function}} $\ast$evaluation\+\_\+function)
+\item 
+\mbox{\Hypertarget{class_network_builder_a4cbed90fd17e13596ea43bb5bd0c3e8f}\label{class_network_builder_a4cbed90fd17e13596ea43bb5bd0c3e8f}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries evaluation\+\_\+function} (std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{class_evaluation_function}{Evaluation\+Function}} $\ast$ $>$ functions)
+\item 
+\mbox{\Hypertarget{class_network_builder_aaa96977da217795d96f386771c4f06c8}\label{class_network_builder_aaa96977da217795d96f386771c4f06c8}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries initializer} (\mbox{\hyperlink{class_parameter_initializer}{Parameter\+Initializer}} $\ast$initializer)
+\item 
+\mbox{\Hypertarget{class_network_builder_a9b72c6bdecb94d1676263bd5512173ca}\label{class_network_builder_a9b72c6bdecb94d1676263bd5512173ca}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries loss\+\_\+function} (\mbox{\hyperlink{class_loss_function}{Loss\+Function}} $\ast$loss\+\_\+function)
+\item 
+\mbox{\Hypertarget{class_network_builder_aafc5d8de7a07dfafb172a7e136b60619}\label{class_network_builder_aafc5d8de7a07dfafb172a7e136b60619}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries optimizer} (\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$optimizer)
+\item 
+\mbox{\Hypertarget{class_network_builder_ae904b05b96a48cfa4fb5f014b1274aa3}\label{class_network_builder_ae904b05b96a48cfa4fb5f014b1274aa3}} 
+\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \& {\bfseries layer} (\mbox{\hyperlink{class_layer}{Layer}} $\ast$layer)
+\item 
+\mbox{\Hypertarget{class_network_builder_a6fd93b31c9f2a930b96e0c1c47777801}\label{class_network_builder_a6fd93b31c9f2a930b96e0c1c47777801}} 
+std\+::vector$<$ int $>$ {\bfseries compile} ()
+\item 
+\mbox{\Hypertarget{class_network_builder_a877408f3a3a230918925c8008bb97f66}\label{class_network_builder_a877408f3a3a230918925c8008bb97f66}} 
+Validity {\bfseries is\+\_\+valid} ()
+\item 
+\mbox{\Hypertarget{class_network_builder_a4d37fb5375985411b1d3140ce82f3aa9}\label{class_network_builder_a4d37fb5375985411b1d3140ce82f3aa9}} 
+size\+\_\+t {\bfseries get\+\_\+total} () const
+\item 
+\mbox{\Hypertarget{class_network_builder_ac6ab3cafa742f3fc2fa3211ddd670bfd}\label{class_network_builder_ac6ab3cafa742f3fc2fa3211ddd670bfd}} 
+\mbox{\hyperlink{class_loss_function}{Loss\+Function}} $\ast$ {\bfseries get\+\_\+loss} ()
+\item 
+\mbox{\Hypertarget{class_network_builder_ac43299d820f0ddfcdb0c9f68f808f221}\label{class_network_builder_ac43299d820f0ddfcdb0c9f68f808f221}} 
+std\+::vector$<$ \mbox{\hyperlink{class_evaluation_function}{Evaluation\+Function}} $\ast$ $>$ {\bfseries get\+\_\+eval} ()
+\item 
+\mbox{\Hypertarget{class_network_builder_a115cc262bf772ad687718c4a8b0f3f7f}\label{class_network_builder_a115cc262bf772ad687718c4a8b0f3f7f}} 
+\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$ {\bfseries get\+\_\+optimizer} ()
+\item 
+\mbox{\Hypertarget{class_network_builder_a25384128f48518f1a19b7c38ad7dee86}\label{class_network_builder_a25384128f48518f1a19b7c38ad7dee86}} 
+\mbox{\hyperlink{class_parameter_initializer}{Parameter\+Initializer}} $\ast$ {\bfseries get\+\_\+initializer} ()
+\item 
+\mbox{\Hypertarget{class_network_builder_a29b391ab23af4fe042f38dfb93ad1739}\label{class_network_builder_a29b391ab23af4fe042f38dfb93ad1739}} 
+bool {\bfseries should\+\_\+clip} () const
+\item 
+\mbox{\Hypertarget{class_network_builder_a4105181341dbf2119d68b434a35d83a4}\label{class_network_builder_a4105181341dbf2119d68b434a35d83a4}} 
+double {\bfseries clip\+\_\+factor} () const
+\item 
+\mbox{\Hypertarget{class_network_builder_a60292812f9bf643710332d51bed04097}\label{class_network_builder_a60292812f9bf643710332d51bed04097}} 
+std\+::vector$<$ \mbox{\hyperlink{class_layer}{Layer}} $\ast$ $>$ {\bfseries get\+\_\+layers} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_builder_a23b8e87a54ae2ac1d79c28d3912eab47}\label{class_network_builder_a23b8e87a54ae2ac1d79c28d3912eab47}} 
+static std\+::string {\bfseries validity\+\_\+to\+\_\+string} (const Validity \&validity)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Network\+Builder.\+h\end{DoxyCompactItemize}

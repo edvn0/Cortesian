@@ -1,0 +1,75 @@
+\hypertarget{class_mean_squared}{}\doxysection{Mean\+Squared Class Reference}
+\label{class_mean_squared}\index{MeanSquared@{MeanSquared}}
+Inheritance diagram for Mean\+Squared\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mean_squared}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_mean_squared_aeff047d09b96bc291415e038b8afabb4}{apply\+\_\+loss\+\_\+single}} (const Eigen\+::\+Vector\+Xd \&x, const Eigen\+::\+Vector\+Xd \&y) override
+\begin{DoxyCompactList}\small\item\em Applies the loss function to an already predicted data set. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix\+Xd \mbox{\hyperlink{class_mean_squared_a45a5eadd36ef87a54d193c401fa8e00a}{apply\+\_\+loss\+\_\+gradient}} (const Eigen\+::\+Matrix\+Xd \&y\+\_\+hat, const Eigen\+::\+Matrix\+Xd \&y) override
+\begin{DoxyCompactList}\small\item\em Calculates the gradient vector from the predicted/real pair. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_mean_squared_a258b135a3bc44c9a271d34a67f5229be}\label{class_mean_squared_a258b135a3bc44c9a271d34a67f5229be}} 
+double {\bfseries apply\+\_\+evaluation\+\_\+single} (const Eigen\+::\+Vector\+Xd \&Y\+\_\+hat, const Eigen\+::\+Vector\+Xd \&Y) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mean_squared_a45a5eadd36ef87a54d193c401fa8e00a}\label{class_mean_squared_a45a5eadd36ef87a54d193c401fa8e00a}} 
+\index{MeanSquared@{MeanSquared}!apply\_loss\_gradient@{apply\_loss\_gradient}}
+\index{apply\_loss\_gradient@{apply\_loss\_gradient}!MeanSquared@{MeanSquared}}
+\doxysubsubsection{\texorpdfstring{apply\_loss\_gradient()}{apply\_loss\_gradient()}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd Mean\+Squared\+::apply\+\_\+loss\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Matrix\+Xd \&}]{y\+\_\+hat,  }\item[{const Eigen\+::\+Matrix\+Xd \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the gradient vector from the predicted/real pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y\+\_\+hat} & predicted X \\
+\hline
+{\em y} & real(\+X) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gradient vector. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_loss_function_a2fceb76d6a7069658bac8cb7b1651d97}{Loss\+Function}}.
+
+\mbox{\Hypertarget{class_mean_squared_aeff047d09b96bc291415e038b8afabb4}\label{class_mean_squared_aeff047d09b96bc291415e038b8afabb4}} 
+\index{MeanSquared@{MeanSquared}!apply\_loss\_single@{apply\_loss\_single}}
+\index{apply\_loss\_single@{apply\_loss\_single}!MeanSquared@{MeanSquared}}
+\doxysubsubsection{\texorpdfstring{apply\_loss\_single()}{apply\_loss\_single()}}
+{\footnotesize\ttfamily double Mean\+Squared\+::apply\+\_\+loss\+\_\+single (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{Y\+\_\+hat,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Applies the loss function to an already predicted data set. 
+
+Caller must have predicted the data to call this function. 
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted \\
+\hline
+{\em y} & real \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+loss 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_loss_function_a5638e049383b04acf30edcb49adc46a7}{Loss\+Function}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/loss\+\_\+evals/Mean\+Squared.\+h\item 
+src/loss\+\_\+eval/Mean\+Squared.\+cpp\end{DoxyCompactItemize}

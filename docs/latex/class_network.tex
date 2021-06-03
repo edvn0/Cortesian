@@ -1,0 +1,86 @@
+\hypertarget{class_network}{}\doxysection{Network Class Reference}
+\label{class_network}\index{Network@{Network}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_a7f51af0ff2267042862008b9be6eb9e5}\label{class_network_a7f51af0ff2267042862008b9be6eb9e5}} 
+{\bfseries Network} (\mbox{\hyperlink{class_network_builder}{Network\+Builder}} builder)
+\item 
+\mbox{\Hypertarget{class_network_ab09083600289e10e00b05a7649e3ac19}\label{class_network_ab09083600289e10e00b05a7649e3ac19}} 
+{\bfseries Network} (\mbox{\hyperlink{class_network_builder}{Network\+Builder}} \&\&builder)
+\item 
+\mbox{\Hypertarget{class_network_af47eff27167bdfd9bb27bc98087ac39f}\label{class_network_af47eff27167bdfd9bb27bc98087ac39f}} 
+virtual \mbox{\hyperlink{class_back_prop_statistics}{Back\+Prop\+Statistics}} {\bfseries fit} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&X, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y, int epochs, int batch\+\_\+size, double train\+\_\+split, bool should\+\_\+shuffle\+\_\+training)
+\item 
+\mbox{\Hypertarget{class_network_ab16893fe6aa75d65c805837e68dc5b83}\label{class_network_ab16893fe6aa75d65c805837e68dc5b83}} 
+\mbox{\hyperlink{class_back_prop_statistics}{Back\+Prop\+Statistics}} {\bfseries fit\+\_\+tensor} (Eigen\+::\+Matrix\+Xd \&X, Eigen\+::\+Matrix\+Xd \&Y, int epochs, int batch\+\_\+size, Eigen\+::\+Matrix\+Xd \&X\+\_\+validate, Eigen\+::\+Matrix\+Xd \&Y\+\_\+validate)
+\item 
+\mbox{\Hypertarget{class_network_a77a45a88099c6a971dba83674707b32d}\label{class_network_a77a45a88099c6a971dba83674707b32d}} 
+Eigen\+::\+Vector\+Xd {\bfseries predict} (const Eigen\+::\+Vector\+Xd \&vector)
+\item 
+\mbox{\Hypertarget{class_network_a6d5c1bb4f5c49f62c4415e1744941e65}\label{class_network_a6d5c1bb4f5c49f62c4415e1744941e65}} 
+std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ {\bfseries evaluate} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Xs)
+\item 
+\mbox{\Hypertarget{class_network_a9ebca8ce9ff565d0a6c8c2a45e8f41cc}\label{class_network_a9ebca8ce9ff565d0a6c8c2a45e8f41cc}} 
+std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ {\bfseries evaluate} (const Eigen\+::\+Matrix\+Xd \&Xs)
+\item 
+\mbox{\Hypertarget{class_network_a8f175394b78ce5c2031399d6e53ccee7}\label{class_network_a8f175394b78ce5c2031399d6e53ccee7}} 
+Eigen\+::\+Vector\+Xd {\bfseries classify} (const Eigen\+::\+Vector\+Xd \&vector)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_a0e5b7761bbdb4d2d67b2228392f7f6cc}\label{class_network_a0e5b7761bbdb4d2d67b2228392f7f6cc}} 
+static std\+::vector$<$ \mbox{\hyperlink{struct_data_split_1_1_data_set}{Data\+Split\+::\+Data\+Set}} $>$ {\bfseries generate\+\_\+splits} (Eigen\+::\+Matrix\+Xd \&X\+\_\+tensor, Eigen\+::\+Matrix\+Xd \&Y\+\_\+tensor, size\+\_\+t from\+\_\+index, size\+\_\+t to\+\_\+index, int i)
+\item 
+\mbox{\Hypertarget{class_network_ab828653caffd6b6247f0b26320ad8014}\label{class_network_ab828653caffd6b6247f0b26320ad8014}} 
+static void {\bfseries print\+\_\+epoch\+\_\+information} (double loss, const std\+::vector$<$ double $>$ \&metrics)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_aaa5906388e0d56446c0d12f31c27d2a3}\label{class_network_aaa5906388e0d56446c0d12f31c27d2a3}} 
+void {\bfseries optimize} ()
+\item 
+\mbox{\Hypertarget{class_network_aa3afdd177ac354b075e3808dac762b95}\label{class_network_aa3afdd177ac354b075e3808dac762b95}} 
+void {\bfseries back\+\_\+propagate} (const Eigen\+::\+Vector\+Xd \&matrix)
+\item 
+\mbox{\Hypertarget{class_network_a8d4d936b284203f5ce405f9ca5dcb781}\label{class_network_a8d4d936b284203f5ce405f9ca5dcb781}} 
+void {\bfseries evaluate\+\_\+for\+\_\+back\+\_\+prop} (const \mbox{\hyperlink{struct_data_split_1_1_data_point}{Data\+Split\+::\+Data\+Point}} \&point)
+\item 
+\mbox{\Hypertarget{class_network_a5cb8ea5ab5e6ab17591718f271716e40}\label{class_network_a5cb8ea5ab5e6ab17591718f271716e40}} 
+void {\bfseries evaluate\+\_\+for\+\_\+back\+\_\+prop} (const \mbox{\hyperlink{struct_data_split_1_1_data_set}{Data\+Split\+::\+Data\+Set}} \&ds)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_a73909e14b8bed75ec99812ac6a914f1b}\label{class_network_a73909e14b8bed75ec99812ac6a914f1b}} 
+std\+::vector$<$ \mbox{\hyperlink{class_layer}{Layer}} $\ast$ $>$ {\bfseries m\+\_\+layers}
+\item 
+\mbox{\Hypertarget{class_network_ac2e05f4861666af420763f0c1004b2bd}\label{class_network_ac2e05f4861666af420763f0c1004b2bd}} 
+\mbox{\hyperlink{class_loss_function}{Loss\+Function}} $\ast$ {\bfseries m\+\_\+loss}
+\item 
+\mbox{\Hypertarget{class_network_abb68eb5f3dd9b7a6d3fa9c978e5f4230}\label{class_network_abb68eb5f3dd9b7a6d3fa9c978e5f4230}} 
+std\+::vector$<$ \mbox{\hyperlink{class_evaluation_function}{Evaluation\+Function}} $\ast$ $>$ {\bfseries m\+\_\+eval}
+\item 
+\mbox{\Hypertarget{class_network_a5caf0b6449851109629172a247dbeece}\label{class_network_a5caf0b6449851109629172a247dbeece}} 
+\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$ {\bfseries m\+\_\+optimizer}
+\item 
+\mbox{\Hypertarget{class_network_a3f017a395ddf3e2f3220eda51319407d}\label{class_network_a3f017a395ddf3e2f3220eda51319407d}} 
+Clipping {\bfseries m\+\_\+clipping}
+\item 
+\mbox{\Hypertarget{class_network_a1e080312d90caf5db9159ae6c07f242d}\label{class_network_a1e080312d90caf5db9159ae6c07f242d}} 
+\mbox{\hyperlink{class_parameter_initializer}{Parameter\+Initializer}} $\ast$ {\bfseries m\+\_\+initializer}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_afa114a9280b4ec6b7830d1093954be82}\label{class_network_afa114a9280b4ec6b7830d1093954be82}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_network}{Network}} \&network)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Network.\+h\item 
+src/Network.\+cpp\end{DoxyCompactItemize}

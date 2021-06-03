@@ -1,0 +1,48 @@
+\hypertarget{class_conv2_d}{}\doxysection{Conv2D Class Reference}
+\label{class_conv2_d}\index{Conv2D@{Conv2D}}
+Inheritance diagram for Conv2D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_conv2_d}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_conv2_d_a4257a356715d697a1bc1c12019e670cb}\label{class_conv2_d_a4257a356715d697a1bc1c12019e670cb}} 
+Eigen\+::\+Vector\+Xd {\bfseries calculate} (const Eigen\+::\+Vector\+Xd \&in) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a70c13518747f2e6b93e96f038a730be7}\label{class_conv2_d_a70c13518747f2e6b93e96f038a730be7}} 
+void {\bfseries add\+\_\+deltas} (const Eigen\+::\+Matrix\+Xd \&d\+\_\+w, const Eigen\+::\+Vector\+Xd \&d\+\_\+b) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a125e38df4a3a8671976a74a4ca1c16a0}\label{class_conv2_d_a125e38df4a3a8671976a74a4ca1c16a0}} 
+void {\bfseries fit} (\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$optimizer) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a4c5b2d2546930ea6af120cc626de4cd6}\label{class_conv2_d_a4c5b2d2546930ea6af120cc626de4cd6}} 
+Eigen\+::\+Vector\+Xd {\bfseries activate} (Eigen\+::\+Vector\+Xd in, Eigen\+::\+Vector\+Xd out) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a25e33912d8de12bb8b1025e25cded9cb}\label{class_conv2_d_a25e33912d8de12bb8b1025e25cded9cb}} 
+Eigen\+::\+Matrix\+Xd {\bfseries error\+\_\+derivative} (const Eigen\+::\+Vector\+Xd \&previous, const Eigen\+::\+Matrix\+Xd \&current) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a98914570e6deae256edbf440dd127618}\label{class_conv2_d_a98914570e6deae256edbf440dd127618}} 
+Eigen\+::\+Vector\+Xd {\bfseries calculate} (Eigen\+::\+Vector\+Xd \&in) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a4cbabdb311c0ae2dc930cd7bc8a7affd}\label{class_conv2_d_a4cbabdb311c0ae2dc930cd7bc8a7affd}} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+weight} () override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a452ffd33425f76c02cb8251b2cb3886f}\label{class_conv2_d_a452ffd33425f76c02cb8251b2cb3886f}} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+activated} () override
+\item 
+\mbox{\Hypertarget{class_conv2_d_aa2b2e80123d4b2a2ccaa26e1aec7f40d}\label{class_conv2_d_aa2b2e80123d4b2a2ccaa26e1aec7f40d}} 
+void {\bfseries set\+\_\+params} (Eigen\+::\+Matrix\+Xd weight, Eigen\+::\+Vector\+Xd bias) override
+\item 
+\mbox{\Hypertarget{class_conv2_d_a6a1da8e35950b920c66fe82f20b72033}\label{class_conv2_d_a6a1da8e35950b920c66fe82f20b72033}} 
+void {\bfseries set\+\_\+delta\+\_\+params} (Eigen\+::\+Matrix\+Xd d\+\_\+weight, Eigen\+::\+Vector\+Xd d\+\_\+bias) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/Conv2d.\+h\item 
+src/layers/Conv2d.\+cpp\end{DoxyCompactItemize}

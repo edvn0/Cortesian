@@ -1,0 +1,25 @@
+\hypertarget{class_optimizer}{}\doxysection{Optimizer Class Reference}
+\label{class_optimizer}\index{Optimizer@{Optimizer}}
+Inheritance diagram for Optimizer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_optimizer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_optimizer_a9c7b69396fb2efa303cdd9c00bd9f5be}\label{class_optimizer_a9c7b69396fb2efa303cdd9c00bd9f5be}} 
+virtual void {\bfseries change\+\_\+weight} (int layer\+\_\+index, Eigen\+::\+Matrix\+Xd \&w, const Eigen\+::\+Matrix\+Xd \&d\+\_\+w)=0
+\item 
+\mbox{\Hypertarget{class_optimizer_a022dd0c3d27b6c76fa7a5d660cc4484a}\label{class_optimizer_a022dd0c3d27b6c76fa7a5d660cc4484a}} 
+virtual void {\bfseries change\+\_\+bias} (int layer\+\_\+index, Eigen\+::\+Vector\+Xd \&b, const Eigen\+::\+Vector\+Xd \&d\+\_\+b)=0
+\item 
+\mbox{\Hypertarget{class_optimizer_a6d4ade0c022e04c5a3be17023f535fce}\label{class_optimizer_a6d4ade0c022e04c5a3be17023f535fce}} 
+virtual void {\bfseries initialize\+\_\+optimizer} (int layers, Eigen\+::\+Matrix\+Xd w\+\_\+seed, Eigen\+::\+Vector\+Xd b\+\_\+seed)=0
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/optimizers/Optimizer.\+h\end{DoxyCompactItemize}

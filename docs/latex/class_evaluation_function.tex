@@ -1,0 +1,71 @@
+\hypertarget{class_evaluation_function}{}\doxysection{Evaluation\+Function Class Reference}
+\label{class_evaluation_function}\index{EvaluationFunction@{EvaluationFunction}}
+Inheritance diagram for Evaluation\+Function\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_evaluation_function}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_evaluation_function_a01b97d91b782fbe291f22769de4a749a}\label{class_evaluation_function_a01b97d91b782fbe291f22769de4a749a}} 
+virtual double {\bfseries apply\+\_\+evaluation\+\_\+single} (const Eigen\+::\+Vector\+Xd \&Y\+\_\+hat, const Eigen\+::\+Vector\+Xd \&Y)=0
+\item 
+virtual double \mbox{\hyperlink{class_evaluation_function_a7f7c47d6c2f4ddc950a3b21ce0579df4}{apply\+\_\+evaluation}} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y\+\_\+hat, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y)
+\begin{DoxyCompactList}\small\item\em Applies evaluation metrics against a vector of Eigen\+::\+Vectors. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{class_evaluation_function_a96d6faad895b88b6329d624554d18ed6}{apply\+\_\+evaluation}} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&Y\+\_\+hat, const Eigen\+::\+Matrix\+Xd \&Y\+\_\+tensor)
+\begin{DoxyCompactList}\small\item\em Overload of. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_evaluation_function_a96d6faad895b88b6329d624554d18ed6}\label{class_evaluation_function_a96d6faad895b88b6329d624554d18ed6}} 
+\index{EvaluationFunction@{EvaluationFunction}!apply\_evaluation@{apply\_evaluation}}
+\index{apply\_evaluation@{apply\_evaluation}!EvaluationFunction@{EvaluationFunction}}
+\doxysubsubsection{\texorpdfstring{apply\_evaluation()}{apply\_evaluation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual double Evaluation\+Function\+::apply\+\_\+evaluation (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{Y\+\_\+hat,  }\item[{const Eigen\+::\+Matrix\+Xd \&}]{Y\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload of. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#apply\_evaluation }}
+
+\end{DoxyCode}
+ instead taking Y as a tensor. 
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted Xs -\/$>$ Y\+\_\+hat \\
+\hline
+{\em Y\+\_\+tensor} & real Ys, as tensor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a metric score 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_evaluation_function_a7f7c47d6c2f4ddc950a3b21ce0579df4}\label{class_evaluation_function_a7f7c47d6c2f4ddc950a3b21ce0579df4}} 
+\index{EvaluationFunction@{EvaluationFunction}!apply\_evaluation@{apply\_evaluation}}
+\index{apply\_evaluation@{apply\_evaluation}!EvaluationFunction@{EvaluationFunction}}
+\doxysubsubsection{\texorpdfstring{apply\_evaluation()}{apply\_evaluation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual double Evaluation\+Function\+::apply\+\_\+evaluation (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{Y\+\_\+hat,  }\item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{Y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Applies evaluation metrics against a vector of Eigen\+::\+Vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Y\+\_\+hat} & predicted Xs -\/$>$ Y\+\_\+hat. \\
+\hline
+{\em Y} & real Y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a metric score 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/loss\+\_\+evals/Evaluation\+Function.\+h\end{DoxyCompactItemize}

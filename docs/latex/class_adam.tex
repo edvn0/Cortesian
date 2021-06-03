@@ -1,0 +1,29 @@
+\hypertarget{class_adam}{}\doxysection{Adam Class Reference}
+\label{class_adam}\index{Adam@{Adam}}
+Inheritance diagram for Adam\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_adam}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_adam_adc425bd8d0f7b790f34dd9c3ad90fa2d}\label{class_adam_adc425bd8d0f7b790f34dd9c3ad90fa2d}} 
+{\bfseries Adam} (double learning, double alpha\+\_\+one=0.\+9, double alpha\+\_\+two=0.\+999)
+\item 
+\mbox{\Hypertarget{class_adam_aa16131226479c2e9873749a4b3264db0}\label{class_adam_aa16131226479c2e9873749a4b3264db0}} 
+void {\bfseries change\+\_\+weight} (int layer\+\_\+index, Eigen\+::\+Matrix\+Xd \&w, const Eigen\+::\+Matrix\+Xd \&d\+\_\+w) override
+\item 
+\mbox{\Hypertarget{class_adam_af5c3b6804f8b506a2e0f76afc3323e79}\label{class_adam_af5c3b6804f8b506a2e0f76afc3323e79}} 
+void {\bfseries change\+\_\+bias} (int layer\+\_\+index, Eigen\+::\+Vector\+Xd \&b, const Eigen\+::\+Vector\+Xd \&d\+\_\+b) override
+\item 
+\mbox{\Hypertarget{class_adam_a7112ea454cefa941a2d4c8760be78eb4}\label{class_adam_a7112ea454cefa941a2d4c8760be78eb4}} 
+void {\bfseries initialize\+\_\+optimizer} (int layers, Eigen\+::\+Matrix\+Xd w\+\_\+seed, Eigen\+::\+Vector\+Xd b\+\_\+seed) override
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/optimizers/Adam.\+h\item 
+src/optimizer/Adam.\+cpp\end{DoxyCompactItemize}

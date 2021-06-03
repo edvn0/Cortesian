@@ -1,0 +1,96 @@
+\hypertarget{class_layer}{}\doxysection{Layer Class Reference}
+\label{class_layer}\index{Layer@{Layer}}
+Inheritance diagram for Layer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_layer}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_layer_1_1_l2_tensors}{L2\+Tensors}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layer_a300966622e05a72d51fb28848ee26d10}\label{class_layer_a300966622e05a72d51fb28848ee26d10}} 
+virtual Eigen\+::\+Vector\+Xd {\bfseries calculate} (const Eigen\+::\+Vector\+Xd \&in)=0
+\item 
+\mbox{\Hypertarget{class_layer_a2266e4edd5a7a138d2a6c6b37969a2f2}\label{class_layer_a2266e4edd5a7a138d2a6c6b37969a2f2}} 
+virtual void {\bfseries add\+\_\+deltas} (const Eigen\+::\+Matrix\+Xd \&d\+\_\+w, const Eigen\+::\+Vector\+Xd \&d\+\_\+b)=0
+\item 
+\mbox{\Hypertarget{class_layer_a4f92dd4be25e51e3d072b3731813095e}\label{class_layer_a4f92dd4be25e51e3d072b3731813095e}} 
+virtual void {\bfseries fit} (\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$optimizer)=0
+\item 
+\mbox{\Hypertarget{class_layer_adcf2d40bbeac0da2ecbf9c375a010b3e}\label{class_layer_adcf2d40bbeac0da2ecbf9c375a010b3e}} 
+virtual Eigen\+::\+Vector\+Xd {\bfseries activate} (Eigen\+::\+Vector\+Xd in, Eigen\+::\+Vector\+Xd out)=0
+\item 
+\mbox{\Hypertarget{class_layer_a2051ae0e40a3213f3e99a7fec6928338}\label{class_layer_a2051ae0e40a3213f3e99a7fec6928338}} 
+virtual Eigen\+::\+Matrix\+Xd {\bfseries error\+\_\+derivative} (const Eigen\+::\+Vector\+Xd \&previous, const Eigen\+::\+Matrix\+Xd \&current)=0
+\item 
+\mbox{\Hypertarget{class_layer_a1b26ac251a4e46fdcc62953fe12a6e14}\label{class_layer_a1b26ac251a4e46fdcc62953fe12a6e14}} 
+virtual Eigen\+::\+Vector\+Xd {\bfseries calculate} (Eigen\+::\+Vector\+Xd \&in)=0
+\item 
+\mbox{\Hypertarget{class_layer_aa855e42f6404e107ba92b795c7c87206}\label{class_layer_aa855e42f6404e107ba92b795c7c87206}} 
+virtual Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+weight} ()=0
+\item 
+\mbox{\Hypertarget{class_layer_aa27ba56b2a6694e80826afb6ec257cb5}\label{class_layer_aa27ba56b2a6694e80826afb6ec257cb5}} 
+virtual Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+activated} ()=0
+\item 
+\mbox{\Hypertarget{class_layer_a75c006ba16e89dd79aec65435529776a}\label{class_layer_a75c006ba16e89dd79aec65435529776a}} 
+virtual \mbox{\hyperlink{struct_layer_1_1_l2_tensors}{L2\+Tensors}} \& {\bfseries get\+\_\+regularization} ()
+\item 
+\mbox{\Hypertarget{class_layer_a4132202972a0d89886f253697fa4e200}\label{class_layer_a4132202972a0d89886f253697fa4e200}} 
+virtual void {\bfseries set\+\_\+params} (Eigen\+::\+Matrix\+Xd weight, Eigen\+::\+Vector\+Xd bias)=0
+\item 
+\mbox{\Hypertarget{class_layer_aec6823db94f2ba9ac2edce87beec8d5a}\label{class_layer_aec6823db94f2ba9ac2edce87beec8d5a}} 
+virtual void {\bfseries set\+\_\+delta\+\_\+params} (Eigen\+::\+Matrix\+Xd d\+\_\+weight, Eigen\+::\+Vector\+Xd d\+\_\+bias)=0
+\item 
+\mbox{\Hypertarget{class_layer_a50c8c5924332ad279f6acd43fa29f996}\label{class_layer_a50c8c5924332ad279f6acd43fa29f996}} 
+virtual int {\bfseries get\+\_\+neurons} ()
+\item 
+\mbox{\Hypertarget{class_layer_ae7e66f126393524365b203fcc4a04a79}\label{class_layer_ae7e66f126393524365b203fcc4a04a79}} 
+virtual void {\bfseries set\+\_\+index} (int layer\+\_\+index)
+\item 
+\mbox{\Hypertarget{class_layer_adff3f66bb84e0d7b76c2df0482da9bfa}\label{class_layer_adff3f66bb84e0d7b76c2df0482da9bfa}} 
+virtual const double \& {\bfseries get\+\_\+l2} ()
+\item 
+\mbox{\Hypertarget{class_layer_a755522ea0b094242bbb9be9ce650593a}\label{class_layer_a755522ea0b094242bbb9be9ce650593a}} 
+bool {\bfseries has\+\_\+previous} ()
+\item 
+\mbox{\Hypertarget{class_layer_a5c30f3d706b278ae84dd503b9cc1c98c}\label{class_layer_a5c30f3d706b278ae84dd503b9cc1c98c}} 
+int {\bfseries get\+\_\+layer\+\_\+index} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layer_af44fc77d9a3bdbc79450af42021a6963}\label{class_layer_af44fc77d9a3bdbc79450af42021a6963}} 
+int {\bfseries m\+\_\+neurons}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layer_ad361069806e195a711b309a75a954abc}\label{class_layer_ad361069806e195a711b309a75a954abc}} 
+{\bfseries Layer} (\mbox{\hyperlink{class_activation}{Activation}} $\ast$activation, int neurons, double l2)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layer_ad9b36fd1019f4d4a1761732ad6ac360f}\label{class_layer_ad9b36fd1019f4d4a1761732ad6ac360f}} 
+int {\bfseries m\+\_\+layer\+\_\+index}
+\item 
+\mbox{\Hypertarget{class_layer_a4bcbb05ae071689e0c8fa08eaac9bd38}\label{class_layer_a4bcbb05ae071689e0c8fa08eaac9bd38}} 
+\mbox{\hyperlink{class_activation}{Activation}} $\ast$ {\bfseries m\+\_\+activation}
+\item 
+\mbox{\Hypertarget{class_layer_a0e08e053a33777cfb0632cb4cb9f80c2}\label{class_layer_a0e08e053a33777cfb0632cb4cb9f80c2}} 
+\mbox{\hyperlink{struct_layer_1_1_l2_tensors}{L2\+Tensors}} {\bfseries regularization}
+\item 
+\mbox{\Hypertarget{class_layer_a4d3c5a035d49a8c236417646a3988bac}\label{class_layer_a4d3c5a035d49a8c236417646a3988bac}} 
+double {\bfseries m\+\_\+l2} \{0.\+0\}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/Layer.\+h\end{DoxyCompactItemize}

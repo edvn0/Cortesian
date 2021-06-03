@@ -1,0 +1,72 @@
+\hypertarget{class_dense}{}\doxysection{Dense Class Reference}
+\label{class_dense}\index{Dense@{Dense}}
+Inheritance diagram for Dense\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_dense}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense_a3e8fd8440ea0379e084c7d2cd3863946}\label{class_dense_a3e8fd8440ea0379e084c7d2cd3863946}} 
+{\bfseries Dense} (\mbox{\hyperlink{class_activation}{Activation}} $\ast$activation, int neurons, double l2)
+\item 
+\mbox{\Hypertarget{class_dense_a3dc89effe617b413104dfe7e53b19b6f}\label{class_dense_a3dc89effe617b413104dfe7e53b19b6f}} 
+{\bfseries Dense} (\mbox{\hyperlink{class_activation}{Activation}} $\ast$activation, int neurons)
+\item 
+\mbox{\Hypertarget{class_dense_a966da5fb9b7835fff47b3d0845c23a1a}\label{class_dense_a966da5fb9b7835fff47b3d0845c23a1a}} 
+{\bfseries Dense} (const \mbox{\hyperlink{class_dense}{Dense}} \&other)
+\item 
+\mbox{\Hypertarget{class_dense_a879ab4e0d60dde8d611d21f31e9834bd}\label{class_dense_a879ab4e0d60dde8d611d21f31e9834bd}} 
+{\bfseries Dense} (int neurons, double l2, \mbox{\hyperlink{class_activation}{Activation}} $\ast$activation, Eigen\+::\+Matrix\+Xd ws, Eigen\+::\+Vector\+Xd bs)
+\item 
+\mbox{\Hypertarget{class_dense_aff83b3d45151d4365d6db9209c0b045e}\label{class_dense_aff83b3d45151d4365d6db9209c0b045e}} 
+void {\bfseries add\+\_\+deltas} (const Eigen\+::\+Matrix\+Xd \&d\+\_\+w, const Eigen\+::\+Vector\+Xd \&d\+\_\+b) override
+\item 
+\mbox{\Hypertarget{class_dense_a0f7a8a4f9f028f9e02551c07012bff7c}\label{class_dense_a0f7a8a4f9f028f9e02551c07012bff7c}} 
+void {\bfseries fit} (\mbox{\hyperlink{class_optimizer}{Optimizer}} $\ast$optimizer) override
+\item 
+\mbox{\Hypertarget{class_dense_a110ba97a09a0a204684d8c1ed9a36359}\label{class_dense_a110ba97a09a0a204684d8c1ed9a36359}} 
+Eigen\+::\+Vector\+Xd {\bfseries activate} (Eigen\+::\+Vector\+Xd in, Eigen\+::\+Vector\+Xd out) override
+\item 
+\mbox{\Hypertarget{class_dense_aa62fc5ec94cfdeabe1ad9b27111e8b75}\label{class_dense_aa62fc5ec94cfdeabe1ad9b27111e8b75}} 
+Eigen\+::\+Matrix\+Xd {\bfseries error\+\_\+derivative} (const Eigen\+::\+Vector\+Xd \&previous, const Eigen\+::\+Matrix\+Xd \&current) override
+\item 
+\mbox{\Hypertarget{class_dense_ad2c8cdeafdf0639f09eb18e55927b60e}\label{class_dense_ad2c8cdeafdf0639f09eb18e55927b60e}} 
+Eigen\+::\+Vector\+Xd {\bfseries calculate} (Eigen\+::\+Vector\+Xd \&in) override
+\item 
+\mbox{\Hypertarget{class_dense_af041ecac3f77e96cf0c801a0392c6864}\label{class_dense_af041ecac3f77e96cf0c801a0392c6864}} 
+Eigen\+::\+Vector\+Xd {\bfseries get\+\_\+bias} ()
+\item 
+\mbox{\Hypertarget{class_dense_a67fc896d82f5fa9b1f698e2c73be5c98}\label{class_dense_a67fc896d82f5fa9b1f698e2c73be5c98}} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+weight} () override
+\item 
+\mbox{\Hypertarget{class_dense_a86ca7ffb22341ecd5babb88c21c233d9}\label{class_dense_a86ca7ffb22341ecd5babb88c21c233d9}} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+activated} () override
+\item 
+\mbox{\Hypertarget{class_dense_a235d0dcb8a4c45aec2bebf35d0cc97f1}\label{class_dense_a235d0dcb8a4c45aec2bebf35d0cc97f1}} 
+void {\bfseries set\+\_\+params} (Eigen\+::\+Matrix\+Xd weight, Eigen\+::\+Vector\+Xd bias) override
+\item 
+\mbox{\Hypertarget{class_dense_a1d9cc241573098e7efbc036fdee821a5}\label{class_dense_a1d9cc241573098e7efbc036fdee821a5}} 
+void {\bfseries set\+\_\+delta\+\_\+params} (Eigen\+::\+Matrix\+Xd d\+\_\+weight, Eigen\+::\+Vector\+Xd d\+\_\+bias) override
+\item 
+\mbox{\Hypertarget{class_dense_acb4445407d54347645262860c11fb6a7}\label{class_dense_acb4445407d54347645262860c11fb6a7}} 
+\mbox{\hyperlink{struct_layer_1_1_l2_tensors}{L2\+Tensors}} \& {\bfseries get\+\_\+regularization} () override
+\item 
+\mbox{\Hypertarget{class_dense_a9537701b87e6d69b60170e20cbb366c3}\label{class_dense_a9537701b87e6d69b60170e20cbb366c3}} 
+Eigen\+::\+Vector\+Xd {\bfseries calculate} (const Eigen\+::\+Vector\+Xd \&in) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense_a895faee756f80ba8bf3604eae1e19c51}\label{class_dense_a895faee756f80ba8bf3604eae1e19c51}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_dense}{Dense}} \&layer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/Dense.\+h\item 
+src/layers/Dense.\+cpp\end{DoxyCompactItemize}
