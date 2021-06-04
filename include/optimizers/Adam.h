@@ -27,7 +27,12 @@ private:
 public:
   explicit Adam(double learning, double alpha_one = 0.9,
                 double alpha_two = 0.999)
-      : learning_rate(learning), beta_one(alpha_one), beta_two(alpha_two) {}
+      : learning_rate(learning), beta_one(alpha_one), beta_two(alpha_two) {
+    this->operator()("optimizer", "Adam");
+    this->operator()("learning", std::to_string(learning));
+    this->operator()("alpha_one", std::to_string(alpha_one));
+    this->operator()("alpha_two", std::to_string(alpha_two));
+  }
 
   void change_weight(int layer_index, Eigen::MatrixXd &w,
                      const Eigen::MatrixXd &d_w) override;

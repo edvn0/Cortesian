@@ -6,6 +6,7 @@
 
 #include <effolkronium/random.hpp>
 #include <eigen3/Eigen/Core>
+#include <fstream>
 #include <iostream>
 #include <ostream>
 #include <string>

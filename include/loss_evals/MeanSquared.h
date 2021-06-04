@@ -10,6 +10,11 @@
 
 class MeanSquared : public LossFunction, public EvaluationFunction {
 public:
+  MeanSquared() {
+    this->LossFunction::operator()("loss", "MeanSquared");
+    this->EvaluationFunction::operator()("evaluation", "MeanSquared");
+  }
+
   double apply_loss_single(const Eigen::VectorXd &x,
                            const Eigen::VectorXd &y) override;
 

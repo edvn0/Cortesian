@@ -5,10 +5,11 @@
 #ifndef CORTESIAN_PARAMETERINITIALIZER_H
 #define CORTESIAN_PARAMETERINITIALIZER_H
 
+#include "../utils/MetaBase.h"
 #include <eigen3/Eigen/Core>
 #include <vector>
 
-class ParameterInitializer {
+class ParameterInitializer : public MetaBase {
 protected:
   bool m_is_initialized{false};
   std::vector<int> m_structure;

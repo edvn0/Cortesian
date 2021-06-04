@@ -5,9 +5,10 @@
 #ifndef CORTESIAN_OPTIMIZER_H
 #define CORTESIAN_OPTIMIZER_H
 
+#include "../utils/MetaBase.h"
 #include <eigen3/Eigen/Core>
 
-class Optimizer {
+class Optimizer : public MetaBase {
 public:
   virtual ~Optimizer() = default;
 

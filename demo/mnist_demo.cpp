@@ -1,16 +1,16 @@
-#include <eigen3/Eigen/Core>
 #include <chrono>
+#include <eigen3/Eigen/Core>
 #include <iostream>
 
 #include "../include/Network.h"
 #include "../include/activations/LeakyRelu.h"
 #include "../include/activations/Softmax.h"
 #include "../include/initializers/EigenInitializer.h"
+#include "../include/loss_evals/ArgMax.h"
 #include "../include/loss_evals/CategoricalCrossEntropy.h"
 #include "../include/loss_evals/MeanAbsolute.h"
 #include "../include/loss_evals/MeanSquared.h"
 #include "../include/optimizers/Adam.h"
-#include "../include/utils/ArgMax.h"
 #include "../include/utils/DataReader.h"
 
 int main() {
@@ -56,10 +56,10 @@ int main() {
       .initializer(new EigenInitializer())
       .optimizer(new Adam(1))
       .layer(new Dense(new LeakyRelu(), 784, 0.1))
-      .layer(new Dense(new LeakyRelu(), 30, 0.5))
-      .layer(new Dense(new LeakyRelu(), 30, 0.5))
-      .layer(new Dense(new LeakyRelu(), 30, 0.5))
-      .layer(new Dense(new LeakyRelu(), 30, 0.5))
+      .layer(new Dense(new LeakyRelu(), 300, 0.5))
+      .layer(new Dense(new LeakyRelu(), 300, 0.5))
+      .layer(new Dense(new LeakyRelu(), 300, 0.5))
+      .layer(new Dense(new LeakyRelu(), 300, 0.5))
       .layer(new Dense(new Softmax(), 10, 0.5));
 
   Network network(builder);

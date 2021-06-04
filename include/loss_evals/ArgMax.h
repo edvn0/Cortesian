@@ -5,10 +5,11 @@
 #ifndef CORTESIAN_ARGMAX_H
 #define CORTESIAN_ARGMAX_H
 
-#include "../loss_evals/EvaluationFunction.h"
+#include "EvaluationFunction.h"
 
 class ArgMax : public EvaluationFunction {
 public:
+  ArgMax() { this->operator()("evaluation", "ArgMax"); }
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;
 };

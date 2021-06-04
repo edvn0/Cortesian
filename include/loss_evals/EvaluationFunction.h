@@ -5,10 +5,11 @@
 #ifndef CORTESIAN_EVALUATIONFUNCTION_H
 #define CORTESIAN_EVALUATIONFUNCTION_H
 
+#include "../utils/MetaBase.h"
 #include <eigen3/Eigen/Core>
 #include <vector>
 
-class EvaluationFunction {
+class EvaluationFunction : public MetaBase {
 public:
   virtual ~EvaluationFunction() = default;
 

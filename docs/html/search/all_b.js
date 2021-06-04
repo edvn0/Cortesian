@@ -1,4 +1,4 @@
-var searchData=
-[
-  ['tanh_32',['Tanh',['../class_tanh.html',1,'']]]
-];
+var searchData =
+    [
+        ['parameterinitializer_34', ['ParameterInitializer', ['../class_parameter_initializer.html', 1, '']]]
+    ];

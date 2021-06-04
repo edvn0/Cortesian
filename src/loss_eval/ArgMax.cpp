@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../../include/utils/ArgMax.h"
+#include "../../include/loss_evals/ArgMax.h"
 
 #include "../../include/utils/MathUtils.h"
 

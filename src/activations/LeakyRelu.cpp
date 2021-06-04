@@ -27,3 +27,8 @@ Eigen::VectorXd LeakyRelu::derivative(Eigen::VectorXd in) {
   };
   return static_cast<Eigen::MatrixXd>(in.unaryExpr(func));
 }
+
+LeakyRelu::LeakyRelu() {
+  this->operator()("activation", "LeakyRelu");
+  this->operator()("alpha", std::to_string(cap));
+}

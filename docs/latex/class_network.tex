@@ -1,5 +1,20 @@
 \hypertarget{class_network}{}\doxysection{Network Class Reference}
 \label{class_network}\index{Network@{Network}}
+
+
+A multi/single layer backpropagation feedforward network.  
+
+
+
+
+{\ttfamily \#include $<$Network.\+h$>$}
+
+Inheritance diagram for Network\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_network}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,9 +41,18 @@ std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ {\bfseries evaluate} (const Eigen\+::
 \item 
 \mbox{\Hypertarget{class_network_a8f175394b78ce5c2031399d6e53ccee7}\label{class_network_a8f175394b78ce5c2031399d6e53ccee7}} 
 Eigen\+::\+Vector\+Xd {\bfseries classify} (const Eigen\+::\+Vector\+Xd \&vector)
+\item 
+\mbox{\Hypertarget{class_network_a86662014df0f670680a4fe94cb04c1c4}\label{class_network_a86662014df0f670680a4fe94cb04c1c4}} 
+void {\bfseries save} (const std\+::string \&file\+\_\+name) const
+\item 
+\mbox{\Hypertarget{class_network_a2cd0844b99774949e702a92fe48aa1e8}\label{class_network_a2cd0844b99774949e702a92fe48aa1e8}} 
+void {\bfseries save} (const std\+::string \&\&file\+\_\+name)
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_network_a590012179d3627bb5b22a3e88137fb10}\label{class_network_a590012179d3627bb5b22a3e88137fb10}} 
+static std\+::string {\bfseries to\+\_\+json} (const \mbox{\hyperlink{class_network}{Network}} \&network)
 \item 
 \mbox{\Hypertarget{class_network_a0e5b7761bbdb4d2d67b2228392f7f6cc}\label{class_network_a0e5b7761bbdb4d2d67b2228392f7f6cc}} 
 static std\+::vector$<$ \mbox{\hyperlink{struct_data_split_1_1_data_set}{Data\+Split\+::\+Data\+Set}} $>$ {\bfseries generate\+\_\+splits} (Eigen\+::\+Matrix\+Xd \&X\+\_\+tensor, Eigen\+::\+Matrix\+Xd \&Y\+\_\+tensor, size\+\_\+t from\+\_\+index, size\+\_\+t to\+\_\+index, int i)
@@ -79,6 +103,9 @@ Clipping {\bfseries m\+\_\+clipping}
 std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_network}{Network}} \&network)
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+A multi/single layer backpropagation feedforward network. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

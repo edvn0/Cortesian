@@ -9,6 +9,7 @@
 
 class Tanh : public Activation {
 public:
+  Tanh();
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;
 };

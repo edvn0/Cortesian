@@ -7,14 +7,22 @@
 
 #include <chrono>
 
+/**
+ * A timer timing a block of code.
+ */
 class BlockTimer {
-public:
-  BlockTimer() { start(); }
+private:
+  std::chrono::time_point<std::chrono::system_clock> m_StartTime;
+  std::chrono::time_point<std::chrono::system_clock> m_EndTime;
+  bool m_bRunning = false;
 
   void start() {
     m_StartTime = std::chrono::system_clock::now();
     m_bRunning = true;
   }
+
+public:
+  BlockTimer() { start(); }
 
   void stop() {
     m_EndTime = std::chrono::system_clock::now();
@@ -36,11 +44,6 @@ public:
   }
 
   double elapsedSeconds() { return elapsedMilliseconds() / 1000.0; }
-
-private:
-  std::chrono::time_point<std::chrono::system_clock> m_StartTime;
-  std::chrono::time_point<std::chrono::system_clock> m_EndTime;
-  bool m_bRunning = false;
 };
 
 #endif // CORTESIAN_BLOCKTIMER_H
