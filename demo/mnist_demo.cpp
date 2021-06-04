@@ -1,5 +1,5 @@
-#include <eigen3/Eigen/Core>
 #include <chrono>
+#include <eigen3/Eigen/Core>
 #include <iostream>
 
 #include "../include/Network.h"

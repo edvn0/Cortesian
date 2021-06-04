@@ -13,9 +13,9 @@
  * A layer is a virtual class handling feeding the network forward.
  * See {@link #Dense} for an implementation of this class.
  *
- * A layer is also in charge of updating the weights in back propagation, however,
- * instead of handling the logic of the updates itself, provides that responsibility
- * to {@link #Optimizer}.
+ * A layer is also in charge of updating the weights in back propagation,
+ * however, instead of handling the logic of the updates itself, provides that
+ * responsibility to {@link #Optimizer}.
  */
 class Layer : public MetaBase {
 protected:

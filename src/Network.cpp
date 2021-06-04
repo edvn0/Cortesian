@@ -441,7 +441,7 @@ Network::~Network() {
   m_layers.clear();
 }
 
-std::string Network::to_json(const Network& network) {
+std::string Network::to_json(const Network &network) {
   std::string json;
   json.reserve(500);
   json.reserve(500);

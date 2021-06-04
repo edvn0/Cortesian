@@ -63,8 +63,8 @@ protected:
 
 public:
   static std::string to_json(const Network &network);
-  static Network from_json_file(const std::string& json_string);
-  static Network from_json(const std::string& pre_loaded_json);
+  static Network from_json_file(const std::string &json_string);
+  static Network from_json(const std::string &pre_loaded_json);
 
 public:
   Network();

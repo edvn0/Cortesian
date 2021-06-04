@@ -9,9 +9,7 @@
 
 class ArgMax : public EvaluationFunction {
 public:
-  ArgMax() {
-    this->operator()("evaluation", "ArgMax");
-  }
+  ArgMax() { this->operator()("evaluation", "ArgMax"); }
   double apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                  const Eigen::VectorXd &Y) override;
 };

@@ -20,6 +20,4 @@ Eigen::VectorXd Tanh::derivative(Eigen::VectorXd in) {
   return 1 - in.array() * in.array();
 }
 
-Tanh::Tanh() {
-  this->operator()("activation", "Tanh");
-}
+Tanh::Tanh() { this->operator()("activation", "Tanh"); }
