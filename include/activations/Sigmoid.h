@@ -2,19 +2,19 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#ifndef CORTESIAN_SIGMOIDFUNCTION_H
-#define CORTESIAN_SIGMOIDFUNCTION_H
+#ifndef CORTESIAN_SIGMOID_H
+#define CORTESIAN_SIGMOID_H
 
 #include "Activation.h"
 
-class SigmoidFunction : public Activation {
+class Sigmoid : public Activation {
 private:
   static double approx(double t);
 
 public:
-  SigmoidFunction();
+  Sigmoid();
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;
 };
 
-#endif // CORTESIAN_SIGMOIDFUNCTION_H
+#endif // CORTESIAN_SIGMOID_H

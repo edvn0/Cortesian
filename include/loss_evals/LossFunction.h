@@ -17,7 +17,6 @@ public:
                            const std::vector<Eigen::VectorXd> &Y) {
     double loss = 0.0;
     size_t rows = Y_hat.size();
-#pragma omp parallel for
     for (size_t i = 0; i < rows; i++) {
       loss += apply_loss_single(Y_hat[i], Y[i]);
     }
@@ -28,7 +27,6 @@ public:
                            const Eigen::MatrixXd &Y_tensor) {
     double loss = 0.0;
     size_t rows = Y_hat.size();
-#pragma omp parallel for
     for (size_t i = 0; i < rows; i++) {
       loss += apply_loss_single(Y_hat[i], Y_tensor.row((long)i));
     }

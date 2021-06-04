@@ -13,7 +13,7 @@
 #include "../include/optimizers/Adam.h"
 #include "../include/utils/DataReader.h"
 
-int main() {
+int main_test() {
   auto [X_tensor, Y_tensor] = csv_to_tensor(
       "/Users/edwincarlsson/Documents/Code.nosync/CPP/DeepLearning/cortesian/"
       "resources/mnist_case_x.csv",

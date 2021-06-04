@@ -47,12 +47,12 @@ add_executable(
         include/utils/MathUtils.h
         src/util/DataSplit.cpp
         include/utils/DataSplit.h
-        src/activations/LinearFunction.cpp
-        include/activations/LinearFunction.h
+        src/activations/Linear.cpp
+        include/activations/Linear.h
         src/loss_eval/MeanAbsolute.cpp
         include/loss_evals/MeanAbsolute.h
-        src/activations/SigmoidFunction.cpp
-        include/activations/SigmoidFunction.h
+        src/activations/Sigmoid.cpp
+        include/activations/Sigmoid.h
         src/activations/Tanh.cpp
         include/activations/Tanh.h
         src/activations/Softmax.cpp
@@ -69,7 +69,7 @@ add_executable(
         src/layers/Conv1d.cpp
         include/layers/Conv1d.h
         include/DefaultNetworkFactory.h
-        include/utils/MetaBase.h)
+        include/utils/MetaBase.h demo/tiny_demo.cpp)
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv
         OpenMP::OpenMP_CXX)
 

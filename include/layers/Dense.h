@@ -62,6 +62,7 @@ public:
 
   friend std::ostream &operator<<(std::ostream &os, const Dense &layer);
   Eigen::VectorXd calculate(const Eigen::VectorXd &in) override;
+  void serialize_parameters() override;
 };
 
 #endif // CORTESIAN_DENSE_H

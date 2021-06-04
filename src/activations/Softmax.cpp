@@ -21,12 +21,7 @@ Eigen::VectorXd Softmax::soft_max(const Eigen::VectorXd &in) {
   auto z = in - max_vector;
   auto sum = z.unaryExpr([](double t) { return exp(t); }).sum();
   return z.unaryExpr([&](double t) {
-    auto val = exp(t) / sum;
-    if (val < soft_max_epsilon) {
-      return 0.0;
-    } else {
-      return val;
-    }
+    return  exp(t) / sum;
   });
 }
 

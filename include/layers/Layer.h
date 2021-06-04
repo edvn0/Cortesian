@@ -81,6 +81,8 @@ public:
   bool has_previous() { return m_layer_index != 0; };
 
   int get_layer_index() { return m_layer_index; }
+
+  virtual void serialize_parameters() {  };
 };
 
 #endif // CORTESIAN_LAYER_H

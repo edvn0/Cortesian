@@ -8,5 +8,8 @@
 
 double ArgMax::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
                                        const Eigen::VectorXd &Y) {
-  return arg_max(Y_hat) == arg_max(Y) ? 1.0 : 0.0;
+
+  auto y_hat_am = arg_max(Y_hat);
+  auto y_am = arg_max(Y);
+  return y_hat_am == y_am ? 1.0 : 0.0;
 }

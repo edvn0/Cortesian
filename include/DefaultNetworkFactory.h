@@ -7,7 +7,7 @@
 
 #include "Network.h"
 #include "activations/LeakyRelu.h"
-#include "activations/SigmoidFunction.h"
+#include "activations/Sigmoid.h"
 #include "activations/Softmax.h"
 #include "initializers/EigenInitializer.h"
 #include "layers/Dense.h"
@@ -37,7 +37,7 @@ static Network multi_layer_perceptron(size_t input_neurons, size_t layers,
     builder.evaluation_function(
         {new ArgMax(), new MeanAbsolute(), new MeanSquared()});
   } else {
-    builder.layer(new Dense(new SigmoidFunction(), (int)output_neurons, 0.1));
+    builder.layer(new Dense(new Sigmoid(), (int)output_neurons, 0.1));
     builder.loss_function(new CategoricalCrossEntropy());
     builder.evaluation_function({new MeanAbsolute(), new MeanSquared()});
   }
@@ -60,7 +60,7 @@ static Network perceptron(size_t input_neurons, size_t hidden_neurons,
     builder.evaluation_function(
         {new ArgMax(), new MeanAbsolute(), new MeanSquared()});
   } else {
-    builder.layer(new Dense(new SigmoidFunction(), (int)output_neurons, 0.1));
+    builder.layer(new Dense(new Sigmoid(), (int)output_neurons, 0.1));
     builder.loss_function(new CategoricalCrossEntropy());
     builder.evaluation_function({new MeanAbsolute(), new MeanSquared()});
   }

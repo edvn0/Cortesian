@@ -142,7 +142,6 @@ void Network::evaluate_for_back_prop(const DataSplit::DataPoint &point) {
 
 void Network::evaluate_for_back_prop(const DataSplit::DataSet &ds) {
   size_t size = ds.rows.size();
-#pragma omp parallel for default(none) shared(size, ds)
   for (int i = 0; i < size; i++) {
     evaluate_for_back_prop(ds.rows[i]);
   }
@@ -150,12 +149,8 @@ void Network::evaluate_for_back_prop(const DataSplit::DataSet &ds) {
 
 std::vector<Eigen::VectorXd> Network::evaluate(const Eigen::MatrixXd &Xs) {
   size_t rows = Xs.rows();
-#pragma omp declare reduction (merge : std::vector<Eigen::VectorXd> : omp_out.insert(omp_out.end(), omp_in.begin(), omp_in.end()))
-
   std::vector<Eigen::VectorXd> evaluated;
   evaluated.reserve(rows);
-#pragma omp parallel for reduction(merge                                       \
-                                   : evaluated) default(none) shared(rows, Xs)
   for (long i = 0; i < rows; i++) {
     Eigen::VectorXd xs = Xs.row(i);
 
@@ -341,6 +336,11 @@ Network::generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
 }
 
 void Network::save(const std::string &file_name) const {
+
+  for (auto &layer : m_layers) {
+    layer->serialize_parameters();
+  }
+
   std::fstream file(file_name, std::fstream::out);
   std::string json = Network::to_json(*this);
   file.write(json.data(), (long)json.size());
@@ -380,7 +380,8 @@ std::string Network::to_json(const Network &network) {
             .append("\"")
             .append(std::get<0>(s))
             .append("\": \"")
-            .append(std::get<1>(s)).append("\"");
+            .append(std::get<1>(s))
+            .append("\"");
 
         if (j != max_data_size) {
           json.append(",");
@@ -401,7 +402,8 @@ std::string Network::to_json(const Network &network) {
             .append("\"")
             .append(std::get<0>(s))
             .append("\": \"")
-            .append(std::get<1>(s)).append("\"");
+            .append(std::get<1>(s))
+            .append("\"");
 
         if (j != max_data_size) {
           json.append(",");
@@ -425,7 +427,8 @@ std::string Network::to_json(const Network &network) {
               .append("\"")
               .append(std::get<0>(s))
               .append("\": \"")
-              .append(std::get<1>(s)).append("\"");
+              .append(std::get<1>(s))
+              .append("\"");
 
           if (j != max_data_size) {
             json.append(",");
@@ -453,7 +456,8 @@ std::string Network::to_json(const Network &network) {
             .append("\"")
             .append(std::get<0>(s))
             .append("\": \"")
-            .append(std::get<1>(s)).append("\"");
+            .append(std::get<1>(s))
+            .append("\"");
 
         if (j != max_data_size) {
           json.append(",");
@@ -478,7 +482,8 @@ std::string Network::to_json(const Network &network) {
               .append("\"")
               .append(std::get<0>(s))
               .append("\": \"")
-              .append(std::get<1>(s)).append("\"");
+              .append(std::get<1>(s))
+              .append("\"");
 
           if (j != max_data_size) {
             json.append(",");

@@ -3,6 +3,7 @@
 //
 
 #include "../../include/layers/Dense.h"
+#include "../../include/utils/DataReader.h"
 
 #include <iostream>
 #include <utility>
@@ -18,20 +19,20 @@ void Dense::fit(Optimizer *optimizer) {
   if (deltas_added > 0) {
     if (m_l2 > 0) {
       // regularization
-      Eigen::MatrixXd reg_weights =
-          regularization.m_l2Matrix.array() * m_delta_weight.array();
-      Eigen::VectorXd req_bias =
-          regularization.m_l2Vector.array() * m_delta_bias.array();
-      m_delta_weight -= reg_weights;
-      m_delta_bias -= req_bias;
+      Eigen::MatrixXd reg_weight = m_delta_weight.array()*m_l2;
+      Eigen::MatrixXd reg_bias = m_delta_bias.array()*m_l2;
+      m_delta_weight -= reg_weight;
+      m_delta_bias -= reg_bias;
     }
 
     Eigen::MatrixXd average_delta_w =
         m_delta_weight.array() / (float)deltas_added;
     Eigen::VectorXd average_delta_b =
         m_delta_bias.array() / (float)deltas_added;
+    auto prev = m_bias;
     optimizer->change_bias((int)m_layer_index, m_bias, average_delta_b);
     optimizer->change_weight((int)m_layer_index, m_weight, average_delta_w);
+    auto pro = m_bias;
     m_delta_weight = m_delta_weight.setZero();
     m_delta_bias = m_delta_bias.setZero();
     deltas_added = 0;
@@ -110,4 +111,9 @@ Eigen::VectorXd Dense::calculate(const Eigen::VectorXd &in) {
     activated = out;
   }
   return activated;
+}
+
+void Dense::serialize_parameters() {
+  this->operator()("weight", eigen_to_json(m_weight));
+  this->operator()("bias", eigen_to_json(m_bias));
 }

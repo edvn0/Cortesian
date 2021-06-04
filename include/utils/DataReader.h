@@ -41,6 +41,10 @@ csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
   format.delimiter(delimiter);
   if (!has_header)
     format.no_header();
+  else {
+    format.header_row(0);
+    format.column_names({"X0", "X1", "Y"});
+  }
 
   csv::CSVReader reader(file_name, format);
   Eigen::MatrixXd X_tensor;
@@ -52,6 +56,7 @@ csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
   for (csv::CSVRow &csv_row : reader) {
     size_t column = 0;
     for (csv::CSVField &field : csv_row) {
+      std::cout << field.get();
       X_mapper(X_tensor, field, row, column);
       Y_mapper(Y_tensor, field, row, column);
       column++;
@@ -123,7 +128,7 @@ static inline std::string eigen_to_json(const Eigen::MatrixXd &weight) {
  * @param weight matrix
  * @return json nested array.
  */
-static const inline std::string eigen_to_json(const Eigen::VectorXd &bias) {
+static inline std::string eigen_to_json(const Eigen::VectorXd &bias) {
   size_t rows = bias.rows();
   std::string nested_array = "[";
   nested_array.reserve((rows)*4);

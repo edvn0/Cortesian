@@ -2,9 +2,9 @@
 // Created by Edwin Carlsson on 2021-06-01.
 //
 
-#include "../../include/activations/SigmoidFunction.h"
+#include "../../include/activations/Sigmoid.h"
 
-double SigmoidFunction::approx(double t) {
+double Sigmoid::approx(double t) {
   if (t < -2.0) {
     return -1.0;
   } else if (t > 2.0) {
@@ -14,14 +14,14 @@ double SigmoidFunction::approx(double t) {
   }
 }
 
-Eigen::VectorXd SigmoidFunction::function(Eigen::VectorXd in) {
+Eigen::VectorXd Sigmoid::function(Eigen::VectorXd in) {
   return in.unaryExpr([&](double t) { return approx(t); });
 }
 
-Eigen::VectorXd SigmoidFunction::derivative(Eigen::VectorXd in) {
+Eigen::VectorXd Sigmoid::derivative(Eigen::VectorXd in) {
   return in.array() * (1 - in.array());
 }
 
-SigmoidFunction::SigmoidFunction() {
+Sigmoid::Sigmoid() {
   this->operator()("activation", "Sigmoid");
 }
