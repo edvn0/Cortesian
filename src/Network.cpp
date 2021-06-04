@@ -119,85 +119,8 @@ Network::evaluate(const std::vector<Eigen::VectorXd> &Xs) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Network &network) {
-  std::string json;
-  json.reserve(500);
-  json.append("{");
-  json.append("\n\t\"Optimizer\": {");
-  auto optim_data = network.m_optimizer->key_value_pairs();
-  std::for_each(optim_data.begin(), optim_data.end(),
-                [&json](std::tuple<std::string, std::string> &s) {
-                  json.append("\n\t\t")
-                      .append("\"")
-                      .append(std::get<0>(s))
-                      .append("\": \"")
-                      .append(std::get<1>(s))
-                      .append("\",");
-                });
-  json.append("\n\t},");
-
-  json.append("\n\t\"Loss\": {");
-  auto loss_data = network.m_loss->key_value_pairs();
-  std::for_each(loss_data.begin(), loss_data.end(),
-                [&json](std::tuple<std::string, std::string> &s) {
-                  json.append("\n\t\t")
-                      .append("\"")
-                      .append(std::get<0>(s))
-                      .append("\": \"")
-                      .append(std::get<1>(s))
-                      .append("\",");
-                });
-  json.append("\n\t},");
-
-  json.append("\n\t\"Evaluators\": [");
-  for (auto eval : network.m_eval) {
-    json.append("\n\t\t{");
-    auto eval_data = eval->key_value_pairs();
-    std::for_each(eval_data.begin(), eval_data.end(),
-                  [&json](std::tuple<std::string, std::string> &s) {
-                    json.append("\n\t\t\t")
-                        .append("\"")
-                        .append(std::get<0>(s))
-                        .append("\": \"")
-                        .append(std::get<1>(s))
-                        .append("\",");
-                  });
-    json.append("\n\t\t},");
-  }
-  json.append("\n\t],");
-
-  json.append("\n\tInitializer: {");
-  auto initializer_data = network.m_initializer->key_value_pairs();
-  std::for_each(initializer_data.begin(), initializer_data.end(),
-                [&json](std::tuple<std::string, std::string> &s) {
-                  json.append("\n\t\t")
-                      .append("\"")
-                      .append(std::get<0>(s))
-                      .append("\": \"")
-                      .append(std::get<1>(s))
-                      .append("\",");
-                });
-  json.append("\n\t}");
-
-  json.append("\n\t\"Layers\": [");
-  for (auto layer : network.m_layers) {
-    json.append("\n\t\t{");
-    auto layer_data = layer->key_value_pairs();
-    std::for_each(layer_data.begin(), layer_data.end(),
-                  [&json](std::tuple<std::string, std::string> &s) {
-                    json.append("\n\t\t\t")
-                        .append("\"")
-                        .append(std::get<0>(s))
-                        .append("\": \"")
-                        .append(std::get<1>(s))
-                        .append("\",");
-                  });
-    json.append("\n\t\t},");
-  }
-  json.append("\n\t],");
-
-  json.append("\n}\n");
-  os << json;
-  return os;
+  std::string json = Network::to_json(network);
+  return os << json;
 }
 
 void Network::optimize() {
@@ -420,7 +343,8 @@ Network::generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
 void Network::save(const std::string &file_name) const {
   std::fstream file(file_name, std::fstream::out);
   std::string json = Network::to_json(*this);
-  file << json;
+  file.write(json.data(), (long)json.size());
+  file.close();
 }
 
 Network::~Network() {
@@ -444,86 +368,142 @@ Network::~Network() {
 std::string Network::to_json(const Network &network) {
   std::string json;
   json.reserve(500);
-  json.reserve(500);
   json.append("{");
   json.append("\n\t\"Optimizer\": {");
   auto optim_data = network.m_optimizer->key_value_pairs();
-  std::for_each(optim_data.begin(), optim_data.end(),
-                [&json](std::tuple<std::string, std::string> &s) {
-                  json.append("\n\t\t")
-                      .append("\"")
-                      .append(std::get<0>(s))
-                      .append("\": \"")
-                      .append(std::get<1>(s))
-                      .append("\",");
-                });
+  int max_data_size = optim_data.size() - 1;
+  int j = 0;
+  std::for_each(
+      optim_data.begin(), optim_data.end(),
+      [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+        json.append("\n\t\t")
+            .append("\"")
+            .append(std::get<0>(s))
+            .append("\": \"")
+            .append(std::get<1>(s)).append("\"");
+
+        if (j != max_data_size) {
+          json.append(",");
+        }
+
+        j++;
+      });
   json.append("\n\t},");
 
   json.append("\n\t\"Loss\": {");
   auto loss_data = network.m_loss->key_value_pairs();
-  std::for_each(loss_data.begin(), loss_data.end(),
-                [&json](std::tuple<std::string, std::string> &s) {
-                  json.append("\n\t\t")
-                      .append("\"")
-                      .append(std::get<0>(s))
-                      .append("\": \"")
-                      .append(std::get<1>(s))
-                      .append("\",");
-                });
+  max_data_size = loss_data.size() - 1;
+  j = 0;
+  std::for_each(
+      loss_data.begin(), loss_data.end(),
+      [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+        json.append("\n\t\t")
+            .append("\"")
+            .append(std::get<0>(s))
+            .append("\": \"")
+            .append(std::get<1>(s)).append("\"");
+
+        if (j != max_data_size) {
+          json.append(",");
+        }
+        j++;
+      });
   json.append("\n\t},");
 
   json.append("\n\t\"Evaluators\": [");
+  int i = 0;
+  int eval_size = network.m_eval.size() - 1;
   for (auto eval : network.m_eval) {
     json.append("\n\t\t{");
     auto eval_data = eval->key_value_pairs();
-    std::for_each(eval_data.begin(), eval_data.end(),
-                  [&json](std::tuple<std::string, std::string> &s) {
-                    json.append("\n\t\t\t")
-                        .append("\"")
-                        .append(std::get<0>(s))
-                        .append("\": \"")
-                        .append(std::get<1>(s))
-                        .append("\",");
-                  });
-    json.append("\n\t\t},");
+    max_data_size = eval_data.size() - 1;
+    j = 0;
+    std::for_each(
+        eval_data.begin(), eval_data.end(),
+        [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+          json.append("\n\t\t\t")
+              .append("\"")
+              .append(std::get<0>(s))
+              .append("\": \"")
+              .append(std::get<1>(s)).append("\"");
+
+          if (j != max_data_size) {
+            json.append(",");
+          }
+          j++;
+        });
+
+    if (i != eval_size) {
+      json.append("\n\t\t},");
+    } else {
+      json.append("\n\t\t}");
+    }
+    i++;
   }
   json.append("\n\t],");
 
-  json.append("\n\tInitializer: {");
+  json.append("\n\t\"Initializer\": {");
   auto initializer_data = network.m_initializer->key_value_pairs();
-  std::for_each(initializer_data.begin(), initializer_data.end(),
-                [&json](std::tuple<std::string, std::string> &s) {
-                  json.append("\n\t\t")
-                      .append("\"")
-                      .append(std::get<0>(s))
-                      .append("\": \"")
-                      .append(std::get<1>(s))
-                      .append("\",");
-                });
-  json.append("\n\t}");
+  max_data_size = initializer_data.size() - 1;
+  j = 0;
+  std::for_each(
+      initializer_data.begin(), initializer_data.end(),
+      [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+        json.append("\n\t\t")
+            .append("\"")
+            .append(std::get<0>(s))
+            .append("\": \"")
+            .append(std::get<1>(s)).append("\"");
+
+        if (j != max_data_size) {
+          json.append(",");
+        }
+
+        j++;
+      });
+  json.append("\n\t},");
 
   json.append("\n\t\"Layers\": [");
+  int layer_size = network.m_layers.size() - 1;
+  i = 0;
   for (auto layer : network.m_layers) {
     json.append("\n\t\t{");
     auto layer_data = layer->key_value_pairs();
-    std::for_each(layer_data.begin(), layer_data.end(),
-                  [&json](std::tuple<std::string, std::string> &s) {
-                    json.append("\n\t\t\t")
-                        .append("\"")
-                        .append(std::get<0>(s))
-                        .append("\": \"")
-                        .append(std::get<1>(s))
-                        .append("\",");
-                  });
-    json.append("\n\t\t},");
+    max_data_size = layer_data.size() - 1;
+    j = 0;
+    std::for_each(
+        layer_data.begin(), layer_data.end(),
+        [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+          json.append("\n\t\t\t")
+              .append("\"")
+              .append(std::get<0>(s))
+              .append("\": \"")
+              .append(std::get<1>(s)).append("\"");
+
+          if (j != max_data_size) {
+            json.append(",");
+          }
+
+          j++;
+        });
+
+    if (i != layer_size) {
+      json.append("\n\t\t},");
+    } else {
+      json.append("\n\t\t}");
+    }
+    i++;
   }
-  json.append("\n\t],");
+  json.append("\n\t]");
 
   json.append("\n}\n");
   return json;
 }
 
 Network Network::from_json(const std::string &json) {
+
+  std::cout << json;
+
   NetworkBuilder builder;
   // TODO: needs to be implemented.
   // FIXME: needs to be implemented.
@@ -533,8 +513,9 @@ Network Network::from_json(const std::string &json) {
 Network Network::from_json_file(const std::string &file_path) {
   std::string json;
   std::fstream json_file(file_path, std::fstream::in);
+  std::stringstream buffer;
+  buffer << json_file.rdbuf();
 
-  json_file >> json;
-
+  json = buffer.str();
   return from_json(json);
 }

@@ -66,6 +66,10 @@ int main() {
 
   std::cout << network;
 
+  network.save("../resources/model.json");
+
+  auto n = Network::from_json_file("../resources/model.json");
+
   auto out = network.fit_tensor(X_tensor, Y_tensor, 100, 64, X_validate_tensor,
                                 Y_validate_tensor);
 

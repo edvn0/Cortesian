@@ -98,17 +98,17 @@ public:
   static std::string validity_to_string(const Validity &validity) {
     switch (validity) {
     case OPTIMIZER:
-      return "Optimizer";
+      return "Optimizer missing.";
     case EVAL:
-      return "Evaluation";
+      return "Evaluation function(s) missing.";
     case LOSS:
-      return "Loss";
+      return "Loss function missing.";
     case LAYERS:
-      return "Layers";
+      return "Layers missing.";
     case INITIALIZER:
-      return "Initializer";
+      return "Initializer missing.";
     case EVAL_SINGLE:
-      return "Evaluation Single Function";
+      return "Evaluation function missing.";
     case VALID:
       return "Is valid.";
     }
