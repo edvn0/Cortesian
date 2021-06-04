@@ -122,8 +122,7 @@ Eigen::VectorXd predicted = network.predict(test_vector);
 int clazz = network.classify(test_vector); // same as above, but with arg max.
 ```
 
-Finally, store the network meta data in a file.
-Nota bene: this is not serialization yet: I have not implemented the serialization of weights/biases.
+Finally, store the network meta data in a file. Nota bene: this is not serialization yet: I have not implemented the serialization of weights/biases.
 
 ```
 network.save("models/model.json");
