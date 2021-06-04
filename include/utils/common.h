@@ -8,6 +8,7 @@
 #include <eigen3/Eigen/Core>
 #include <iostream>
 #include <ostream>
+#include <fstream>
 #include <string>
 #include <vector>
 

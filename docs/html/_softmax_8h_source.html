@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -85,15 +86,18 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">double</span> constexpr soft_max_epsilon = 1e-8;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  Eigen::VectorXd derivative(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                                    Eigen::VectorXd out) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_SOFTMAX_H</span></div>
-<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:10</div></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="class_softmax.html">Softmax</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  Eigen::VectorXd <a class="code" href="class_softmax.html#a98da38edd98791545398890b53bb8a72">derivative</a>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  Eigen::MatrixXd <a class="code" href="class_softmax.html#a84751f5fe1b6c857784807d66b381927">derivative_on_input</a>(Eigen::VectorXd in,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                                    Eigen::VectorXd out) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_SOFTMAX_H</span></div>
+<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:11</div></div>
 <div class="ttc" id="aclass_softmax_html"><div class="ttname"><a href="class_softmax.html">Softmax</a></div><div class="ttdef"><b>Definition:</b> Softmax.h:10</div></div>
+<div class="ttc" id="aclass_softmax_html_a84751f5fe1b6c857784807d66b381927"><div class="ttname"><a href="class_softmax.html#a84751f5fe1b6c857784807d66b381927">Softmax::derivative_on_input</a></div><div class="ttdeci">Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in, Eigen::VectorXd out) override</div><div class="ttdoc">To handle backpropagation, we take the derivative of the activation function with respect to the grad...</div><div class="ttdef"><b>Definition:</b> Softmax.cpp:11</div></div>
+<div class="ttc" id="aclass_softmax_html_a98da38edd98791545398890b53bb8a72"><div class="ttname"><a href="class_softmax.html#a98da38edd98791545398890b53bb8a72">Softmax::derivative</a></div><div class="ttdeci">Eigen::VectorXd derivative(Eigen::VectorXd in) override</div><div class="ttdoc">Differentiates the vector with respect to &quot;itself&quot; in terms of the backpropagation.</div><div class="ttdef"><b>Definition:</b> Softmax.cpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

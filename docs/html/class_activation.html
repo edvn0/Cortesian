@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -75,26 +76,177 @@ Inheritance diagram for Activation:</div>
  <div class="center">
   <img src="class_activation.png" usemap="#Activation_map" alt=""/>
   <map id="Activation_map" name="Activation_map">
-<area href="class_leaky_relu.html" alt="LeakyRelu" shape="rect" coords="0,56,105,80"/>
-<area href="class_linear_function.html" alt="LinearFunction" shape="rect" coords="115,56,220,80"/>
-<area href="class_sigmoid_function.html" alt="SigmoidFunction" shape="rect" coords="230,56,335,80"/>
-<area href="class_softmax.html" alt="Softmax" shape="rect" coords="345,56,450,80"/>
-<area href="class_tanh.html" alt="Tanh" shape="rect" coords="460,56,565,80"/>
+<area href="class_meta_base.html" title="Provides a simple &quot;Parent&quot; to all objects for serialization/deserialization." alt="MetaBase" shape="rect" coords="230,0,335,24"/>
+<area href="class_leaky_relu.html" alt="LeakyRelu" shape="rect" coords="0,112,105,136"/>
+<area href="class_linear_function.html" alt="LinearFunction" shape="rect" coords="115,112,220,136"/>
+<area href="class_sigmoid_function.html" alt="SigmoidFunction" shape="rect" coords="230,112,335,136"/>
+<area href="class_softmax.html" alt="Softmax" shape="rect" coords="345,112,450,136"/>
+<area href="class_tanh.html" alt="Tanh" shape="rect" coords="460,112,565,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8c32842daaf8a2d0394533b59517ca3b"><td class="memItemLeft" align="right" valign="top"><a id="a8c32842daaf8a2d0394533b59517ca3b"></a>
-virtual Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><b>function</b> (Eigen::VectorXd in)=0</td></tr>
+<tr class="memitem:a8c32842daaf8a2d0394533b59517ca3b"><td class="memItemLeft" align="right" valign="top">virtual Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_activation.html#a8c32842daaf8a2d0394533b59517ca3b">function</a> (Eigen::VectorXd in)=0</td></tr>
+<tr class="memdesc:a8c32842daaf8a2d0394533b59517ca3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates the input, turning Weight*Vector + Bias into a vector of size of owning layer's neurons.  <a href="class_activation.html#a8c32842daaf8a2d0394533b59517ca3b">More...</a><br /></td></tr>
 <tr class="separator:a8c32842daaf8a2d0394533b59517ca3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcedfb19303d83eee408d0c708ac0e4f"><td class="memItemLeft" align="right" valign="top"><a id="afcedfb19303d83eee408d0c708ac0e4f"></a>
-virtual Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><b>derivative</b> (Eigen::VectorXd in)=0</td></tr>
+<tr class="memitem:afcedfb19303d83eee408d0c708ac0e4f"><td class="memItemLeft" align="right" valign="top">virtual Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_activation.html#afcedfb19303d83eee408d0c708ac0e4f">derivative</a> (Eigen::VectorXd in)=0</td></tr>
+<tr class="memdesc:afcedfb19303d83eee408d0c708ac0e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Differentiates the vector with respect to "itself" in terms of the backpropagation.  <a href="class_activation.html#afcedfb19303d83eee408d0c708ac0e4f">More...</a><br /></td></tr>
 <tr class="separator:afcedfb19303d83eee408d0c708ac0e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61cf13226f267e1747add31758ab073f"><td class="memItemLeft" align="right" valign="top"><a id="a61cf13226f267e1747add31758ab073f"></a>
-virtual Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><b>derivative_on_input</b> (Eigen::VectorXd in, Eigen::VectorXd out)</td></tr>
+<tr class="memitem:a61cf13226f267e1747add31758ab073f"><td class="memItemLeft" align="right" valign="top">virtual Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_activation.html#a61cf13226f267e1747add31758ab073f">derivative_on_input</a> (Eigen::VectorXd in, Eigen::VectorXd out)</td></tr>
+<tr class="memdesc:a61cf13226f267e1747add31758ab073f"><td class="mdescLeft">&#160;</td><td class="mdescRight">To handle backpropagation, we take the derivative of the activation function with respect to the gradient, forcing us not to derive the vector against itself, but on the output of the gradient, i.e.  <a href="class_activation.html#a61cf13226f267e1747add31758ab073f">More...</a><br /></td></tr>
 <tr class="separator:a61cf13226f267e1747add31758ab073f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_meta_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_meta_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_meta_base.html">MetaBase</a></td></tr>
+<tr class="memitem:a0a83fd2566741ff0dc14ff4025cad7b4 inherit pub_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a0a83fd2566741ff0dc14ff4025cad7b4"></a>
+virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (const std::string &amp;key)</td></tr>
+<tr class="separator:a0a83fd2566741ff0dc14ff4025cad7b4 inherit pub_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc25ba4f9bd079bcb94825c5087bb6e3 inherit pub_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::tuple&lt; std::string, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_meta_base.html#acc25ba4f9bd079bcb94825c5087bb6e3">key_value_pairs</a> () const</td></tr>
+<tr class="memdesc:acc25ba4f9bd079bcb94825c5087bb6e3 inherit pub_methods_class_meta_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the tuples from the meta data of subclassing entities.  <a href="class_meta_base.html#acc25ba4f9bd079bcb94825c5087bb6e3">More...</a><br /></td></tr>
+<tr class="separator:acc25ba4f9bd079bcb94825c5087bb6e3 inherit pub_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_class_meta_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_meta_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_meta_base.html">MetaBase</a></td></tr>
+<tr class="memitem:a7c43b9d02be46267ca497501912af763 inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a7c43b9d02be46267ca497501912af763"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;key, std::string &amp;value)</td></tr>
+<tr class="separator:a7c43b9d02be46267ca497501912af763 inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c44b1c6e905fedf662a24479ac5b8ed inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a0c44b1c6e905fedf662a24479ac5b8ed"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;&amp;key, std::string &amp;&amp;value)</td></tr>
+<tr class="separator:a0c44b1c6e905fedf662a24479ac5b8ed inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43fd7b5fada7c7d29a3eedfd2ea8d9e2 inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a43fd7b5fada7c7d29a3eedfd2ea8d9e2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;key, std::string &amp;&amp;value)</td></tr>
+<tr class="separator:a43fd7b5fada7c7d29a3eedfd2ea8d9e2 inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c4acf60343a8c93a38c1f5acfd6502 inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a99c4acf60343a8c93a38c1f5acfd6502"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;&amp;key, std::string &amp;value)</td></tr>
+<tr class="separator:a99c4acf60343a8c93a38c1f5acfd6502 inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_meta_base"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_meta_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_meta_base.html">MetaBase</a></td></tr>
+<tr class="memitem:ad763c61c36ccf98337b9b058dd0c4e5b inherit pro_attribs_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="ad763c61c36ccf98337b9b058dd0c4e5b"></a>
+std::unordered_map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_meta_data</b></td></tr>
+<tr class="separator:ad763c61c36ccf98337b9b058dd0c4e5b inherit pro_attribs_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afcedfb19303d83eee408d0c708ac0e4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcedfb19303d83eee408d0c708ac0e4f">&#9670;&nbsp;</a></span>derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Eigen::VectorXd Activation::derivative </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::VectorXd&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Differentiates the vector with respect to "itself" in terms of the backpropagation. </p>
+<p>Might need to override for vector valued functions, since Hessians need to be handled separately. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>vector to be differentiated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>differentiated vector. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_tanh.html#af6ba0ad3218e38f8bf0019db618756eb">Tanh</a>, <a class="el" href="class_softmax.html#a98da38edd98791545398890b53bb8a72">Softmax</a>, <a class="el" href="class_sigmoid_function.html#a1b8956d71fecf4c6e5464a06b130789f">SigmoidFunction</a>, <a class="el" href="class_linear_function.html#a0bd78c666f083c20d8186408ed1cab64">LinearFunction</a>, and <a class="el" href="class_leaky_relu.html#ab33d18bd7203b5d59f1512c7843db83d">LeakyRelu</a>.</p>
+
+</div>
+</div>
+<a id="a61cf13226f267e1747add31758ab073f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61cf13226f267e1747add31758ab073f">&#9670;&nbsp;</a></span>derivative_on_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Eigen::MatrixXd Activation::derivative_on_input </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::VectorXd&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>To handle backpropagation, we take the derivative of the activation function with respect to the gradient, forcing us not to derive the vector against itself, but on the output of the gradient, i.e. </p>
+<p>dO/dGradient = output*derivative(input) by the chain rule. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>activations of layers </td></tr>
+    <tr><td class="paramname">out</td><td>error terms (recursion gradients) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the hessian </dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_softmax.html#a84751f5fe1b6c857784807d66b381927">Softmax</a>.</p>
+
+</div>
+</div>
+<a id="a8c32842daaf8a2d0394533b59517ca3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c32842daaf8a2d0394533b59517ca3b">&#9670;&nbsp;</a></span>function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Eigen::VectorXd Activation::function </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::VectorXd&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Activates the input, turning Weight*Vector + Bias into a vector of size of owning layer's neurons. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>(w*X + b) from current layer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the activated vector. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_tanh.html#a270b01918408d995744fc0b7d3e57e1a">Tanh</a>, <a class="el" href="class_softmax.html#ac3e6ed66b8dbdc3461d12aad8a8ea73d">Softmax</a>, <a class="el" href="class_sigmoid_function.html#a8e63a9a3ada38b1354218c3ab2b39f83">SigmoidFunction</a>, <a class="el" href="class_linear_function.html#a5d7612cecce2c63355bfe8322d46ae5d">LinearFunction</a>, and <a class="el" href="class_leaky_relu.html#a44218a95abc3424ecc80984113d9dcc8">LeakyRelu</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/activations/<a class="el" href="_activation_8h_source.html">Activation.h</a></li>
 </ul>

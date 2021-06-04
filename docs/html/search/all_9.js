@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['parameterinitializer_28',['ParameterInitializer',['../class_parameter_initializer.html',1,'']]]
+  ['network_31',['Network',['../class_network.html',1,'']]],
+  ['networkbuilder_32',['NetworkBuilder',['../class_network_builder.html',1,'']]]
 ];

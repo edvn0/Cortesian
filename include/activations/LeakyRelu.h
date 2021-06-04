@@ -11,6 +11,8 @@ class LeakyRelu : public Activation {
   double cap{0.01};
 
 public:
+  LeakyRelu();
+
   Eigen::VectorXd function(Eigen::VectorXd in) override;
 
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;

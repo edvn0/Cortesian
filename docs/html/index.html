@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Cortesian: Main Page</title>
+<title>Cortesian: Cortesian</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -61,11 +62,90 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Cortesian Documentation</div>  </div>
+<div class="title">Cortesian </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> Cortesian is a learning project stemming from an implementation I built in Java 2020-2021.</p>
+<p>I intend to provide transparency to how neural networks work and why they perform well on problems, and how you could implement one yourself!</p>
+<p>Starting in Java, I now intend to move almost exclusively to C++, which means that I need to understand the language and its intricacies.</p>
+<p>The code is far from performant, perfect, good, or even decent, however, I do not concern myself with those criteria in this project.</p>
+<p>My goal for this project is to be able to create a convolutional neural network which can get ~80% on Cifar-100.</p>
+<p>If you wish to help me or comment the code, please do, and submit changes as pull requests.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+API</h1>
+<p>A <code><a class="el" href="class_network.html" title="A multi/single layer backpropagation feedforward network.">Network</a></code> is created by a <code><a class="el" href="class_network_builder.html">NetworkBuilder</a></code>, like so:</p>
+<div class="fragment"><div class="line">NetworkBuilder builder;</div>
+<div class="line">// Configuration here.</div>
+<div class="line">builder.loss(new MeanSquared())</div>
+<div class="line">    .initializer(new EigenInitializer())</div>
+<div class="line">    .optimizer(new StochasticGradientDescent())</div>
+<div class="line">    .evaluation({ new MeanAbsolute() });</div>
+<div class="line"> </div>
+<div class="line">// Instead of providing an initializer list to evaluation</div>
+<div class="line">// you can provide a single evaluation function like so:</div>
+<div class="line">builder.evaluation(new MeanAbsolute());</div>
+<div class="line"> </div>
+<div class="line">// We also need to define layers.</div>
+</div><!-- fragment --><p>Now, we need to add <code><a class="el" href="class_layer.html" title="A layer is a virtual class handling feeding the network forward.">Layer</a></code>. Layers need to represent your data. If you add 4 layers, that means that there are 3 weight/bias pairs connecting them, effectively meaning that you have 1 input layer, 2 hidden layers and 1 output layer.</p>
+<div class="fragment"><div class="line">// Currently only accepts vectors as inputs, </div>
+<div class="line">// unlike Keras taking tensors.</div>
+<div class="line">size_t input_size; </div>
+<div class="line"> </div>
+<div class="line">// How many neurons are there in the hidden layers? </div>
+<div class="line">size_t hidden_neurons_first;</div>
+<div class="line">size_t hidden_neurons_second;</div>
+<div class="line"> </div>
+<div class="line">// Currently only accepts vectors as outputs, </div>
+<div class="line">// unlike Keras taking tensors.</div>
+<div class="line">size_t output_size; </div>
+<div class="line">// Relu capping, setting the values of the activated  </div>
+<div class="line">// values to this value if it&#39;s less than zero.</div>
+<div class="line">double relu_cap = 0.01;</div>
+<div class="line"> </div>
+<div class="line">// Statistical property, weighting single samples</div>
+<div class="line">// against the loss of the entire network.</div>
+<div class="line">double l2_regularization = 0.2; </div>
+<div class="line"> </div>
+<div class="line">builder.layer(new Layer(input_nodes, new LeakyRelu(relu_cap), relu_cap))</div>
+<div class="line">    .layer(new Layer(hidden_neurons_first, new LeakyRelu(relu_cap), relu_cap))</div>
+<div class="line">    .layer(new Layer(hidden_neurons_second, new LeakyRelu(relu_cap), relu_cap))</div>
+<div class="line">    .layer(new Layer(output_size, new LeakyRelu(relu_cap), relu_cap));</div>
+</div><!-- fragment --><p>Finally, to construct the network:</p>
+<div class="fragment"><div class="line">Network network(builder); // constructs the network. </div>
+<div class="line">// builds weights/biases etc.</div>
+</div><!-- fragment --><p>To use the network you need data matching your configuration. This can be loaded via:</p>
+<div class="fragment"><div class="line">csv_to_tensor(const std::string &amp;file_name, </div>
+<div class="line">              size_t rows, </div>
+<div class="line">              size_t X_cols, </div>
+<div class="line">              size_t Y_cols,</div>
+<div class="line">              const std::function&lt;void(Eigen::MatrixXd &amp;, csv::CSVField &amp;,size_t, size_t)&gt; &amp;X_mapper,</div>
+<div class="line">              const std::function&lt;void(Eigen::MatrixXd &amp;, csv::CSVField &amp;,size_t, size_t)&gt; &amp;Y_mapper,</div>
+<div class="line">              bool has_header = true, </div>
+<div class="line">              char delimiter = &#39;,&#39;)</div>
+</div><!-- fragment --><p>The mappers are functors applied to each row, receiving the output tensor, the current field of your csv file, the row index currently to be changed and the column index currently to be changed. An example of an invocation of this function with mnist data:</p>
+<div class="fragment"><div class="line">// Since MNIST data infamously has 785 values per row, </div>
+<div class="line">// the class being the 0th value, we need to check for this in the functors.</div>
+<div class="line"> </div>
+<div class="line">// This is obviously a lousy way to handle tensor loading from csv.</div>
+<div class="line">// This now occupies about 700mb of space...</div>
+<div class="line">auto [X_tensor, Y_tensor] = csv_to_tensor(</div>
+<div class="line">  &quot;resources/mnist_train.csv&quot;,</div>
+<div class="line">  60000, 784, 10,</div>
+<div class="line">  [](Eigen::MatrixXd &amp;matrix, csv::CSVField &amp;field, size_t row,</div>
+<div class="line">     size_t col) {</div>
+<div class="line">    if (col != 0) {</div>
+<div class="line">      matrix((long)row, (long)col - 1) = field.get&lt;double&gt;() / 255.0;</div>
+<div class="line">    }</div>
+<div class="line">  },</div>
+<div class="line">  [](Eigen::MatrixXd &amp;matrix, csv::CSVField &amp;field, size_t row,</div>
+<div class="line">     size_t col) {</div>
+<div class="line">    if (col == 0) {</div>
+<div class="line">      matrix((long)row, field.get&lt;int&gt;()) = 1.0;</div>
+<div class="line">    }</div>
+<div class="line">  });</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -84,13 +85,15 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">double</span> approx(<span class="keywordtype">double</span> t);</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  Eigen::VectorXd derivative(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_SIGMOIDFUNCTION_H</span></div>
-<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:10</div></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <a class="code" href="class_sigmoid_function.html">SigmoidFunction</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  Eigen::VectorXd <a class="code" href="class_sigmoid_function.html#a1b8956d71fecf4c6e5464a06b130789f">derivative</a>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_SIGMOIDFUNCTION_H</span></div>
+<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:11</div></div>
 <div class="ttc" id="aclass_sigmoid_function_html"><div class="ttname"><a href="class_sigmoid_function.html">SigmoidFunction</a></div><div class="ttdef"><b>Definition:</b> SigmoidFunction.h:10</div></div>
+<div class="ttc" id="aclass_sigmoid_function_html_a1b8956d71fecf4c6e5464a06b130789f"><div class="ttname"><a href="class_sigmoid_function.html#a1b8956d71fecf4c6e5464a06b130789f">SigmoidFunction::derivative</a></div><div class="ttdeci">Eigen::VectorXd derivative(Eigen::VectorXd in) override</div><div class="ttdoc">Differentiates the vector with respect to &quot;itself&quot; in terms of the backpropagation.</div><div class="ttdef"><b>Definition:</b> SigmoidFunction.cpp:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

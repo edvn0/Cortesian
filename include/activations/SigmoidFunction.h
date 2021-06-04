@@ -12,6 +12,7 @@ private:
   static double approx(double t);
 
 public:
+  SigmoidFunction();
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;
 };

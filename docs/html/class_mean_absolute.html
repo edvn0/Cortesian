@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -75,8 +76,10 @@ Inheritance diagram for MeanAbsolute:</div>
  <div class="center">
   <img src="class_mean_absolute.png" usemap="#MeanAbsolute_map" alt=""/>
   <map id="MeanAbsolute_map" name="MeanAbsolute_map">
-<area href="class_loss_function.html" alt="LossFunction" shape="rect" coords="0,0,120,24"/>
-<area href="class_evaluation_function.html" alt="EvaluationFunction" shape="rect" coords="130,0,250,24"/>
+<area href="class_loss_function.html" alt="LossFunction" shape="rect" coords="0,56,120,80"/>
+<area href="class_evaluation_function.html" alt="EvaluationFunction" shape="rect" coords="130,56,250,80"/>
+<area href="class_meta_base.html" title="Provides a simple &quot;Parent&quot; to all objects for serialization/deserialization." alt="MetaBase" shape="rect" coords="0,0,120,24"/>
+<area href="class_meta_base.html" title="Provides a simple &quot;Parent&quot; to all objects for serialization/deserialization." alt="MetaBase" shape="rect" coords="130,0,250,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -104,6 +107,13 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>calculate</
 <tr class="memitem:a1cf906b56d879369bf5c19b52fe7fa92 inherit pub_methods_class_loss_function"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_loss_function.html#a1cf906b56d879369bf5c19b52fe7fa92">apply_loss</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;Y_hat, const Eigen::MatrixXd &amp;Y)</td></tr>
 <tr class="memdesc:a1cf906b56d879369bf5c19b52fe7fa92 inherit pub_methods_class_loss_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the loss function to an already tensor Caller must have predicted the data to call this function.  <a href="class_loss_function.html#a1cf906b56d879369bf5c19b52fe7fa92">More...</a><br /></td></tr>
 <tr class="separator:a1cf906b56d879369bf5c19b52fe7fa92 inherit pub_methods_class_loss_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_meta_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_meta_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_meta_base.html">MetaBase</a></td></tr>
+<tr class="memitem:a0a83fd2566741ff0dc14ff4025cad7b4 inherit pub_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a0a83fd2566741ff0dc14ff4025cad7b4"></a>
+virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (const std::string &amp;key)</td></tr>
+<tr class="separator:a0a83fd2566741ff0dc14ff4025cad7b4 inherit pub_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc25ba4f9bd079bcb94825c5087bb6e3 inherit pub_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::tuple&lt; std::string, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_meta_base.html#acc25ba4f9bd079bcb94825c5087bb6e3">key_value_pairs</a> () const</td></tr>
+<tr class="memdesc:acc25ba4f9bd079bcb94825c5087bb6e3 inherit pub_methods_class_meta_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the tuples from the meta data of subclassing entities.  <a href="class_meta_base.html#acc25ba4f9bd079bcb94825c5087bb6e3">More...</a><br /></td></tr>
+<tr class="separator:acc25ba4f9bd079bcb94825c5087bb6e3 inherit pub_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_evaluation_function"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_evaluation_function')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_evaluation_function.html">EvaluationFunction</a></td></tr>
 <tr class="memitem:a7f7c47d6c2f4ddc950a3b21ce0579df4 inherit pub_methods_class_evaluation_function"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_evaluation_function.html#a7f7c47d6c2f4ddc950a3b21ce0579df4">apply_evaluation</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;Y_hat, const std::vector&lt; Eigen::VectorXd &gt; &amp;Y)</td></tr>
 <tr class="memdesc:a7f7c47d6c2f4ddc950a3b21ce0579df4 inherit pub_methods_class_evaluation_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies evaluation metrics against a vector of Eigen::Vectors.  <a href="class_evaluation_function.html#a7f7c47d6c2f4ddc950a3b21ce0579df4">More...</a><br /></td></tr>
@@ -111,6 +121,26 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>calculate</
 <tr class="memitem:a96d6faad895b88b6329d624554d18ed6 inherit pub_methods_class_evaluation_function"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_evaluation_function.html#a96d6faad895b88b6329d624554d18ed6">apply_evaluation</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;Y_hat, const Eigen::MatrixXd &amp;Y_tensor)</td></tr>
 <tr class="memdesc:a96d6faad895b88b6329d624554d18ed6 inherit pub_methods_class_evaluation_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload of.  <a href="class_evaluation_function.html#a96d6faad895b88b6329d624554d18ed6">More...</a><br /></td></tr>
 <tr class="separator:a96d6faad895b88b6329d624554d18ed6 inherit pub_methods_class_evaluation_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_class_meta_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_meta_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_meta_base.html">MetaBase</a></td></tr>
+<tr class="memitem:a7c43b9d02be46267ca497501912af763 inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a7c43b9d02be46267ca497501912af763"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;key, std::string &amp;value)</td></tr>
+<tr class="separator:a7c43b9d02be46267ca497501912af763 inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c44b1c6e905fedf662a24479ac5b8ed inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a0c44b1c6e905fedf662a24479ac5b8ed"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;&amp;key, std::string &amp;&amp;value)</td></tr>
+<tr class="separator:a0c44b1c6e905fedf662a24479ac5b8ed inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43fd7b5fada7c7d29a3eedfd2ea8d9e2 inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a43fd7b5fada7c7d29a3eedfd2ea8d9e2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;key, std::string &amp;&amp;value)</td></tr>
+<tr class="separator:a43fd7b5fada7c7d29a3eedfd2ea8d9e2 inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c4acf60343a8c93a38c1f5acfd6502 inherit pro_methods_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="a99c4acf60343a8c93a38c1f5acfd6502"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (std::string &amp;&amp;key, std::string &amp;value)</td></tr>
+<tr class="separator:a99c4acf60343a8c93a38c1f5acfd6502 inherit pro_methods_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_meta_base"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_meta_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_meta_base.html">MetaBase</a></td></tr>
+<tr class="memitem:ad763c61c36ccf98337b9b058dd0c4e5b inherit pro_attribs_class_meta_base"><td class="memItemLeft" align="right" valign="top"><a id="ad763c61c36ccf98337b9b058dd0c4e5b"></a>
+std::unordered_map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_meta_data</b></td></tr>
+<tr class="separator:ad763c61c36ccf98337b9b058dd0c4e5b inherit pro_attribs_class_meta_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2092fe033fba6edb33fc1ba61b71aa23"></a>

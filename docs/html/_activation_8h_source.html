@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -77,26 +78,31 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef CORTESIAN_ACTIVATION_H</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define CORTESIAN_ACTIVATION_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;eigen3/Eigen/Core&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_activation.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_activation.html">Activation</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="class_activation.html">Activation</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">virtual</span> Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) = 0;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keyword">virtual</span> Eigen::VectorXd derivative(Eigen::VectorXd in) = 0;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">virtual</span> Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                            Eigen::VectorXd out) {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">auto</span> arrPred = out.array();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">auto</span> arrRaw = in.array();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    Eigen::MatrixXd fixed = arrRaw * arrPred;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">auto</span> diffRaw = derivative(arrRaw);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> arrPred * diffRaw.array();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  };</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_ACTIVATION_H</span></div>
-<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:10</div></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../utils/MetaBase.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;eigen3/Eigen/Core&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_activation.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_activation.html">Activation</a> : <span class="keyword">public</span> <a class="code" href="class_meta_base.html">MetaBase</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="class_activation.html">Activation</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_activation.html#a8c32842daaf8a2d0394533b59517ca3b">   21</a></span>&#160;  <span class="keyword">virtual</span> Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) = 0;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_activation.html#afcedfb19303d83eee408d0c708ac0e4f">   30</a></span>&#160;  <span class="keyword">virtual</span> Eigen::VectorXd <a class="code" href="class_activation.html#afcedfb19303d83eee408d0c708ac0e4f">derivative</a>(Eigen::VectorXd in) = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_activation.html#a61cf13226f267e1747add31758ab073f">   41</a></span>&#160;  <span class="keyword">virtual</span> Eigen::MatrixXd <a class="code" href="class_activation.html#a61cf13226f267e1747add31758ab073f">derivative_on_input</a>(Eigen::VectorXd in,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                              Eigen::VectorXd out) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">auto</span> arrPred = out.array();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">auto</span> arrRaw = in.array();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">auto</span> diffRaw = <a class="code" href="class_activation.html#afcedfb19303d83eee408d0c708ac0e4f">derivative</a>(arrRaw);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> arrPred * diffRaw.array();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_ACTIVATION_H</span></div>
+<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:11</div></div>
+<div class="ttc" id="aclass_activation_html_a61cf13226f267e1747add31758ab073f"><div class="ttname"><a href="class_activation.html#a61cf13226f267e1747add31758ab073f">Activation::derivative_on_input</a></div><div class="ttdeci">virtual Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in, Eigen::VectorXd out)</div><div class="ttdoc">To handle backpropagation, we take the derivative of the activation function with respect to the grad...</div><div class="ttdef"><b>Definition:</b> Activation.h:41</div></div>
+<div class="ttc" id="aclass_activation_html_afcedfb19303d83eee408d0c708ac0e4f"><div class="ttname"><a href="class_activation.html#afcedfb19303d83eee408d0c708ac0e4f">Activation::derivative</a></div><div class="ttdeci">virtual Eigen::VectorXd derivative(Eigen::VectorXd in)=0</div><div class="ttdoc">Differentiates the vector with respect to &quot;itself&quot; in terms of the backpropagation.</div></div>
+<div class="ttc" id="aclass_meta_base_html"><div class="ttname"><a href="class_meta_base.html">MetaBase</a></div><div class="ttdoc">Provides a simple &quot;Parent&quot; to all objects for serialization/deserialization.</div><div class="ttdef"><b>Definition:</b> MetaBase.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

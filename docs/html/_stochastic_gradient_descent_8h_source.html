@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -87,20 +88,23 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">void</span> sgd(Eigen::VectorXd &amp;param, <span class="keyword">const</span> Eigen::VectorXd &amp;delta_param) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="class_stochastic_gradient_descent.html">StochasticGradientDescent</a>(<span class="keywordtype">double</span> l_r = 0.0001) : l_r(l_r){};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">void</span> change_weight(<span class="keywordtype">int</span> layer_index, Eigen::MatrixXd &amp;w,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                     <span class="keyword">const</span> Eigen::MatrixXd &amp;d_w) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="class_stochastic_gradient_descent.html">StochasticGradientDescent</a>(<span class="keywordtype">double</span> l_r = 0.0001) : l_r(l_r) {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    this-&gt;operator()(<span class="stringliteral">&quot;optimizer&quot;</span>, <span class="stringliteral">&quot;StochasticGradientDescent&quot;</span>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    this-&gt;operator()(<span class="stringliteral">&quot;learning&quot;</span>, std::to_string(l_r));</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  };</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">void</span> change_bias(<span class="keywordtype">int</span> layer_index, Eigen::VectorXd &amp;b,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                   <span class="keyword">const</span> Eigen::VectorXd &amp;d_b) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">void</span> change_weight(<span class="keywordtype">int</span> layer_index, Eigen::MatrixXd &amp;w,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                     <span class="keyword">const</span> Eigen::MatrixXd &amp;d_w) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> initialize_optimizer(<span class="keywordtype">int</span> layers, Eigen::MatrixXd w_seed,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                            Eigen::VectorXd b_seed) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_STOCHASTICGRADIENTDESCENT_H</span></div>
-<div class="ttc" id="aclass_optimizer_html"><div class="ttname"><a href="class_optimizer.html">Optimizer</a></div><div class="ttdef"><b>Definition:</b> Optimizer.h:10</div></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> change_bias(<span class="keywordtype">int</span> layer_index, Eigen::VectorXd &amp;b,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                   <span class="keyword">const</span> Eigen::VectorXd &amp;d_b) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">void</span> initialize_optimizer(<span class="keywordtype">int</span> layers, Eigen::MatrixXd w_seed,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                            Eigen::VectorXd b_seed) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_STOCHASTICGRADIENTDESCENT_H</span></div>
+<div class="ttc" id="aclass_optimizer_html"><div class="ttname"><a href="class_optimizer.html">Optimizer</a></div><div class="ttdef"><b>Definition:</b> Optimizer.h:11</div></div>
 <div class="ttc" id="aclass_stochastic_gradient_descent_html"><div class="ttname"><a href="class_stochastic_gradient_descent.html">StochasticGradientDescent</a></div><div class="ttdef"><b>Definition:</b> StochasticGradientDescent.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

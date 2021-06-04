@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -81,13 +82,15 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_tanh.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_tanh.html">Tanh</a> : <span class="keyword">public</span> <a class="code" href="class_activation.html">Activation</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  Eigen::VectorXd derivative(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_TANH_H</span></div>
-<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:10</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <a class="code" href="class_tanh.html">Tanh</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  Eigen::VectorXd <a class="code" href="class_tanh.html#af6ba0ad3218e38f8bf0019db618756eb">derivative</a>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_TANH_H</span></div>
+<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:11</div></div>
 <div class="ttc" id="aclass_tanh_html"><div class="ttname"><a href="class_tanh.html">Tanh</a></div><div class="ttdef"><b>Definition:</b> Tanh.h:10</div></div>
+<div class="ttc" id="aclass_tanh_html_af6ba0ad3218e38f8bf0019db618756eb"><div class="ttname"><a href="class_tanh.html#af6ba0ad3218e38f8bf0019db618756eb">Tanh::derivative</a></div><div class="ttdeci">Eigen::VectorXd derivative(Eigen::VectorXd in) override</div><div class="ttdoc">Differentiates the vector with respect to &quot;itself&quot; in terms of the backpropagation.</div><div class="ttdef"><b>Definition:</b> Tanh.cpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

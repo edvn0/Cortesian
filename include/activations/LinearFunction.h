@@ -9,6 +9,7 @@
 
 class LinearFunction : public Activation {
 public:
+  LinearFunction();
   Eigen::VectorXd function(Eigen::VectorXd in) override;
   Eigen::VectorXd derivative(Eigen::VectorXd in) override;
 };

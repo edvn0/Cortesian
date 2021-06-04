@@ -59,3 +59,6 @@ void EigenInitializer::init(std::vector<int> structure) {
   m_structure = structure;
   m_offset_length = m_structure.size() - 1;
 }
+EigenInitializer::EigenInitializer() {
+  this->operator()("initializer", "EigenInitializer");
+}

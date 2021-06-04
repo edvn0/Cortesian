@@ -21,3 +21,7 @@ Eigen::VectorXd SigmoidFunction::function(Eigen::VectorXd in) {
 Eigen::VectorXd SigmoidFunction::derivative(Eigen::VectorXd in) {
   return in.array() * (1 - in.array());
 }
+
+SigmoidFunction::SigmoidFunction() {
+  this->operator()("activation", "Sigmoid");
+}

@@ -29,3 +29,7 @@ Eigen::VectorXd Softmax::soft_max(const Eigen::VectorXd &in) {
     }
   });
 }
+
+Softmax::Softmax() {
+  this->operator()("activation", "Softmax");
+}

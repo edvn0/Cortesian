@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -73,7 +74,14 @@ $(function() {
   <tr bgcolor="#f0f0f0"><td class="entry"><b>change_bias</b>(int layer_index, Eigen::VectorXd &amp;b, const Eigen::VectorXd &amp;d_b) override (defined in <a class="el" href="class_adam.html">Adam</a>)</td><td class="entry"><a class="el" href="class_adam.html">Adam</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>change_weight</b>(int layer_index, Eigen::MatrixXd &amp;w, const Eigen::MatrixXd &amp;d_w) override (defined in <a class="el" href="class_adam.html">Adam</a>)</td><td class="entry"><a class="el" href="class_adam.html">Adam</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>initialize_optimizer</b>(int layers, Eigen::MatrixXd w_seed, Eigen::VectorXd b_seed) override (defined in <a class="el" href="class_adam.html">Adam</a>)</td><td class="entry"><a class="el" href="class_adam.html">Adam</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Optimizer</b>()=default (defined in <a class="el" href="class_optimizer.html">Optimizer</a>)</td><td class="entry"><a class="el" href="class_optimizer.html">Optimizer</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_meta_base.html#acc25ba4f9bd079bcb94825c5087bb6e3">key_value_pairs</a>() const</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>m_meta_data</b> (defined in <a class="el" href="class_meta_base.html">MetaBase</a>)</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator()</b>(std::string &amp;key, std::string &amp;value) (defined in <a class="el" href="class_meta_base.html">MetaBase</a>)</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator()</b>(std::string &amp;&amp;key, std::string &amp;&amp;value) (defined in <a class="el" href="class_meta_base.html">MetaBase</a>)</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator()</b>(std::string &amp;key, std::string &amp;&amp;value) (defined in <a class="el" href="class_meta_base.html">MetaBase</a>)</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator()</b>(std::string &amp;&amp;key, std::string &amp;value) (defined in <a class="el" href="class_meta_base.html">MetaBase</a>)</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator[]</b>(const std::string &amp;key) (defined in <a class="el" href="class_meta_base.html">MetaBase</a>)</td><td class="entry"><a class="el" href="class_meta_base.html">MetaBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~Optimizer</b>()=default (defined in <a class="el" href="class_optimizer.html">Optimizer</a>)</td><td class="entry"><a class="el" href="class_optimizer.html">Optimizer</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

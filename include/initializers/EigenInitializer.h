@@ -17,6 +17,8 @@ private:
   }
 
 public:
+  EigenInitializer();
+
   std::vector<Eigen::MatrixXd> get_weight_params() override;
   std::vector<Eigen::VectorXd> get_bias_params() override;
   std::vector<Eigen::MatrixXd> get_delta_weight_params() override;

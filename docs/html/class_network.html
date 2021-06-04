@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -74,6 +75,20 @@ $(function() {
 <div class="title">Network Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A multi/single layer backpropagation feedforward network.  
+ <a href="class_network.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_network_8h_source.html">Network.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Network:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_network.png" usemap="#Network_map" alt=""/>
+  <map id="Network_map" name="Network_map">
+<area href="class_meta_base.html" title="Provides a simple &quot;Parent&quot; to all objects for serialization/deserialization." alt="MetaBase" shape="rect" coords="0,0,68,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -101,9 +116,24 @@ std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="
 <tr class="memitem:a8f175394b78ce5c2031399d6e53ccee7"><td class="memItemLeft" align="right" valign="top"><a id="a8f175394b78ce5c2031399d6e53ccee7"></a>
 Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><b>classify</b> (const Eigen::VectorXd &amp;vector)</td></tr>
 <tr class="separator:a8f175394b78ce5c2031399d6e53ccee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86662014df0f670680a4fe94cb04c1c4"><td class="memItemLeft" align="right" valign="top"><a id="a86662014df0f670680a4fe94cb04c1c4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (const std::string &amp;file_name) const</td></tr>
+<tr class="separator:a86662014df0f670680a4fe94cb04c1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cd0844b99774949e702a92fe48aa1e8"><td class="memItemLeft" align="right" valign="top"><a id="a2cd0844b99774949e702a92fe48aa1e8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (const std::string &amp;&amp;file_name)</td></tr>
+<tr class="separator:a2cd0844b99774949e702a92fe48aa1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a590012179d3627bb5b22a3e88137fb10"><td class="memItemLeft" align="right" valign="top"><a id="a590012179d3627bb5b22a3e88137fb10"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>to_json</b> (const <a class="el" href="class_network.html">Network</a> &amp;network)</td></tr>
+<tr class="separator:a590012179d3627bb5b22a3e88137fb10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f7d0bfed15af7954dc1371aa7c2698a"><td class="memItemLeft" align="right" valign="top"><a id="a5f7d0bfed15af7954dc1371aa7c2698a"></a>
+static <a class="el" href="class_network.html">Network</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_json_file</b> (const std::string &amp;json_string)</td></tr>
+<tr class="separator:a5f7d0bfed15af7954dc1371aa7c2698a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b76fef121513ac05721865b8b413b87"><td class="memItemLeft" align="right" valign="top"><a id="a1b76fef121513ac05721865b8b413b87"></a>
+static <a class="el" href="class_network.html">Network</a>&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const std::string &amp;pre_loaded_json)</td></tr>
+<tr class="separator:a1b76fef121513ac05721865b8b413b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e5b7761bbdb4d2d67b2228392f7f6cc"><td class="memItemLeft" align="right" valign="top"><a id="a0e5b7761bbdb4d2d67b2228392f7f6cc"></a>
 static std::vector&lt; <a class="el" href="struct_data_split_1_1_data_set.html">DataSplit::DataSet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>generate_splits</b> (Eigen::MatrixXd &amp;X_tensor, Eigen::MatrixXd &amp;Y_tensor, size_t from_index, size_t to_index, int i)</td></tr>
 <tr class="separator:a0e5b7761bbdb4d2d67b2228392f7f6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,7 +183,9 @@ Friends</h2></td></tr>
 std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;os, const <a class="el" href="class_network.html">Network</a> &amp;network)</td></tr>
 <tr class="separator:afa114a9280b4ec6b7830d1093954be82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A multi/single layer backpropagation feedforward network. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="_network_8h_source.html">Network.h</a></li>
 <li>src/Network.cpp</li>
 </ul>

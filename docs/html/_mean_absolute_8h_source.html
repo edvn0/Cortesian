@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -85,19 +86,23 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">static</span> constexpr <span class="keywordtype">double</span> ma_epsilon = 1e-8;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">double</span> apply_evaluation_single(<span class="keyword">const</span> Eigen::VectorXd &amp;Y_hat,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                 <span class="keyword">const</span> Eigen::VectorXd &amp;Y) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="class_mean_absolute.html#affaf3bfb8bc680c01c4c2c54efa7f985">apply_loss_single</a>(<span class="keyword">const</span> Eigen::VectorXd &amp;Y_hat,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                           <span class="keyword">const</span> Eigen::VectorXd &amp;y) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  Eigen::MatrixXd <a class="code" href="class_mean_absolute.html#a2092fe033fba6edb33fc1ba61b71aa23">apply_loss_gradient</a>(<span class="keyword">const</span> Eigen::MatrixXd &amp;y_hat,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                                      <span class="keyword">const</span> Eigen::MatrixXd &amp;y) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="class_mean_absolute.html">MeanAbsolute</a>() {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    this-&gt;LossFunction::operator()(<span class="stringliteral">&quot;loss&quot;</span>, <span class="stringliteral">&quot;MeanAbsolute&quot;</span>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    this-&gt;EvaluationFunction::operator()(<span class="stringliteral">&quot;evaluation&quot;</span>, <span class="stringliteral">&quot;MeanAbsolute&quot;</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">double</span> apply_evaluation_single(<span class="keyword">const</span> Eigen::VectorXd &amp;Y_hat,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                                 <span class="keyword">const</span> Eigen::VectorXd &amp;Y) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="class_mean_absolute.html#affaf3bfb8bc680c01c4c2c54efa7f985">apply_loss_single</a>(<span class="keyword">const</span> Eigen::VectorXd &amp;Y_hat,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                           <span class="keyword">const</span> Eigen::VectorXd &amp;y) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_MEANABSOLUTE_H</span></div>
-<div class="ttc" id="aclass_evaluation_function_html"><div class="ttname"><a href="class_evaluation_function.html">EvaluationFunction</a></div><div class="ttdef"><b>Definition:</b> EvaluationFunction.h:11</div></div>
-<div class="ttc" id="aclass_loss_function_html"><div class="ttname"><a href="class_loss_function.html">LossFunction</a></div><div class="ttdef"><b>Definition:</b> LossFunction.h:11</div></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  Eigen::MatrixXd <a class="code" href="class_mean_absolute.html#a2092fe033fba6edb33fc1ba61b71aa23">apply_loss_gradient</a>(<span class="keyword">const</span> Eigen::MatrixXd &amp;y_hat,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                      <span class="keyword">const</span> Eigen::MatrixXd &amp;y) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_MEANABSOLUTE_H</span></div>
+<div class="ttc" id="aclass_evaluation_function_html"><div class="ttname"><a href="class_evaluation_function.html">EvaluationFunction</a></div><div class="ttdef"><b>Definition:</b> EvaluationFunction.h:12</div></div>
+<div class="ttc" id="aclass_loss_function_html"><div class="ttname"><a href="class_loss_function.html">LossFunction</a></div><div class="ttdef"><b>Definition:</b> LossFunction.h:12</div></div>
 <div class="ttc" id="aclass_mean_absolute_html"><div class="ttname"><a href="class_mean_absolute.html">MeanAbsolute</a></div><div class="ttdef"><b>Definition:</b> MeanAbsolute.h:11</div></div>
 <div class="ttc" id="aclass_mean_absolute_html_a2092fe033fba6edb33fc1ba61b71aa23"><div class="ttname"><a href="class_mean_absolute.html#a2092fe033fba6edb33fc1ba61b71aa23">MeanAbsolute::apply_loss_gradient</a></div><div class="ttdeci">Eigen::MatrixXd apply_loss_gradient(const Eigen::MatrixXd &amp;y_hat, const Eigen::MatrixXd &amp;y) override</div><div class="ttdoc">Calculates the gradient vector from the predicted/real pair.</div><div class="ttdef"><b>Definition:</b> MeanAbsolute.cpp:17</div></div>
 <div class="ttc" id="aclass_mean_absolute_html_affaf3bfb8bc680c01c4c2c54efa7f985"><div class="ttname"><a href="class_mean_absolute.html#affaf3bfb8bc680c01c4c2c54efa7f985">MeanAbsolute::apply_loss_single</a></div><div class="ttdeci">double apply_loss_single(const Eigen::VectorXd &amp;Y_hat, const Eigen::VectorXd &amp;y) override</div><div class="ttdoc">Applies the loss function to an already predicted data set.</div><div class="ttdef"><b>Definition:</b> MeanAbsolute.cpp:11</div></div>

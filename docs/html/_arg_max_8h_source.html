@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Cortesian: include/utils/ArgMax.h Source File</title>
+<title>Cortesian: include/loss_evals/ArgMax.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -62,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_821002d4f10779a80d4fb17bc32f21f1.html">utils</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3ebf45beb8156e56547d24a8a2cb2f1f.html">loss_evals</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,17 +78,20 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef CORTESIAN_ARGMAX_H</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define CORTESIAN_ARGMAX_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../loss_evals/EvaluationFunction.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;EvaluationFunction.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_arg_max.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_arg_max.html">ArgMax</a> : <span class="keyword">public</span> <a class="code" href="class_evaluation_function.html">EvaluationFunction</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">double</span> apply_evaluation_single(<span class="keyword">const</span> Eigen::VectorXd &amp;Y_hat,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                                 <span class="keyword">const</span> Eigen::VectorXd &amp;Y) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_ARGMAX_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <a class="code" href="class_arg_max.html">ArgMax</a>() {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    this-&gt;operator()(<span class="stringliteral">&quot;evaluation&quot;</span>, <span class="stringliteral">&quot;ArgMax&quot;</span>);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  }</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">double</span> apply_evaluation_single(<span class="keyword">const</span> Eigen::VectorXd &amp;Y_hat,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                                 <span class="keyword">const</span> Eigen::VectorXd &amp;Y) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_ARGMAX_H</span></div>
 <div class="ttc" id="aclass_arg_max_html"><div class="ttname"><a href="class_arg_max.html">ArgMax</a></div><div class="ttdef"><b>Definition:</b> ArgMax.h:10</div></div>
-<div class="ttc" id="aclass_evaluation_function_html"><div class="ttname"><a href="class_evaluation_function.html">EvaluationFunction</a></div><div class="ttdef"><b>Definition:</b> EvaluationFunction.h:11</div></div>
+<div class="ttc" id="aclass_evaluation_function_html"><div class="ttname"><a href="class_evaluation_function.html">EvaluationFunction</a></div><div class="ttdef"><b>Definition:</b> EvaluationFunction.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

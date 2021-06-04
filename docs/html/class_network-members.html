@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -77,6 +78,8 @@ $(function() {
   <tr bgcolor="#f0f0f0"><td class="entry"><b>evaluate_for_back_prop</b>(const DataSplit::DataSet &amp;ds) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>fit</b>(const std::vector&lt; Eigen::VectorXd &gt; &amp;X, const std::vector&lt; Eigen::VectorXd &gt; &amp;Y, int epochs, int batch_size, double train_split, bool should_shuffle_training) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>fit_tensor</b>(Eigen::MatrixXd &amp;X, Eigen::MatrixXd &amp;Y, int epochs, int batch_size, Eigen::MatrixXd &amp;X_validate, Eigen::MatrixXd &amp;Y_validate) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>from_json</b>(const std::string &amp;pre_loaded_json) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>from_json_file</b>(const std::string &amp;json_string) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>generate_splits</b>(Eigen::MatrixXd &amp;X_tensor, Eigen::MatrixXd &amp;Y_tensor, size_t from_index, size_t to_index, int i) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>m_clipping</b> (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>m_eval</b> (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
@@ -91,7 +94,10 @@ $(function() {
   <tr bgcolor="#f0f0f0"><td class="entry"><b>optimize</b>() (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>predict</b>(const Eigen::VectorXd &amp;vector) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>print_epoch_information</b>(double loss, const std::vector&lt; double &gt; &amp;metrics) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Network</b>() (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>save</b>(const std::string &amp;file_name) const (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>save</b>(const std::string &amp;&amp;file_name) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>to_json</b>(const Network &amp;network) (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~Network</b>() (defined in <a class="el" href="class_network.html">Network</a>)</td><td class="entry"><a class="el" href="class_network.html">Network</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

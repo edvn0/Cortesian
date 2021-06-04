@@ -9,6 +9,14 @@
 #include "../optimizers/Optimizer.h"
 #include <eigen3/Eigen/Core>
 
+/**
+ * A layer is a virtual class handling feeding the network forward.
+ * See {@link #Dense} for an implementation of this class.
+ *
+ * A layer is also in charge of updating the weights in back propagation, however,
+ * instead of handling the logic of the updates itself, provides that responsibility
+ * to {@link #Optimizer}.
+ */
 class Layer : public MetaBase {
 protected:
   Layer(Activation *activation, int neurons, double l2)
@@ -63,7 +71,10 @@ public:
 
   virtual int get_neurons() { return m_neurons; };
 
-  virtual void set_index(int layer_index) { m_layer_index = layer_index; };
+  virtual void set_index(int layer_index) {
+    m_layer_index = layer_index;
+    this->operator()("layer_index", std::to_string(m_layer_index));
+  };
 
   virtual const double &get_l2() { return m_l2; }
 

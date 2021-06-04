@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['meanabsolute_23',['MeanAbsolute',['../class_mean_absolute.html',1,'']]],
-  ['meansquared_24',['MeanSquared',['../class_mean_squared.html',1,'']]]
+  ['key_5fvalue_5fpairs_22',['key_value_pairs',['../class_meta_base.html#acc25ba4f9bd079bcb94825c5087bb6e3',1,'MetaBase']]]
 ];

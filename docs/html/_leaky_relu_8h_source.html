@@ -24,6 +24,7 @@
    <div id="projectname">Cortesian
    &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">A feedforward neural network based on simplicity instead of speed.</div>
   </td>
  </tr>
  </tbody>
@@ -83,14 +84,17 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">double</span> cap{0.01};</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <a class="code" href="class_leaky_relu.html">LeakyRelu</a>();</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  Eigen::VectorXd derivative(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_LEAKYRELU_H</span></div>
-<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:10</div></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  Eigen::VectorXd <span class="keyword">function</span>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  Eigen::VectorXd <a class="code" href="class_leaky_relu.html#ab33d18bd7203b5d59f1512c7843db83d">derivative</a>(Eigen::VectorXd in) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CORTESIAN_LEAKYRELU_H</span></div>
+<div class="ttc" id="aclass_activation_html"><div class="ttname"><a href="class_activation.html">Activation</a></div><div class="ttdef"><b>Definition:</b> Activation.h:11</div></div>
 <div class="ttc" id="aclass_leaky_relu_html"><div class="ttname"><a href="class_leaky_relu.html">LeakyRelu</a></div><div class="ttdef"><b>Definition:</b> LeakyRelu.h:10</div></div>
+<div class="ttc" id="aclass_leaky_relu_html_ab33d18bd7203b5d59f1512c7843db83d"><div class="ttname"><a href="class_leaky_relu.html#ab33d18bd7203b5d59f1512c7843db83d">LeakyRelu::derivative</a></div><div class="ttdeci">Eigen::VectorXd derivative(Eigen::VectorXd in) override</div><div class="ttdoc">Differentiates the vector with respect to &quot;itself&quot; in terms of the backpropagation.</div><div class="ttdef"><b>Definition:</b> LeakyRelu.cpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
