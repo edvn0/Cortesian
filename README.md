@@ -31,8 +31,8 @@ builder.evaluation(new MeanAbsolute());
 // We also need to define layers.
 ```
 
-Now, we need to add `Layer`. Layers need to represent your data. If you add 4 layers, that means that there are 3 weight/bias pairs connecting them, effectively meaning that you have 1
-input layer, 2 hidden layers and 1 output layer.
+Now, we need to add `Layer`. Layers need to represent your data. If you add 4 layers, that means that there are 3 weight/bias pairs connecting them, effectively
+meaning that you have 1 input layer, 2 hidden layers and 1 output layer.
 
 ```
 // Currently only accepts vectors as inputs, 
@@ -80,8 +80,8 @@ csv_to_tensor(const std::string &file_name,
               char delimiter = ',')
 ```
 
-The mappers are functors applied to each row, receiving the output tensor, the current field of your csv file, the row index currently to be changed and the column index currently to be changed.
-An example of an invocation of this function with mnist data:
+The mappers are functors applied to each row, receiving the output tensor, the current field of your csv file, the row index currently to be changed and the
+column index currently to be changed. An example of an invocation of this function with mnist data:
 
 ```
 // Since MNIST data infamously has 785 values per row, 
@@ -104,4 +104,27 @@ auto [X_tensor, Y_tensor] = csv_to_tensor(
       matrix((long)row, field.get<int>()) = 1.0;
     }
   });
+```
+
+And to fit, validate and predict/classify the network:
+
+```
+// Takes Xs, Ys, epochs, batch_size, a validation x tensor and a validation y_tensor.
+// Will provide some helpful overloads, e.g. fit_tensor(X_tensor, Y_tensor).
+
+// This returns a class with mean time taken per epoch, mean loss per epoch, and mean evaluation metrics per epoch.
+BackPropStatistics out = network.fit_tensor(X_tensor, Y_tensor, 100, 64, X_validate_tensor,
+                            Y_validate_tensor);
+                            
+// after fitting, we can classify/predict:
+// Will in future provide tensor overloads.
+Eigen::VectorXd predicted = network.predict(test_vector);
+int clazz = network.classify(test_vector); // same as above, but with arg max.
+```
+
+Finally, store the network meta data in a file.
+Nota bene: this is not serialization yet: I have not implemented the serialization of weights/biases.
+
+```
+network.save("models/model.json");
 ```
