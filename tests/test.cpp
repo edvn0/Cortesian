@@ -108,10 +108,17 @@ TEST_CASE("Eigen Serialization/Deserialization") {
 }
 
 TEST_CASE("BENCHMARKS Json Deser/Ser", "[benchjson]") {
-  // Average 159ms
+  // Average 159ms, standard deviation 1.6ms
   BENCHMARK("Stress test S/D weights (256,256)") {
     Eigen::MatrixXd mat = Eigen::MatrixXd::Random(256, 256);
     std::string ser = eigen_to_json(mat);
     return json_to_eigen<Eigen::MatrixXd>(ser, EigenType::MATRIX, 256, 256);
+  };
+
+  // Average 2950ms, 152ms standard deviation
+  BENCHMARK("Stress test S/D weights (1000,1000)") {
+    Eigen::MatrixXd mat = Eigen::MatrixXd::Random(1000, 1000);
+    std::string ser = eigen_to_json(mat);
+    return json_to_eigen<Eigen::MatrixXd>(ser, EigenType::MATRIX, 1000, 1000);
   };
 }
