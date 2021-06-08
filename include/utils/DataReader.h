@@ -43,7 +43,6 @@ csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
     format.no_header();
   else {
     format.header_row(0);
-    format.column_names({"X0", "X1", "Y"});
   }
 
   csv::CSVReader reader(file_name, format);
@@ -56,9 +55,60 @@ csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
   for (csv::CSVRow &csv_row : reader) {
     size_t column = 0;
     for (csv::CSVField &field : csv_row) {
-      std::cout << field.get();
       X_mapper(X_tensor, field, row, column);
       Y_mapper(Y_tensor, field, row, column);
+      column++;
+    }
+    row++;
+  }
+  auto stopped = t.elapsedSeconds();
+  std::cout << "Data loading and mapping took: " << stopped << " seconds.\n";
+
+  return std::make_tuple(X_tensor, Y_tensor);
+}
+
+/**
+ * Helper method to load CSV data via functors provided.
+ * These functors are important: you are provided with a row and a column index,
+ * to be able to provide where in your data is X, Y mapped.
+ * @param file_name path of file
+ * @param rows how many rows of CSV?
+ * @param X_cols after mapping, how many rows does your X tensor have?
+ * @param Y_cols after mapping, how many rows does your Y tensor have?
+ * @param X_mapper mapping a CSVField to your X data.
+ * @param Y_mapper mapping a CSVField to your Y data.
+ * @param has_header does this CSV have a header?
+ * @param delimiter what delimiter is used?
+ * @return a rank (1,1) tensor
+ */
+static std::tuple<Eigen::MatrixXd, Eigen::MatrixXd>
+csv_to_mnist(const std::string &file_name, size_t rows, size_t X_cols,
+             size_t Y_cols, bool has_header = true, char delimiter = ',') {
+
+  BlockTimer t;
+  csv::CSVFormat format;
+  format.delimiter(delimiter);
+  if (!has_header)
+    format.no_header();
+  else {
+    format.header_row(0);
+  }
+
+  csv::CSVReader reader(file_name, format);
+  Eigen::MatrixXd X_tensor;
+  X_tensor.resize((long)rows, (long)X_cols);
+  Eigen::MatrixXd Y_tensor;
+  Y_tensor.resize((long)rows, (long)Y_cols);
+
+  size_t row = 0;
+  for (csv::CSVRow &csv_row : reader) {
+    size_t column = 0;
+    for (csv::CSVField &field : csv_row) {
+      if (column == 0) {
+        Y_tensor(row, field.get<long>()) = 1.0;
+      } else {
+        X_tensor(row, column - 1) = field.get<double>();
+      }
       column++;
     }
     row++;

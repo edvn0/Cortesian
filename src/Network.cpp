@@ -223,10 +223,27 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
 
   auto splits = generate_splits(X, Y, start_size, end_size, batch_size);
 
+  const std::vector<Eigen::VectorXd> pre_training_evaluation =
+      evaluate(X_validate);
+  auto pre_training_loss =
+      m_loss->apply_loss(pre_training_evaluation, Y_validate);
+  std::vector<double> pre_training_metrics;
+  pre_training_metrics.reserve(m_eval.size());
+  for (auto *eval : m_eval) {
+    pre_training_metrics.emplace_back(
+        eval->apply_evaluation(pre_training_evaluation, Y_validate));
+  }
+
+  std::cout << "Prior to training: ";
+
+  print_epoch_information(pre_training_loss, pre_training_metrics);
+
+  std::cout << std::endl;
+
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
     Random::shuffle(splits);
-    for (auto &dps : splits) {
+    for (const auto &dps : splits) {
       evaluate_for_back_prop(dps);
       optimize();
     }

@@ -69,7 +69,7 @@ add_executable(
         src/layers/Conv1d.cpp
         include/layers/Conv1d.h
         include/DefaultNetworkFactory.h
-        include/utils/MetaBase.h demo/tiny_demo.cpp)
+        include/utils/MetaBase.h demo/tiny_demo.cpp src/loss_eval/LogLoss.cpp src/loss_eval/LogLoss.h)
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv
         OpenMP::OpenMP_CXX)
 

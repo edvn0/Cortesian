@@ -139,12 +139,21 @@ public:
   }
 
   [[nodiscard]] size_t get_total() const { return m_total; }
+
   LossFunction *get_loss() { return m_loss_function; }
+
   std::vector<EvaluationFunction *> get_eval() { return m_evaluation_function; }
+
   Optimizer *get_optimizer() { return m_optimizer; }
+
   ParameterInitializer *get_initializer() { return m_initializer; }
-  [[nodiscard]] bool should_clip() const { return m_gradient_clipping > 0.0001; };
+
+  [[nodiscard]] bool should_clip() const {
+    return m_gradient_clipping > 0.0001;
+  };
+
   [[nodiscard]] double clip_factor() const { return m_gradient_clipping; }
+
   std::vector<Layer *> get_layers() { return m_layers; }
 };
 

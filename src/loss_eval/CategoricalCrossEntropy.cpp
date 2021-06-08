@@ -20,7 +20,7 @@ double CategoricalCrossEntropy::apply_loss_single(const Eigen::VectorXd &Y_hat,
 Eigen::MatrixXd
 CategoricalCrossEntropy::apply_loss_gradient(const Eigen::MatrixXd &y_hat,
                                              const Eigen::MatrixXd &y) {
-  return y_hat - y;
+  return y - y_hat;
 }
 
 double

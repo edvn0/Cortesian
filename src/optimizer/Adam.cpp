@@ -3,6 +3,7 @@
 //
 
 #include "../../include/optimizers/Adam.h"
+#include <iostream>
 
 void Adam::change_weight(int layer_index, Eigen::MatrixXd &w,
                          const Eigen::MatrixXd &d_w) {

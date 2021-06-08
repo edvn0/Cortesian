@@ -11,5 +11,5 @@ double ArgMax::apply_evaluation_single(const Eigen::VectorXd &Y_hat,
 
   auto y_hat_am = arg_max(Y_hat);
   auto y_am = arg_max(Y);
-  return y_hat_am == y_am ? 1.0 : 0.0;
+  return y_hat_am == y_am ? 100.0 : 0.0;
 }
