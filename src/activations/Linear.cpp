@@ -3,12 +3,10 @@
 //
 
 #include "../../include/activations/Linear.h"
-Eigen::VectorXd Linear::function(Eigen::VectorXd in) { return in; }
+Eigen::VectorXd Linear::function(const Eigen::VectorXd &in) { return in; }
 
-Eigen::VectorXd Linear::derivative(Eigen::VectorXd in) {
+Eigen::VectorXd Linear::derivative(const Eigen::VectorXd &in) {
   return Eigen::VectorXd::Ones(in.rows());
 }
 
-Linear::Linear() {
-  this->operator()("activation", "Linear");
-}
+Linear::Linear() { this->operator()("activation", "Linear"); }

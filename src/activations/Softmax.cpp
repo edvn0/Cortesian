@@ -3,26 +3,28 @@
 //
 
 #include "../../include/activations/Softmax.h"
+#include <iostream>
 
-Eigen::VectorXd Softmax::function(Eigen::VectorXd in) { return soft_max(in); }
+Eigen::VectorXd Softmax::function(const Eigen::VectorXd &in) {
+  return soft_max(in);
+}
 
-Eigen::VectorXd Softmax::derivative(Eigen::VectorXd in) { assert(false); }
+Eigen::VectorXd Softmax::derivative(const Eigen::VectorXd &in) {
+  assert(false);
+}
 
-Eigen::MatrixXd Softmax::derivative_on_input(Eigen::VectorXd in,
-                                             Eigen::VectorXd out) {
+Eigen::MatrixXd Softmax::derivative_on_input(const Eigen::VectorXd &in,
+                                             const Eigen::VectorXd &out) {
   auto sum = (in.array() * out.array()).sum();
   auto diff = out.array() - sum;
   return in.array() * diff;
 }
 
 Eigen::VectorXd Softmax::soft_max(const Eigen::VectorXd &in) {
-  Eigen::VectorXd max_vector =
-      Eigen::VectorXd::Constant(in.rows(), in.maxCoeff());
-  auto z = in - max_vector;
-  auto sum = z.unaryExpr([](double t) { return exp(t); }).sum();
-  return z.unaryExpr([&](double t) {
-    return  exp(t) / sum;
-  });
+  auto d = Eigen::VectorXd::Constant(in.rows(), in.maxCoeff());
+  auto e_x = (in.array() - d.array()).exp();
+  auto sum = e_x.sum();
+  return e_x / sum;
 }
 
 Softmax::Softmax() { this->operator()("activation", "Softmax"); }
