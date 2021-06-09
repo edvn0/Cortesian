@@ -4,8 +4,11 @@
 //
 
 #include <catch2/catch_all.hpp>
+#include <vector>
 
+#include "../include/Network.h"
 #include "../include/utils/DataReader.h"
+#include "../include/utils/DataSplit.h"
 #include "../src/activations/Softmax.cpp"
 #include "../src/loss_eval/CategoricalCrossEntropy.cpp"
 
@@ -63,8 +66,7 @@ TEST_CASE("Eigen Serialization/Deserialization") {
     Eigen::VectorXd vec(3);
     vec << 1.000000012, 2.00000151, 3.0000000051512;
     std::string ser = eigen_to_json(vec);
-    Eigen::VectorXd deser =
-        json_to_eigen<Eigen::VectorXd>(ser, EigenType::VECTOR, 3, 1);
+    auto deser = json_to_eigen<Eigen::VectorXd>(ser, EigenType::VECTOR, 3, 1);
 
     REQUIRE((deser - vec).norm() < certainty);
   }
@@ -72,8 +74,7 @@ TEST_CASE("Eigen Serialization/Deserialization") {
   SECTION("S/D Random 100 vector") {
     Eigen::VectorXd vec = Eigen::VectorXd::Random(100);
     std::string ser = eigen_to_json(vec);
-    Eigen::VectorXd deser =
-        json_to_eigen<Eigen::VectorXd>(ser, EigenType::VECTOR, 100, 1);
+    auto deser = json_to_eigen<Eigen::VectorXd>(ser, EigenType::VECTOR, 100, 1);
 
     REQUIRE((deser - vec).norm() < certainty);
   }

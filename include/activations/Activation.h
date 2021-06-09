@@ -18,7 +18,7 @@ public:
    * @param in (w*X + b) from current layer.
    * @return the activated vector.
    */
-  virtual Eigen::VectorXd function(Eigen::VectorXd in) = 0;
+  virtual Eigen::VectorXd function(const Eigen::VectorXd& in) = 0;
 
   /**
    * Differentiates the vector with respect to "itself" in terms of the
@@ -27,7 +27,7 @@ public:
    * @param in vector to be differentiated.
    * @return differentiated vector.
    */
-  virtual Eigen::VectorXd derivative(Eigen::VectorXd in) = 0;
+  virtual Eigen::VectorXd derivative(const Eigen::VectorXd& in) = 0;
 
   /**
    * To handle backpropagation, we take the derivative of the activation
@@ -38,8 +38,8 @@ public:
    * @param out error terms (recursion gradients)
    * @return the hessian
    */
-  virtual Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in,
-                                              Eigen::VectorXd out) {
+  virtual Eigen::MatrixXd derivative_on_input(const Eigen::VectorXd& in,
+                                              const Eigen::VectorXd& out) {
     auto arrPred = out.array();
     auto arrRaw = in.array();
     auto diffRaw = derivative(arrRaw);

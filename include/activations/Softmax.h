@@ -14,10 +14,10 @@ private:
 
 public:
   Softmax();
-  Eigen::VectorXd function(Eigen::VectorXd in) override;
-  Eigen::VectorXd derivative(Eigen::VectorXd in) override;
-  Eigen::MatrixXd derivative_on_input(Eigen::VectorXd in,
-                                      Eigen::VectorXd out) override;
+  Eigen::VectorXd function(const Eigen::VectorXd &in) override;
+  Eigen::VectorXd derivative(const Eigen::VectorXd &in) override;
+  Eigen::MatrixXd derivative_on_input(const Eigen::VectorXd&,
+                                      const Eigen::VectorXd&) override;
 };
 
 #endif // CORTESIAN_SOFTMAX_H

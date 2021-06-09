@@ -12,10 +12,11 @@ class LeakyRelu : public Activation {
 
 public:
   LeakyRelu();
+  explicit LeakyRelu(double cap) : cap(cap){};
 
-  Eigen::VectorXd function(Eigen::VectorXd in) override;
+  Eigen::VectorXd function(const Eigen::VectorXd &in) override;
 
-  Eigen::VectorXd derivative(Eigen::VectorXd in) override;
+  Eigen::VectorXd derivative(const Eigen::VectorXd &in) override;
 };
 
 #endif // CORTESIAN_LEAKYRELU_H

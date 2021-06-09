@@ -12,30 +12,31 @@
 #include "../include/loss_evals/MeanAbsolute.h"
 #include "../include/loss_evals/MeanSquared.h"
 #include "../include/optimizers/Adam.h"
+#include "../include/optimizers/StochasticGradientDescent.h"
 #include "../include/utils/DataReader.h"
 
 int main() {
   auto [X_tensor, Y_tensor] = csv_to_mnist(
       "/Users/edwincarlsson/Documents/Code.nosync/CPP/DeepLearning/cortesian/"
       "resources/mnist_train.csv",
-      60000, 784, 10);
+      784, 10, 3000);
 
   auto [X_validate_tensor, Y_validate_tensor] = csv_to_mnist(
       "/Users/edwincarlsson/Documents/Code.nosync/CPP/DeepLearning/cortesian/"
       "resources/mnist_test.csv",
-      10000, 784, 10);
+      784, 10, 500);
 
   NetworkBuilder builder;
-  builder.clipping(0.1)
+  builder
       .loss_function(new CategoricalCrossEntropy())
       .evaluation_function(
           {new ArgMax(), new MeanAbsolute(), new MeanSquared()})
       .initializer(new EigenInitializer())
-      .optimizer(new Adam(0.0000011))
-      .layer(new Dense(new Tanh(), 784, 0.01))
-      .layer(new Dense(new Tanh(), 256, 0.01))
-      .layer(new Dense(new Tanh(), 256, 0.01))
-      .layer(new Dense(new Softmax(), 10, 0.01));
+      .optimizer(new Adam(0.01))
+      .layer(new Dense(new LeakyRelu(0.1), 784, 0.4))
+      .layer(new Dense(new LeakyRelu(0.1), 50, 0.1))
+      .layer(new Dense(new LeakyRelu(0.1), 50, 0.1))
+      .layer(new Dense(new Softmax(), 10, 0.4));
 
   Network network(builder);
 
@@ -43,7 +44,7 @@ int main() {
 
   network.save("../resources/model.json");
 
-  auto out = network.fit_tensor(X_tensor, Y_tensor, 100, 64, X_validate_tensor,
+  auto out = network.fit_tensor(X_tensor, Y_tensor, 100, 256, X_validate_tensor,
                                 Y_validate_tensor);
 
   std::cout << out;

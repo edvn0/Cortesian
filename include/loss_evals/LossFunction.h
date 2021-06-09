@@ -12,7 +12,7 @@
 class LossFunction : public MetaBase {
 public:
   virtual ~LossFunction() = default;
-
+protected:
   virtual double calculate(const std::vector<Eigen::VectorXd> &Y_hat,
                            const std::vector<Eigen::VectorXd> &Y) {
     double loss = 0.0;
@@ -32,6 +32,8 @@ public:
     }
     return loss / (double)rows;
   }
+
+public:
 
   /**
    * Applies the loss function to an already predicted data set.

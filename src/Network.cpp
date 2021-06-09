@@ -142,6 +142,7 @@ void Network::evaluate_for_back_prop(const DataSplit::DataPoint &point) {
 
 void Network::evaluate_for_back_prop(const DataSplit::DataSet &ds) {
   size_t size = ds.rows.size();
+#pragma omp parallel shared(size, ds) default(none)
   for (int i = 0; i < size; i++) {
     evaluate_for_back_prop(ds.rows[i]);
   }
@@ -169,12 +170,7 @@ void Network::back_propagate(const Eigen::VectorXd &real) {
   Eigen::VectorXd z = last_layer->get_activated();
 
   Eigen::MatrixXd gradient = m_loss->apply_loss_gradient(z, real);
-  if (m_clipping.clipping) {
-    double norm = gradient.norm();
-    if (norm >= m_clipping.clip_factor) {
-      gradient = m_clipping.clip_factor * gradient / norm;
-    }
-  }
+  clip_gradients(gradient);
 
   int layer = last_layer->get_layer_index();
   do {
@@ -193,6 +189,15 @@ void Network::back_propagate(const Eigen::VectorXd &real) {
     z = last_layer->get_activated();
     layer--;
   } while (layer > 0);
+}
+
+void Network::clip_gradients(Eigen::MatrixXd &gradient) const {
+  if (m_clipping.clipping) {
+    double norm = gradient.norm();
+    if (norm >= m_clipping.clip_factor) {
+      gradient = m_clipping.clip_factor * gradient / norm;
+    }
+  }
 }
 
 Eigen::VectorXd Network::predict(const Eigen::VectorXd &vector) {
@@ -216,12 +221,8 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
                                        Eigen::MatrixXd &X_validate,
                                        Eigen::MatrixXd &Y_validate) {
 
-  BackPropStatistics backPropStatistics(m_eval.size());
-
-  size_t end_size = X.rows();
-  size_t start_size = 0;
-
-  auto splits = generate_splits(X, Y, start_size, end_size, batch_size);
+  BackPropStatistics back_prop_statistics(m_eval.size());
+  auto splits = generate_splits(X, Y, batch_size);
 
   const std::vector<Eigen::VectorXd> pre_training_evaluation =
       evaluate(X_validate);
@@ -242,7 +243,6 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
 
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
-    Random::shuffle(splits);
     for (const auto &dps : splits) {
       evaluate_for_back_prop(dps);
       optimize();
@@ -260,10 +260,10 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
     }
 
     print_epoch_information(loss, metrics);
-    backPropStatistics.update(timeEpoch, loss, metrics);
+    back_prop_statistics.update(timeEpoch, loss, metrics);
   }
-  backPropStatistics.finalize();
-  return backPropStatistics;
+  back_prop_statistics.finalize();
+  return back_prop_statistics;
 }
 
 void Network::print_epoch_information(double loss,
@@ -330,7 +330,9 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
 
 std::vector<DataSplit::DataSet>
 Network::generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
-                         size_t from_index, size_t to_index, int batch_size) {
+                         int batch_size) {
+  size_t to_index = X_tensor.rows();
+  size_t from_index = 0;
   std::vector<DataSplit::DataSet> data_sets;
   data_sets.reserve((int)(X_tensor.size() / batch_size));
   for (size_t i = from_index; i < to_index; i += batch_size) {
