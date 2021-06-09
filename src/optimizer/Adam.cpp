@@ -60,7 +60,7 @@ void Adam::change_bias(int layer_index, Eigen::VectorXd &b,
   auto denom = v_hat.array().sqrt() + epsilon;
   auto num = m_hat * learning_rate;
   Eigen::VectorXd adam = num.array() / denom.array();
-  b -= adam;
+  b = b - adam;
 }
 
 void Adam::initialize_optimizer(int layers, Eigen::MatrixXd w_seed,

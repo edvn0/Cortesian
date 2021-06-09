@@ -18,25 +18,22 @@ void Dense::fit(Optimizer *optimizer) {
 
   if (deltas_added > 0) {
     if (m_l2 > 0) {
-      // regularization
-      Eigen::MatrixXd reg_weight = m_delta_weight.array()*m_l2;
-      Eigen::MatrixXd reg_bias = m_delta_bias.array()*m_l2;
-      m_delta_weight -= reg_weight;
-      m_delta_bias -= reg_bias;
+      m_delta_weight.unaryExpr([=](double t) { return t - t * m_l2; });
+      m_delta_bias.unaryExpr([=](double t) { return t - t * m_l2; });
     }
 
     Eigen::MatrixXd average_delta_w =
         m_delta_weight.array() / (float)deltas_added;
     Eigen::VectorXd average_delta_b =
         m_delta_bias.array() / (float)deltas_added;
-    auto prev = m_bias;
-    optimizer->change_bias((int)m_layer_index, m_bias, average_delta_b);
+
     optimizer->change_weight((int)m_layer_index, m_weight, average_delta_w);
-    auto pro = m_bias;
-    m_delta_weight = m_delta_weight.setZero();
-    m_delta_bias = m_delta_bias.setZero();
-    deltas_added = 0;
+    optimizer->change_bias((int)m_layer_index, m_bias, average_delta_b);
+    m_delta_weight =
+        Eigen::MatrixXd::Zero(m_delta_weight.rows(), m_delta_weight.cols());
+    m_delta_bias = Eigen::VectorXd::Zero(m_delta_bias.rows());
   }
+  deltas_added = 0;
 }
 
 void Dense::add_deltas(const Eigen::MatrixXd &d_w, const Eigen::VectorXd &d_b) {
@@ -107,8 +104,7 @@ Eigen::VectorXd Dense::calculate(const Eigen::VectorXd &in) {
   if (!has_previous()) {
     activated = in;
   } else {
-    auto out = m_activation->function(m_weight * in + m_bias);
-    activated = out;
+    activated = m_activation->function(m_weight * in + m_bias);
   }
   return activated;
 }
