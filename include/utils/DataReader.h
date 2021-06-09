@@ -27,14 +27,11 @@
  * @param delimiter what delimiter is used?
  * @return a rank (1,1) tensor
  */
-static std::tuple<Eigen::MatrixXd, Eigen::MatrixXd>
-csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
-              size_t Y_cols,
-              const std::function<void(Eigen::MatrixXd &, csv::CSVField &,
-                                       size_t, size_t)> &X_mapper,
-              const std::function<void(Eigen::MatrixXd &, csv::CSVField &,
-                                       size_t, size_t)> &Y_mapper,
-              bool has_header = true, char delimiter = ',') {
+static std::tuple<Eigen::MatrixXd, Eigen::MatrixXd> csv_to_tensor(
+    const std::string &file_name, size_t rows, size_t X_cols, size_t Y_cols,
+    const std::function<void(Eigen::MatrixXd &, csv::CSVRow &)> &X_mapper,
+    const std::function<void(Eigen::MatrixXd &, csv::CSVRow &)> &Y_mapper,
+    bool has_header = true, char delimiter = ',') {
 
   BlockTimer t;
   csv::CSVFormat format;
@@ -51,15 +48,9 @@ csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
   Eigen::MatrixXd Y_tensor;
   Y_tensor.resize((long)rows, (long)Y_cols);
 
-  size_t row = 0;
   for (csv::CSVRow &csv_row : reader) {
-    size_t column = 0;
-    for (csv::CSVField &field : csv_row) {
-      X_mapper(X_tensor, field, row, column);
-      Y_mapper(Y_tensor, field, row, column);
-      column++;
-    }
-    row++;
+    X_mapper(X_tensor, csv_row);
+    Y_mapper(Y_tensor, csv_row);
   }
   auto stopped = t.elapsedSeconds();
   std::cout << "Data loading and mapping took: " << stopped << " seconds.\n";
@@ -82,8 +73,8 @@ csv_to_tensor(const std::string &file_name, size_t rows, size_t X_cols,
  * @return a rank (1,1) tensor
  */
 static std::tuple<Eigen::MatrixXd, Eigen::MatrixXd>
-csv_to_mnist(const std::string &file_name, size_t rows, size_t X_cols,
-             size_t Y_cols, bool has_header = true, char delimiter = ',') {
+csv_to_mnist(const std::string &file_name, size_t X_cols, size_t Y_cols,
+             size_t max, bool has_header = true, char delimiter = ',') {
 
   BlockTimer t;
   csv::CSVFormat format;
@@ -96,9 +87,9 @@ csv_to_mnist(const std::string &file_name, size_t rows, size_t X_cols,
 
   csv::CSVReader reader(file_name, format);
   Eigen::MatrixXd X_tensor;
-  X_tensor.resize((long)rows, (long)X_cols);
+  X_tensor.resize((long)max, (long)X_cols);
   Eigen::MatrixXd Y_tensor;
-  Y_tensor.resize((long)rows, (long)Y_cols);
+  Y_tensor.resize((long)max, (long)Y_cols);
 
   size_t row = 0;
   for (csv::CSVRow &csv_row : reader) {
@@ -107,11 +98,18 @@ csv_to_mnist(const std::string &file_name, size_t rows, size_t X_cols,
       if (column == 0) {
         Y_tensor(row, field.get<long>()) = 1.0;
       } else {
-        X_tensor(row, column - 1) = field.get<double>();
+        X_tensor(row, column - 1) = field.get<double>() / 255.0;
       }
       column++;
     }
     row++;
+    if (row >= max) {
+      auto stopped = t.elapsedSeconds();
+      std::cout << "Data loading and mapping took: " << stopped
+                << " seconds.\n";
+
+      return std::make_tuple(X_tensor, Y_tensor);
+    }
   }
   auto stopped = t.elapsedSeconds();
   std::cout << "Data loading and mapping took: " << stopped << " seconds.\n";
@@ -125,7 +123,7 @@ template <typename T>
 std::string to_string_with_precision(const T a_value, const int n = 6) {
   std::ostringstream out;
   out.precision(n);
-  out << std::fixed << a_value;
+  out << a_value;
   return out.str();
 }
 

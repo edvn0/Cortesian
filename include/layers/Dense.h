@@ -61,7 +61,9 @@ public:
   L2Tensors &get_regularization() override;
 
   friend std::ostream &operator<<(std::ostream &os, const Dense &layer);
+
   Eigen::VectorXd calculate(const Eigen::VectorXd &in) override;
+
   void serialize_parameters() override;
 };
 

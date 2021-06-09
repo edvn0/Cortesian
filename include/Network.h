@@ -27,12 +27,12 @@ private:
     Clipping(bool should_clip, double clipping)
         : clip_factor(clipping), clipping(should_clip) {
       this->operator()("clipping", std::to_string(clip_factor));
-      this->operator()("isClipping", should_clip ? "true" : "false");
+      this->operator()("is_clipping", should_clip ? "true" : "false");
     };
 
     Clipping() : clipping(false), clip_factor(0.0) {
       this->operator()("clipping", std::to_string(0.0));
-      this->operator()("isClipping", "false");
+      this->operator()("is_clipping", "false");
     };
   };
 
@@ -43,7 +43,7 @@ protected:
   // virtual loss function, gradient and loss calculations
   LossFunction *m_loss;
 
-  // Vector of evaluation funcions, evaluates the network
+  // Vector of evaluation functions, evaluates the network
   std::vector<EvaluationFunction *> m_eval;
 
   // virtual Optimizer, optimizes weights/biases
@@ -94,7 +94,7 @@ public:
 
   static std::vector<DataSplit::DataSet>
   generate_splits(Eigen::MatrixXd &X_tensor, Eigen::MatrixXd &Y_tensor,
-                  size_t from_index, size_t to_index, int i);
+                  int splits);
 
   static void print_epoch_information(double loss,
                                       const std::vector<double> &metrics);
@@ -102,6 +102,8 @@ public:
   void save(const std::string &file_name) const;
 
   void save(const std::string &&file_name) { save(file_name); };
+
+  void clip_gradients(Eigen::MatrixXd &gradient) const;
 };
 
 #endif // CORTESIAN_NETWORK_H

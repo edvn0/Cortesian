@@ -15,7 +15,9 @@
 
 class NetworkBuilder {
 private:
-  double m_gradient_clipping;
+  double m_gradient_clipping{0.0};
+  bool m_should_clip{false};
+
   int m_total;
   std::vector<Layer *> m_layers;
 
@@ -35,10 +37,12 @@ public:
     m_layers = other.m_layers;
     m_gradient_clipping = other.m_gradient_clipping;
     m_total = other.m_total;
+    m_should_clip = other.m_should_clip;
   }
 
   NetworkBuilder &clipping(double clip_gradients) {
     m_gradient_clipping = clip_gradients;
+    m_should_clip = true;
     return *this;
   }
 
@@ -148,13 +152,11 @@ public:
 
   ParameterInitializer *get_initializer() { return m_initializer; }
 
-  [[nodiscard]] bool should_clip() const {
-    return m_gradient_clipping > 0.0001;
-  };
-
   [[nodiscard]] double clip_factor() const { return m_gradient_clipping; }
 
   std::vector<Layer *> get_layers() { return m_layers; }
+
+  bool should_clip() const { return m_should_clip; }
 };
 
 #endif // CORTESIAN_NETWORKBUILDER_H
