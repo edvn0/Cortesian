@@ -6,19 +6,23 @@
 #include <catch2/catch_all.hpp>
 #include <vector>
 
+#include <eigen3/Eigen/Core>
+
 #include "../include/Network.h"
 #include "../include/utils/DataReader.h"
 #include "../include/utils/DataSplit.h"
 #include "../src/activations/Softmax.cpp"
-#include "../src/loss_eval/CategoricalCrossEntropy.cpp"
+#include "../src/loss_evals/CategoricalCrossEntropy.cpp"
 
 #define CORTESIAN_TEST
 #define CATCH_CONFIG_DISABLE_BENCHMARKING
 
 static constexpr double certainty = 1e-6;
 
-TEST_CASE("Softmax") {
-  SECTION("Should correctly handle case 0.6,0.2,0.2") {
+TEST_CASE("Softmax")
+{
+  SECTION("Should correctly handle case 0.6,0.2,0.2")
+  {
     Activation *f = new Softmax();
     Eigen::VectorXd vec(10);
     vec << 0.0, 0.00, 0.0, 0.0, 0.2, 0.2, 0.0, 0.0, 0.0, 0.6;
@@ -29,7 +33,8 @@ TEST_CASE("Softmax") {
     REQUIRE((calc - expected).norm() < certainty);
   }
 
-  SECTION("Should correctly handle case HUGE certainty") {
+  SECTION("Should correctly handle case HUGE certainty")
+  {
     Activation *f = new Softmax();
     Eigen::VectorXd vec(10);
     vec << 0.0, 0.00, 0.0, 0.0, 0.2, 0.2, 0.0, 0.0, 0.0, 100;
@@ -40,11 +45,13 @@ TEST_CASE("Softmax") {
   }
 }
 
-TEST_CASE("CategoricalCrossEntropy") {
-  SECTION("Should return ~0.708 when tested on particular values") {
+TEST_CASE("CategoricalCrossEntropy")
+{
+  SECTION("Should return ~0.708 when tested on particular values")
+  {
     LossFunction *f = new CategoricalCrossEntropy();
     std::vector<Eigen::VectorXd> preds;
-    Eigen::Vector<double, 4> v1, v2;
+    Eigen::VectorXd v1, v2;
     v1 << 0.25, 0.25, 0.25, 0.25;
     v2 << 0.01, 0.01, 0.01, 0.97;
     preds.emplace_back(v1);
@@ -61,8 +68,10 @@ TEST_CASE("CategoricalCrossEntropy") {
   }
 }
 
-TEST_CASE("Eigen Serialization/Deserialization") {
-  SECTION("S/D Vector") {
+TEST_CASE("Eigen Serialization/Deserialization")
+{
+  SECTION("S/D Vector")
+  {
     Eigen::VectorXd vec(3);
     vec << 1.000000012, 2.00000151, 3.0000000051512;
     std::string ser = eigen_to_json(vec);
@@ -71,7 +80,8 @@ TEST_CASE("Eigen Serialization/Deserialization") {
     REQUIRE((deser - vec).norm() < certainty);
   }
 
-  SECTION("S/D Random 100 vector") {
+  SECTION("S/D Random 100 vector")
+  {
     Eigen::VectorXd vec = Eigen::VectorXd::Random(100);
     std::string ser = eigen_to_json(vec);
     auto deser = json_to_eigen<Eigen::VectorXd>(ser, EigenType::VECTOR, 100, 1);
@@ -79,7 +89,8 @@ TEST_CASE("Eigen Serialization/Deserialization") {
     REQUIRE((deser - vec).norm() < certainty);
   }
 
-  SECTION("S/D Matrix (2,2)") {
+  SECTION("S/D Matrix (2,2)")
+  {
     Eigen::MatrixXd mat(2, 2);
     mat << 1.000001231312, 2.021412321, 3.12321321, 4.12521;
     std::string ser = eigen_to_json(mat);
@@ -89,7 +100,8 @@ TEST_CASE("Eigen Serialization/Deserialization") {
     REQUIRE((deser - mat).norm() < certainty);
   }
 
-  SECTION("S/D Matrix (1000,341)") {
+  SECTION("S/D Matrix (1000,341)")
+  {
     Eigen::MatrixXd mat = Eigen::MatrixXd::Random(1000, 341);
     std::string ser = eigen_to_json(mat);
     Eigen::MatrixXd deser =
@@ -98,7 +110,8 @@ TEST_CASE("Eigen Serialization/Deserialization") {
     REQUIRE((deser - mat).norm() < certainty);
   }
 
-  SECTION("S/D Matrix (341,1000)") {
+  SECTION("S/D Matrix (341,1000)")
+  {
     Eigen::MatrixXd mat = Eigen::MatrixXd::Random(341, 1000);
     std::string ser = eigen_to_json(mat);
     Eigen::MatrixXd deser =
@@ -108,16 +121,19 @@ TEST_CASE("Eigen Serialization/Deserialization") {
   }
 }
 
-TEST_CASE("BENCHMARKS Json Deser/Ser", "[benchjson]") {
+TEST_CASE("BENCHMARKS Json Deser/Ser", "[benchjson]")
+{
   // Average 159ms, standard deviation 1.6ms
-  BENCHMARK("Stress test S/D weights (256,256)") {
+  BENCHMARK("Stress test S/D weights (256,256)")
+  {
     Eigen::MatrixXd mat = Eigen::MatrixXd::Random(256, 256);
     std::string ser = eigen_to_json(mat);
     return json_to_eigen<Eigen::MatrixXd>(ser, EigenType::MATRIX, 256, 256);
   };
 
   // Average 2950ms, 152ms standard deviation
-  BENCHMARK("Stress test S/D weights (1000,1000)") {
+  BENCHMARK("Stress test S/D weights (1000,1000)")
+  {
     Eigen::MatrixXd mat = Eigen::MatrixXd::Random(1000, 1000);
     std::string ser = eigen_to_json(mat);
     return json_to_eigen<Eigen::MatrixXd>(ser, EigenType::MATRIX, 1000, 1000);

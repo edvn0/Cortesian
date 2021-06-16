@@ -42,9 +42,9 @@ public:
    * Return the tuples from the meta data of subclassing entities.
    * @return vector of k,v pairs of meta data.
    */
-  [[nodiscard]] const std::vector<std::tuple<std::string, std::string>>
+  [[nodiscard]] const std::vector<std::pair<std::string, std::string>>
   key_value_pairs() const {
-    std::vector<std::tuple<std::string, std::string>> key_value_pairs;
+    std::vector<std::pair<std::string, std::string>> key_value_pairs;
     key_value_pairs.reserve(m_meta_data.size());
     for (auto &tuple : m_meta_data) {
       key_value_pairs.emplace_back(tuple);

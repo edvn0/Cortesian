@@ -4,28 +4,28 @@
 
 #include "../../include/activations/LeakyRelu.h"
 
-Eigen::VectorXd LeakyRelu::function(const Eigen::VectorXd& in) {
+Eigen::VectorXd LeakyRelu::function(const Eigen::VectorXd &in) {
   double &val = cap;
-  static const auto func = [val](double f) {
+  static const auto func = [&val](double f) {
     if (f > 0) {
       return f;
     } else {
       return val;
     }
   };
-  return static_cast<Eigen::MatrixXd>(in.unaryExpr(func));
+  return in.unaryExpr(func);
 }
 
-Eigen::VectorXd LeakyRelu::derivative(const Eigen::VectorXd& in) {
+Eigen::VectorXd LeakyRelu::derivative(const Eigen::VectorXd &in) {
   double &val = cap;
-  static const auto func = [val](double f) {
+  static const auto func = [&val](double f) {
     if (f > 0) {
       return 1.0;
     } else {
       return val;
     }
   };
-  return static_cast<Eigen::MatrixXd>(in.unaryExpr(func));
+  return in.unaryExpr(func);
 }
 
 LeakyRelu::LeakyRelu() {

@@ -10,8 +10,8 @@
 class Linear : public Activation {
 public:
   Linear();
-  Eigen::VectorXd function(const Eigen::VectorXd& in) override;
-  Eigen::VectorXd derivative(const Eigen::VectorXd& in) override;
+  Eigen::VectorXd function(const Eigen::VectorXd &in) override;
+  Eigen::VectorXd derivative(const Eigen::VectorXd &in) override;
 };
 
 #endif // CORTESIAN_LINEAR_H

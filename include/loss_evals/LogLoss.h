@@ -9,6 +9,8 @@
 
 class LogLoss : public LossFunction {
 public:
+  LogLoss() { this->operator()("loss", "LogLoss"); };
+
   double apply_loss_single(const Eigen::VectorXd &Y_hat,
                            const Eigen::VectorXd &y) override;
 

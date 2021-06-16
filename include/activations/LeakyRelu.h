@@ -12,7 +12,8 @@ class LeakyRelu : public Activation {
 
 public:
   LeakyRelu();
-  explicit LeakyRelu(double cap) : cap(cap){};
+
+  explicit LeakyRelu(double capping) : LeakyRelu() { cap = capping; };
 
   Eigen::VectorXd function(const Eigen::VectorXd &in) override;
 

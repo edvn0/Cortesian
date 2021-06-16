@@ -2,7 +2,7 @@
 // Created by Edwin Carlsson on 2021-06-07.
 //
 
-#include "LogLoss.h"
+#include "../../include/loss_evals/LogLoss.h"
 
 double LogLoss::apply_loss_single(const Eigen::VectorXd &Y_hat,
                                   const Eigen::VectorXd &y) {

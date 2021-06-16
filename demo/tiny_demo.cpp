@@ -20,7 +20,7 @@
 #include "../include/optimizers/Adam.h"
 #include "../include/optimizers/StochasticGradientDescent.h"
 #include "../include/utils/DataReader.h"
-#include "../src/loss_eval/LogLoss.h"
+#include "../include/loss_evals/LogLoss.h"
 
 int test_main() {
   typedef StochasticGradientDescent sgd;

@@ -142,7 +142,6 @@ void Network::evaluate_for_back_prop(const DataSplit::DataPoint &point) {
 
 void Network::evaluate_for_back_prop(const DataSplit::DataSet &ds) {
   size_t size = ds.rows.size();
-#pragma omp parallel shared(size, ds) default(none)
   for (int i = 0; i < size; i++) {
     evaluate_for_back_prop(ds.rows[i]);
   }
@@ -222,6 +221,7 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
                                        Eigen::MatrixXd &Y_validate) {
 
   BackPropStatistics back_prop_statistics(m_eval.size());
+
   auto splits = generate_splits(X, Y, batch_size);
 
   const std::vector<Eigen::VectorXd> pre_training_evaluation =
@@ -236,15 +236,18 @@ BackPropStatistics Network::fit_tensor(Eigen::MatrixXd &X, Eigen::MatrixXd &Y,
   }
 
   std::cout << "Prior to training: ";
-
   print_epoch_information(pre_training_loss, pre_training_metrics);
-
   std::cout << std::endl;
 
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
     for (const auto &dps : splits) {
-      evaluate_for_back_prop(dps);
+      {
+        BlockTimer bp_timer;
+        evaluate_for_back_prop(dps);
+        bp_timer.stop();
+        std::cout << "BP:" << std::to_string(bp_timer.elapsedSeconds()) << "\n";
+      }
       optimize();
     }
     t.stop();
@@ -294,12 +297,18 @@ BackPropStatistics Network::fit(const std::vector<Eigen::VectorXd> &X,
   std::vector<Eigen::VectorXd> validate_x(&X[training_size], &X[X.size() - 1]);
   std::vector<Eigen::VectorXd> validate_y(&Y[training_size], &Y[Y.size() - 1]);
 
+  BlockTimer split_timer;
+
   DataSplit batch_split(batch_size, train_x, train_y);
+
+  split_timer.stop();
+  std::cout << std::to_string(split_timer.elapsedSeconds()) << "\n";
 
   BackPropStatistics backPropStatistics(m_eval.size());
 
   for (int i = 0; i < epochs; i++) {
     BlockTimer t;
+    std::cout << "Starting epoch " << std::to_string(i) << "\n";
     auto splits = batch_split.get_splits(should_shuffle_training);
     for (auto &dps : splits) {
       evaluate_for_back_prop(dps);
@@ -394,12 +403,12 @@ std::string Network::to_json(const Network &network) {
   int j = 0;
   std::for_each(
       optim_data.begin(), optim_data.end(),
-      [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+      [&json, &j, &max_data_size](std::pair<std::string, std::string> &s) {
         json.append("\n\t\t")
             .append("\"")
-            .append(std::get<0>(s))
+            .append(s.first)
             .append("\": \"")
-            .append(std::get<1>(s))
+            .append(s.second)
             .append("\"");
 
         if (j != max_data_size) {
@@ -416,12 +425,12 @@ std::string Network::to_json(const Network &network) {
   j = 0;
   std::for_each(
       loss_data.begin(), loss_data.end(),
-      [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+      [&json, &j, &max_data_size](std::pair<std::string, std::string> &s) {
         json.append("\n\t\t")
             .append("\"")
-            .append(std::get<0>(s))
+            .append(s.first)
             .append("\": \"")
-            .append(std::get<1>(s))
+            .append(s.second)
             .append("\"");
 
         if (j != max_data_size) {
@@ -441,12 +450,12 @@ std::string Network::to_json(const Network &network) {
     j = 0;
     std::for_each(
         eval_data.begin(), eval_data.end(),
-        [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+        [&json, &j, &max_data_size](std::pair<std::string, std::string> &s) {
           json.append("\n\t\t\t")
               .append("\"")
-              .append(std::get<0>(s))
+              .append(s.first)
               .append("\": \"")
-              .append(std::get<1>(s))
+              .append(s.second)
               .append("\"");
 
           if (j != max_data_size) {
@@ -470,12 +479,12 @@ std::string Network::to_json(const Network &network) {
   j = 0;
   std::for_each(
       initializer_data.begin(), initializer_data.end(),
-      [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+      [&json, &j, &max_data_size](std::pair<std::string, std::string> &s) {
         json.append("\n\t\t")
             .append("\"")
-            .append(std::get<0>(s))
+            .append(s.first)
             .append("\": \"")
-            .append(std::get<1>(s))
+            .append(s.second)
             .append("\"");
 
         if (j != max_data_size) {
@@ -496,12 +505,12 @@ std::string Network::to_json(const Network &network) {
     j = 0;
     std::for_each(
         layer_data.begin(), layer_data.end(),
-        [&json, &j, &max_data_size](std::tuple<std::string, std::string> &s) {
+        [&json, &j, &max_data_size](std::pair<std::string, std::string> &s) {
           json.append("\n\t\t\t")
               .append("\"")
-              .append(std::get<0>(s))
+              .append(s.first)
               .append("\": \"")
-              .append(std::get<1>(s))
+              .append(s.second)
               .append("\"");
 
           if (j != max_data_size) {

@@ -40,16 +40,16 @@ add_executable(
         include/utils/BlockTimer.h
         src/initializers/EigenInitializer.cpp
         include/initializers/EigenInitializer.h
-        src/loss_eval/ArgMax.cpp
+        src/loss_evals/ArgMax.cpp
         include/loss_evals/ArgMax.h
-        src/loss_eval/MeanSquared.cpp
+        src/loss_evals/MeanSquared.cpp
         include/loss_evals/MeanSquared.h
         include/utils/MathUtils.h
         src/util/DataSplit.cpp
         include/utils/DataSplit.h
         src/activations/Linear.cpp
         include/activations/Linear.h
-        src/loss_eval/MeanAbsolute.cpp
+        src/loss_evals/MeanAbsolute.cpp
         include/loss_evals/MeanAbsolute.h
         src/activations/Sigmoid.cpp
         include/activations/Sigmoid.h
@@ -59,7 +59,7 @@ add_executable(
         include/activations/Softmax.h
         include/utils/common.h
         include/utils/DataReader.h
-        src/loss_eval/CategoricalCrossEntropy.cpp
+        src/loss_evals/CategoricalCrossEntropy.cpp
         include/loss_evals/CategoricalCrossEntropy.h
         src/optimizer/Adam.cpp
         include/optimizers/Adam.h
@@ -69,7 +69,7 @@ add_executable(
         src/layers/Conv1d.cpp
         include/layers/Conv1d.h
         include/DefaultNetworkFactory.h
-        include/utils/MetaBase.h demo/tiny_demo.cpp src/loss_eval/LogLoss.cpp src/loss_eval/LogLoss.h)
+        include/utils/MetaBase.h demo/tiny_demo.cpp src/loss_evals/LogLoss.cpp include/loss_evals/LogLoss.h)
 target_link_libraries(cortesian effolkronium_random Eigen3::Eigen csv
         OpenMP::OpenMP_CXX)
 

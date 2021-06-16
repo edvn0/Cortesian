@@ -82,7 +82,7 @@ public:
 
   int get_layer_index() { return m_layer_index; }
 
-  virtual void serialize_parameters() {  };
+  virtual void serialize_parameters(){};
 };
 
 #endif // CORTESIAN_LAYER_H

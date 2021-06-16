@@ -104,6 +104,7 @@ csv_to_mnist(const std::string &file_name, size_t X_cols, size_t Y_cols,
     }
     row++;
     if (row >= max) {
+
       auto stopped = t.elapsedSeconds();
       std::cout << "Data loading and mapping took: " << stopped
                 << " seconds.\n";
@@ -212,7 +213,7 @@ json_to_eigen_weight(std::string &weight_str_no_parentheses, size_t rows,
   auto first_paren = 0;
   auto next_paren = 0;
 
-  // This is soooo hacky lmao
+  // This is soooo hacky. I have no idea of how to fix this.
   while ((next_paren = weight_str_no_parentheses.find("]")) !=
              std::string::npos &&
          (first_paren = weight_str_no_parentheses.find("[")) !=

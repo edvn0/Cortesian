@@ -14,14 +14,12 @@ double Sigmoid::approx(double t) {
   }
 }
 
-Eigen::VectorXd Sigmoid::function(const Eigen::VectorXd& in) {
+Eigen::VectorXd Sigmoid::function(const Eigen::VectorXd &in) {
   return in.unaryExpr([&](double t) { return approx(t); });
 }
 
-Eigen::VectorXd Sigmoid::derivative(const Eigen::VectorXd& in) {
+Eigen::VectorXd Sigmoid::derivative(const Eigen::VectorXd &in) {
   return in.array() * (1 - in.array());
 }
 
-Sigmoid::Sigmoid() {
-  this->operator()("activation", "Sigmoid");
-}
+Sigmoid::Sigmoid() { this->operator()("activation", "Sigmoid"); }

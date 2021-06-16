@@ -28,7 +28,7 @@ static Network multi_layer_perceptron(size_t input_neurons, size_t layers,
       .layer(new Dense(new LeakyRelu(), (int)input_neurons, 0.1));
 
   for (size_t t = 0; t < layers; t++) {
-    builder.layer(new Dense(new LeakyRelu(), (int)hidden_neurons, 0.1))
+    builder.layer(new Dense(new LeakyRelu(), (int)hidden_neurons, 0.1));
   }
 
   if (is_classifier) {
